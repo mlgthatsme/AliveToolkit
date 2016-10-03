@@ -359,10 +359,13 @@ void Loop()
 	if (!loadedSave)
 	{
 		std::ifstream stream = std::ifstream("debug.sav");
-		char saveData[8192];
-		stream.read(saveData, 8192);
-		mGame->mWorld->LoadQuikSave(saveData);
-		stream.close();
+		if (stream.good())
+		{
+			char saveData[8192];
+			stream.read(saveData, 8192);
+			mGame->mWorld->LoadQuikSave(saveData);
+			stream.close();
+		}
 		loadedSave = true;
 	}
 
