@@ -117,7 +117,7 @@ namespace AliveAPIDotNet
 
         public void Destroy()
         {
-            ObjectState = 4;
+            ObjectState |= 4;
         }
 
         public override string ToString()
