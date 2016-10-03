@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -34,9 +35,20 @@ namespace AliveAPIDotNet
         }
 
         AliveObject dragObject = null;
+        bool freezeGame = false;
+        bool stepFrame = false;
 
         private void AliveAPI_GameTick(object sender, EventArgs e)
         {
+            while(freezeGame)
+            {
+                if (stepFrame)
+                {
+                    stepFrame = false;
+                    break;
+                }
+            }
+
             this.Invoke(new MethodInvoker(delegate { panelCurrentScreen.Refresh(); }));
             lock (spawnQueues)
             {
@@ -452,6 +464,27 @@ namespace AliveAPIDotNet
             {
                 e.Graphics.DrawString("Refresh", Font, Brushes.Black, PointF.Empty);
             }
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            freezeGame = !freezeGame;
+
+            if (freezeGame)
+            {
+                btnStop.Text = "Continue";
+                Marshal.WriteByte(new IntPtr(0x005CA4D1), 1);
+            }
+            else
+            {
+                btnStop.Text = "Stop";
+                Marshal.WriteByte(new IntPtr(0x005CA4D1), 0);
+            }
+        }
+
+        private void btnStep_Click(object sender, EventArgs e)
+        {
+            stepFrame = true;
         }
     }
 }

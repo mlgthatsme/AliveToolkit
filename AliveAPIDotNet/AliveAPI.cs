@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using System.Threading;
 
 namespace AliveAPIDotNet
 {
@@ -19,8 +20,13 @@ namespace AliveAPIDotNet
 
             Console.WriteLine("API Loaded");
 
-            window = new AliveAPIDotNet.DebugWindow();
-            window.Show();
+            Thread thread = new Thread(new ThreadStart(delegate
+            {
+                window = new AliveAPIDotNet.DebugWindow();
+                Application.Run(window);
+            }));
+            thread.SetApartmentState(ApartmentState.MTA);
+            thread.Start();
         }
     }
 
