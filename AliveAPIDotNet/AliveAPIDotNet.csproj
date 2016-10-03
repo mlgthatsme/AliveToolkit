@@ -94,6 +94,8 @@
       <DependentUpon>ObjectHexEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PathObjectList.cs" />
+    <Compile Include="UnmanagedObject.cs" />
     <Compile Include="Win32Native.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -37,6 +37,7 @@ namespace AliveAPIDotNet
 
         private void AliveAPI_GameTick(object sender, EventArgs e)
         {
+            this.Invoke(new MethodInvoker(delegate { panelCurrentScreen.Refresh(); }));
             lock (spawnQueues)
             {
                 int gameX = (int)AliveAPI.CameraOffsetX + (int)(AliveAPI.MouseX * 374);
@@ -51,7 +52,7 @@ namespace AliveAPIDotNet
                 {
                     if (AliveAPI.MouseLeftPressed)
                     {
-                        foreach (AliveObject obj in AliveAPI.ObjectList.Objects)
+                        foreach (AliveObject obj in AliveAPI.ObjectList.AsAliveObjects)
                         {
                             float dist = Distance(gameX, gameY, (int)obj.PositionX, (int)obj.PositionY);
                             if (dist < 30)
@@ -254,7 +255,7 @@ namespace AliveAPIDotNet
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            AliveObject[] objects = AliveAPI.ObjectList.Objects;
+            AliveObject[] objects = AliveAPI.ObjectList.AsAliveObjects;
 
             object selection = listBox1.SelectedItem;
             listBox1.Items.Clear();
@@ -377,6 +378,57 @@ namespace AliveAPIDotNet
             if (SelectedObject != null)
             {
                 AliveAPI.SetPlayerObject(SelectedObject);
+            }
+        }
+
+        private void listBoxPath_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBoxPath.SelectedItem != null)
+            {
+                new ObjectHexEdit((UnmanagedObject)listBoxPath.SelectedItem).Show();
+            }
+        }
+
+        private void btnPathRefresh_Click(object sender, EventArgs e)
+        {
+            listBoxPath.Items.Clear();
+
+            pathEntries = AliveAPI.PathData.PathEntries;
+
+            foreach (var o in pathEntries)
+            {
+                string S = string.Format("{0} {1} {2} {3}", o.X1, o.Y1, o.X2, o.Y2);
+                listBoxPath.Items.Add(S);
+            }
+
+            panelCurrentScreen.Refresh();
+        }
+
+        PathEntry[] pathEntries = null;
+
+        private void panelCurrentScreen_Paint(object sender, PaintEventArgs e)
+        {
+            if (pathEntries != null)
+            {
+                e.Graphics.ScaleTransform(panelCurrentScreen.Width / 368.0f, panelCurrentScreen.Height / 240.0f);
+                e.Graphics.TranslateTransform(-AliveAPI.CameraOffsetX, -AliveAPI.CameraOffsetY);
+                
+                foreach (var l in pathEntries)
+                {
+                    Point p1 = new Point(l.X1, l.Y1);
+                    Point p2 = new Point(l.X2, l.Y2);
+
+                    e.Graphics.DrawLine(Pens.Red, p1, p2);
+                }
+
+                foreach(var o in AliveAPI.ObjectList.AsAliveObjects)
+                {
+                    e.Graphics.FillEllipse(Brushes.Black, new RectangleF(o.PositionX - 4, o.PositionY - 8, 8, 8));
+                }
+            }
+            else
+            {
+                e.Graphics.DrawString("Refresh", Font, Brushes.Black, PointF.Empty);
             }
         }
     }

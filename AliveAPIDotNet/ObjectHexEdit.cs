@@ -13,7 +13,7 @@ namespace AliveAPIDotNet
 {
     public partial class ObjectHexEdit : Form
     {
-        public ObjectHexEdit(AliveObject obj)
+        public ObjectHexEdit(UnmanagedObject obj)
         {
             InitializeComponent();
             aliveObj = obj;
@@ -21,7 +21,7 @@ namespace AliveAPIDotNet
             hexBox1.ByteProvider = new ObjectByteProvider(aliveObj);
         }
 
-        AliveObject aliveObj;
+        UnmanagedObject aliveObj;
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -36,14 +36,14 @@ namespace AliveAPIDotNet
 
     public class PropertyGridMemorySupplier
     {
-        public PropertyGridMemorySupplier(AliveObject obj, int offset)
+        public PropertyGridMemorySupplier(UnmanagedObject obj, int offset)
         {
             this.obj = obj;
             this.offset = offset;
         }
 
         int offset;
-        AliveObject obj;
+        UnmanagedObject obj;
 
         public int Offset
         {
@@ -112,12 +112,12 @@ namespace AliveAPIDotNet
 
     public class ObjectByteProvider : IByteProvider
     {
-        public ObjectByteProvider(AliveObject obj)
+        public ObjectByteProvider(UnmanagedObject obj)
         {
             AbeObject = obj;
         }
 
-        AliveObject AbeObject;
+        UnmanagedObject AbeObject;
 
         public byte ReadByte(long index)
         {

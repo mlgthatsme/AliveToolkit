@@ -6,14 +6,12 @@ using System.Text;
 
 namespace AliveAPIDotNet
 {
-    public class AliveObject
+    public class AliveObject : UnmanagedObject
     {
-        public AliveObject(IntPtr addr)
+        public AliveObject(IntPtr addr) : base(addr)
         {
-            mAddress = addr;
-        }
 
-        public IntPtr Pointer { get { return mAddress; } }
+        }
 
         public static string GetFriendlyName(int type)
         {
@@ -122,86 +120,9 @@ namespace AliveAPIDotNet
             ObjectState = 4;
         }
 
-        public override bool Equals(object obj)
-        {
-            AliveObject aliveObj = obj as AliveObject;
-            return (aliveObj != null && mAddress == aliveObj.mAddress);
-        }
-
         public override string ToString()
         {
             return string.Format("{5} [{4}, {2}, {3}]: {0} {1}", PositionX.ToString("0.00"), PositionY.ToString("0.00"), ObjectID, AllocatedSize, VTable.ToInt32().ToString("X8"), GetFriendlyName(ObjectID));
-        }
-
-        public static float HalfFloatToFloat(int halfFloat)
-        {
-            return halfFloat / (float)0x10000;
-        }
-
-        public static int FloatToHalfFloat(float v)
-        {
-            return (int)(v * 0x10000);
-        }
-
-        bool IsPtrInRange(IntPtr ptr)
-        {
-            return (ptr.ToInt32() < mAddress.ToInt32() + AllocatedSize);
-        }
-
-        public void SafeWriteInt32(IntPtr addr, int value)
-        {
-            if (IsPtrInRange(addr))
-                Marshal.WriteInt32(addr, value);
-        }
-
-        public void SafeWriteInt16(IntPtr addr, short value)
-        {
-            if (IsPtrInRange(addr))
-                Marshal.WriteInt16(addr, value);
-        }
-
-        public void SafeWriteByte(IntPtr addr, byte value)
-        {
-            if (IsPtrInRange(addr))
-                Marshal.WriteByte(addr, value);
-        }
-
-        public void SafeWriteIntPtr(IntPtr addr, IntPtr value)
-        {
-            if (IsPtrInRange(addr))
-                Marshal.WriteIntPtr(addr, value);
-        }
-
-        public int SafeReadInt32(IntPtr addr)
-        {
-            if (IsPtrInRange(addr))
-                return Marshal.ReadInt32(addr);
-
-            return 0;
-        }
-
-        public short SafeReadInt16(IntPtr addr)
-        {
-            if (IsPtrInRange(addr))
-                return Marshal.ReadInt16(addr);
-
-            return 0;
-        }
-
-        public byte SafeReadByte(IntPtr addr)
-        {
-            if (IsPtrInRange(addr))
-                return Marshal.ReadByte(addr);
-
-            return 0;
-        }
-
-        public IntPtr SafeReadIntPtr(IntPtr addr)
-        {
-            if (IsPtrInRange(addr))
-                return Marshal.ReadIntPtr(addr);
-
-            return IntPtr.Zero;
         }
 
         // Variables
@@ -216,11 +137,6 @@ namespace AliveAPIDotNet
         {
             get { return SafeReadByte(mAddress + 0x1A2); }
             set { SafeWriteByte(mAddress + 0x1A2, value); }
-        }
-
-        public int AllocatedSize // This is a malloc hack and can go very wrong.
-        {
-            get { return Marshal.ReadInt32(mAddress - 0x04); }
         }
 
         public short ObjectID
@@ -264,7 +180,5 @@ namespace AliveAPIDotNet
             get { return HalfFloatToFloat(SafeReadInt32(mAddress + 0xCC)); }
             set { SafeWriteInt32(mAddress + 0xCC, FloatToHalfFloat(value)); }
         }
-
-        private IntPtr mAddress;
     }
 }

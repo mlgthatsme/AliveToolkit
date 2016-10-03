@@ -37,6 +37,8 @@
             this.copyVTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteVTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mindControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -47,7 +49,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lineGraphMemory = new AliveAPIDotNet.LineGraph();
             this.textBoxMemoryLog = new System.Windows.Forms.TextBox();
             this.labelTotal = new System.Windows.Forms.Label();
             this.buttonUpdateMemory = new System.Windows.Forms.Button();
@@ -55,8 +56,11 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.buttonSpawnObject = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
-            this.mindControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.listBoxPath = new System.Windows.Forms.ListBox();
+            this.btnPathRefresh = new System.Windows.Forms.Button();
+            this.panelCurrentScreen = new AliveAPIDotNet.DoubleBufferPanel();
+            this.lineGraphMemory = new AliveAPIDotNet.LineGraph();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -65,6 +69,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.tabPage5.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -99,7 +104,7 @@
             this.removeToolStripMenuItem,
             this.duplicateToolStripMenuItem});
             this.contextMenuObject.Name = "contextMenuObject";
-            this.contextMenuObject.Size = new System.Drawing.Size(159, 176);
+            this.contextMenuObject.Size = new System.Drawing.Size(159, 154);
             // 
             // copyAddressToolStripMenuItem
             // 
@@ -131,6 +136,18 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(155, 6);
+            // 
+            // mindControlToolStripMenuItem
+            // 
+            this.mindControlToolStripMenuItem.Name = "mindControlToolStripMenuItem";
+            this.mindControlToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.mindControlToolStripMenuItem.Text = "Mind Control";
+            this.mindControlToolStripMenuItem.Click += new System.EventHandler(this.mindControlToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(155, 6);
             // 
             // removeToolStripMenuItem
             // 
@@ -164,6 +181,7 @@
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage4);
+            this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -254,17 +272,6 @@
             this.tabPage2.Text = "Memory";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // lineGraphMemory
-            // 
-            this.lineGraphMemory.BackColor = System.Drawing.Color.White;
-            this.lineGraphMemory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(125)))), ((int)(((byte)(187)))));
-            this.lineGraphMemory.Location = new System.Drawing.Point(9, 215);
-            this.lineGraphMemory.MaxPoints = 256;
-            this.lineGraphMemory.Name = "lineGraphMemory";
-            this.lineGraphMemory.Size = new System.Drawing.Size(381, 185);
-            this.lineGraphMemory.TabIndex = 8;
-            this.lineGraphMemory.Title = "Memory Usage";
-            // 
             // textBoxMemoryLog
             // 
             this.textBoxMemoryLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -335,17 +342,56 @@
             this.listBox2.Size = new System.Drawing.Size(388, 355);
             this.listBox2.TabIndex = 0;
             // 
-            // mindControlToolStripMenuItem
+            // tabPage5
             // 
-            this.mindControlToolStripMenuItem.Name = "mindControlToolStripMenuItem";
-            this.mindControlToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.mindControlToolStripMenuItem.Text = "Mind Control";
-            this.mindControlToolStripMenuItem.Click += new System.EventHandler(this.mindControlToolStripMenuItem_Click);
+            this.tabPage5.Controls.Add(this.panelCurrentScreen);
+            this.tabPage5.Controls.Add(this.btnPathRefresh);
+            this.tabPage5.Controls.Add(this.listBoxPath);
+            this.tabPage5.Location = new System.Drawing.Point(4, 22);
+            this.tabPage5.Name = "tabPage5";
+            this.tabPage5.Size = new System.Drawing.Size(400, 509);
+            this.tabPage5.TabIndex = 4;
+            this.tabPage5.Text = "Path";
+            this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // toolStripSeparator3
+            // listBoxPath
             // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(155, 6);
+            this.listBoxPath.FormattingEnabled = true;
+            this.listBoxPath.Location = new System.Drawing.Point(9, 4);
+            this.listBoxPath.Name = "listBoxPath";
+            this.listBoxPath.Size = new System.Drawing.Size(383, 173);
+            this.listBoxPath.TabIndex = 0;
+            this.listBoxPath.DoubleClick += new System.EventHandler(this.listBoxPath_DoubleClick);
+            // 
+            // btnPathRefresh
+            // 
+            this.btnPathRefresh.Location = new System.Drawing.Point(9, 183);
+            this.btnPathRefresh.Name = "btnPathRefresh";
+            this.btnPathRefresh.Size = new System.Drawing.Size(383, 23);
+            this.btnPathRefresh.TabIndex = 1;
+            this.btnPathRefresh.Text = "Refresh";
+            this.btnPathRefresh.UseVisualStyleBackColor = true;
+            this.btnPathRefresh.Click += new System.EventHandler(this.btnPathRefresh_Click);
+            // 
+            // panelCurrentScreen
+            // 
+            this.panelCurrentScreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelCurrentScreen.Location = new System.Drawing.Point(9, 212);
+            this.panelCurrentScreen.Name = "panelCurrentScreen";
+            this.panelCurrentScreen.Size = new System.Drawing.Size(383, 289);
+            this.panelCurrentScreen.TabIndex = 2;
+            this.panelCurrentScreen.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCurrentScreen_Paint);
+            // 
+            // lineGraphMemory
+            // 
+            this.lineGraphMemory.BackColor = System.Drawing.Color.White;
+            this.lineGraphMemory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(125)))), ((int)(((byte)(187)))));
+            this.lineGraphMemory.Location = new System.Drawing.Point(9, 215);
+            this.lineGraphMemory.MaxPoints = 256;
+            this.lineGraphMemory.Name = "lineGraphMemory";
+            this.lineGraphMemory.Size = new System.Drawing.Size(381, 185);
+            this.lineGraphMemory.TabIndex = 8;
+            this.lineGraphMemory.Title = "Memory Usage";
             // 
             // DebugWindow
             // 
@@ -368,6 +414,7 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.tabPage4.ResumeLayout(false);
+            this.tabPage5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -401,5 +448,9 @@
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.ToolStripMenuItem mindControlToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.Button btnPathRefresh;
+        private System.Windows.Forms.ListBox listBoxPath;
+        private DoubleBufferPanel panelCurrentScreen;
     }
 }

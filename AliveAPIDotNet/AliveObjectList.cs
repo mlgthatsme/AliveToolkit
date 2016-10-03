@@ -27,14 +27,30 @@ namespace AliveAPIDotNet
             }
         }
 
-        public void Add(AliveObject obj)
+        public void Add(UnmanagedObject objPointer)
         {
             IntPtr objAddr = Marshal.ReadIntPtr(Marshal.ReadIntPtr(mAddress));
-            Marshal.WriteIntPtr(objAddr + (4 * Count), obj.Pointer);
+            Marshal.WriteIntPtr(objAddr + (4 * Count), objPointer.Pointer);
             Count++;
         }
 
-        public AliveObject[] Objects
+        public UnmanagedObject[] Objects
+        {
+            get
+            {
+                List<UnmanagedObject> objs = new List<UnmanagedObject>();
+                IntPtr objAddr = Marshal.ReadIntPtr(Marshal.ReadIntPtr(mAddress));
+
+                for (int i = 0; i < Count; i++)
+                {
+                    objs.Add(new UnmanagedObject(Marshal.ReadIntPtr(objAddr + (4 * i))));
+                }
+
+                return objs.ToArray();
+            }
+        }
+
+        public AliveObject[] AsAliveObjects
         {
             get
             {
