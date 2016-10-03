@@ -42,6 +42,10 @@ namespace AliveAPIDotNet
         public static event EventHandler<EventArgs> GameTick;
         public static void FireOnGameTick()
         {
+            MouseLeftPressed = (GetAsyncKeyState(1) & 1) == 1;
+            MouseRightPressed = (GetAsyncKeyState(2) & 1) == 1;
+            MouseLeftDown = (GetAsyncKeyState(1) & 0x8000) == 0x8000;
+            MouseRightDown = (GetAsyncKeyState(2) & 0x8000) == 0x8000;
             GameTick?.Invoke(null, null);
         }
 
@@ -73,7 +77,7 @@ namespace AliveAPIDotNet
             writer.Write((short)0);
             writer.Write((short)(x - (width / 2)));
             writer.Write(y);
-            writer.Write((short)(x + (width/2)));
+            writer.Write((short)(x + (width / 2)));
             writer.Write((short)(y + height));
             writer.Write(param);
 
@@ -113,5 +117,82 @@ namespace AliveAPIDotNet
 
         public static AliveObjectList ObjectList = new AliveObjectList(new IntPtr(0x00BB47C4));
         public static AliveObjectList ObjectListActive = new AliveObjectList(new IntPtr(0x005C1124));
+
+        public static float CameraOffsetX
+        {
+            get
+            {
+                return AliveObject.HalfFloatToFloat(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(0x5BB5F4)) + 32)))));
+            }
+        }
+
+        public static float CameraOffsetY
+        {
+            get
+            {
+                return AliveObject.HalfFloatToFloat(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(0x5BB5F4)) + 32)) + 4)));
+            }
+        }
+
+        [DllImport("user32.dll")]
+        static extern short GetAsyncKeyState(int vKey);
+
+        [DllImport("user32.dll")]
+        static extern bool ScreenToClient(IntPtr hWnd, ref Point lpPoint);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImport("user32.dll")]
+        static extern IntPtr GetActiveWindow();
+
+        public static bool IsGameWindowActive { get { return GetActiveWindow() == GameWindowHWND; } }
+
+        static IntPtr hwnd = IntPtr.Zero;
+        public static IntPtr GameWindowHWND
+        {
+            get
+            {
+                if (hwnd == IntPtr.Zero)
+                    hwnd = FindWindow("ABE_WINCLASS", null);
+
+                return hwnd;
+            }
+        }
+
+        public static float MouseX
+        {
+            get
+            {
+                Point p = Cursor.Position;
+                ScreenToClient(GameWindowHWND, ref p);
+                return p.X / (float)GetGameWindowSize.Width;
+            }
+        }
+        public static float MouseY
+        {
+            get
+            {
+                Point p = Cursor.Position;
+                ScreenToClient(GameWindowHWND, ref p);
+                return p.Y / (float)GetGameWindowSize.Height;
+            }
+        }
+
+        public static Size GetGameWindowSize
+        {
+            get
+            {
+                Win32Native.Rect rect = new Win32Native.Rect();
+                Win32Native.GetWindowRect(GameWindowHWND, ref rect);
+                return new Size(rect.Right - rect.Left, rect.Bottom - rect.Top);
+            }
+        }
+
+        public static bool MouseLeftPressed { get; private set; }
+        public static bool MouseRightPressed { get; private set; }
+
+        public static bool MouseLeftDown { get; private set; }
+        public static bool MouseRightDown { get; private set; }
     }
 }

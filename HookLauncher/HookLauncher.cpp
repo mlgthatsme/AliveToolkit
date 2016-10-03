@@ -25,7 +25,7 @@ void StartProcess()
 
 
 		CreateProcess("exoddus.exe", NULL, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
-		Sleep(500);
+		//Sleep(1);
 	}
 }
 

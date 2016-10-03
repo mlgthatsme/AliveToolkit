@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Windows.Interop;
 
 namespace AliveAPIDotNet
 {
@@ -26,11 +28,53 @@ namespace AliveAPIDotNet
             AliveAPI.GameTick += AliveAPI_GameTick;
         }
 
+        float Distance(int x1, int y1, int x2, int y2)
+        {
+            return (float)Math.Sqrt(Math.Pow(Math.Abs(x1 - x2), 2) + Math.Pow(Math.Abs(y1 - y2), 2));
+        }
+
+        AliveObject dragObject = null;
+
         private void AliveAPI_GameTick(object sender, EventArgs e)
         {
             lock (spawnQueues)
             {
-                foreach(var s in spawnQueues)
+                int gameX = (int)AliveAPI.CameraOffsetX + (int)(AliveAPI.MouseX * 374);
+                int gameY = (int)AliveAPI.CameraOffsetY + (int)(AliveAPI.MouseY * 254);
+
+                if (AliveAPI.IsGameWindowActive && AliveAPI.MouseRightPressed)
+                {
+                    if (SelectedSpawnObject != null)
+                        spawnQueues.Add(new SpawnQueue() { spawnEntry = SelectedSpawnObject, parameters = SelectedSpawnObject.ParamsData, PositionX = (short)gameX, PositionY = (short)gameY });
+                }
+                if (AliveAPI.IsGameWindowActive && AliveAPI.MouseLeftDown)
+                {
+                    if (AliveAPI.MouseLeftPressed)
+                    {
+                        foreach (AliveObject obj in AliveAPI.ObjectList.Objects)
+                        {
+                            float dist = Distance(gameX, gameY, (int)obj.PositionX, (int)obj.PositionY);
+                            if (dist < 30)
+                            {
+                                dragObject = obj;
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (dragObject != null)
+                        {
+                            dragObject.PositionX = gameX;
+                            dragObject.PositionY = gameY;
+                        }
+                    }
+                }
+                else
+                {
+                    dragObject = null;
+                }
+                foreach (var s in spawnQueues)
                 {
                     // Load commonly shared resources
                     AliveAPI.LoadResource("ABEBLOW.BAN");
@@ -42,7 +86,7 @@ namespace AliveAPIDotNet
                         AliveAPI.LoadResource(b);
                     }
 
-                    AliveObject obj = AliveAPI.CreateObject(s.spawnEntry.PathID, (short)(AliveAPI.GetPlayerObject().PositionX + 50), (short)(AliveAPI.GetPlayerObject().PositionY - 20), (short)s.spawnEntry.Width, (short)s.spawnEntry.Height, s.parameters);
+                    AliveObject obj = AliveAPI.CreateObject(s.spawnEntry.PathID, s.PositionX, s.PositionY, (short)s.spawnEntry.Width, (short)s.spawnEntry.Height, (s.parameters == null) ? new byte[150] : s.parameters);
                 }
 
                 spawnQueues.Clear();
@@ -54,6 +98,8 @@ namespace AliveAPIDotNet
         struct SpawnQueue
         {
             public SpawnEntry spawnEntry;
+            public short PositionX;
+            public short PositionY;
             public byte[] parameters;
         }
 
@@ -86,7 +132,7 @@ namespace AliveAPIDotNet
             new SpawnEntry(10, "Rock Sack",null, "RTHROW.BND"),
             new SpawnEntry(15, "Slig",null, "SLGLEVER.BAN","SLGLIFT.BAN","SLGSLEEP.BAN","SLGEDGE.BAN","SLGSMASH.BAN","SLGBEAT.BAN","SLGKNFD.BAN","SLIGZ.BND","SLIG.BND", "SLGBLOW.BAN"),
             new SpawnEntry(16, "Slog",null, "SLOG.BND", "DOGKNFD.BAN"),
-            new SpawnEntry(17, "Switch",null, "SWITCH1.BAN", "ABEPULL.BAN"),
+            new SpawnEntry(17, "Switch",null, 75, 25, "SWITCH1.BAN", "ABEPULL.BAN"),
             new SpawnEntry(19, "Anti Chant Orb", null, "MAIMORB.BAN","SPLINE.BAN", "SPARKS.BAN", "METAL.BAN", "EXPLO2.BAN"),
             new SpawnEntry(24, "Mine", null, "MINE.BND","EXPLODE.BND"),
             new SpawnEntry(25, "UXB", null, "UXB.BND","EXPLODE.BND"),
@@ -97,7 +143,7 @@ namespace AliveAPIDotNet
             new SpawnEntry(40, "Meat Sack",null, "MTHROW.BND"),
             new SpawnEntry(41, "Scrab",null, "SCRAB.BND"),
             new SpawnEntry(49, "Mudokon", CreateMudParams(), "ABEBSIC1.BAN","ABEKNFD.BAN","ABEKNBK.BAN","ABEEDGE.BAN","MUDIDLE.BAN","MUDPAL.BND", "MUDSCRUB.BAN","MUDCHSL.BAN","MUDWORK.BND"),
-            new SpawnEntry(82, "Flying Slig", null, 75, 25, "FLYSLIG.BND", "SLGBLOW.BAN", "GRENADE.BAN", "SMEXP.BAN","METAL.BAN", "BIGFLASH.BAN", "VAPOR.BAN"),
+            new SpawnEntry(82, "Flying Slig", null, "FLYSLIG.BND", "SLGBLOW.BAN", "GRENADE.BAN", "SMEXP.BAN","METAL.BAN", "BIGFLASH.BAN", "VAPOR.BAN"),
             new SpawnEntry(83, "Fleech",null, "FLEECH.BAN", "FLEEBLOW.BAN"),
             new SpawnEntry(84, "Slurg",null, "SLURG.BAN"),
             new SpawnEntry(93, "Mine Car",null, "BAYROLL.BAN", "ABECAR.BAN", "METAL.BAN", "EXPLO2.BAN"),
@@ -232,6 +278,8 @@ namespace AliveAPIDotNet
             }
 
             lineGraphMemory.SetValue(total / 1024.0f, 0);
+
+            
         }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
@@ -315,12 +363,11 @@ namespace AliveAPIDotNet
         {
             if (SelectedSpawnObject != null)
             {
-                byte[] defaultParams = new byte[100];
-                byte[] param = (SelectedSpawnObject.ParamsData == null) ? defaultParams : SelectedSpawnObject.ParamsData;
+                byte[] param = SelectedSpawnObject.ParamsData;
 
                 lock(spawnQueues)
                 {
-                    spawnQueues.Add(new SpawnQueue() { spawnEntry = SelectedSpawnObject, parameters = defaultParams });
+                    spawnQueues.Add(new SpawnQueue() { spawnEntry = SelectedSpawnObject, parameters = param, PositionX = (short)(AliveAPI.GetPlayerObject().PositionX + 50), PositionY = (short)(AliveAPI.GetPlayerObject().PositionY - 20) });
                 }
             }
         }

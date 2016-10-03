@@ -226,7 +226,7 @@ public:
 		return 0;
 	}
 
-	virtual short Func7(int a2, int a3, int a4, int a5, int(__thiscall *a6)(_WORD *, int))
+	virtual short Func7(void * a2, __int16 a3)
 	{
 		DBGPRINTFUNC;
 		return 0;
@@ -369,6 +369,20 @@ void Loop()
 		loadedSave = true;
 	}
 
+	if (GetAsyncKeyState('E'))
+	{
+		/*AliveAPI::ObjectList * Objects = *reinterpret_cast<AliveAPI::ObjectList **>(0x00BB47C4);
+		for (int i = 0; i < Objects->mCount; i++)
+		{
+			AE_abe * v9 = (AE_abe*)Objects->mData[i];
+			if (v9->type == 110)
+			{
+				int v17 = 0;
+				(*((int(__thiscall **)(AE_abe *, void*, _DWORD))v9->vtable + 7))(v9, &v17, 1);
+			}
+		}*/
+	}
+
 	CLROnTick();
 }
 
@@ -439,6 +453,8 @@ void MLG_InitHook()
 	H_LoopHook.Install(reinterpret_cast<T_LoopHook>(Hook_LoopHook));
 
 	//H_resourceHack.Install(Hook_resourceHack);
+
+	
 
 	bool hookMemory = false;
 
