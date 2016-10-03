@@ -17,7 +17,7 @@ namespace AliveAPIDotNet
         {
             Application.EnableVisualStyles();
 
-            Console.WriteLine(".Net lib is init!");
+            Console.WriteLine("API Loaded");
 
             window = new AliveAPIDotNet.DebugWindow();
             window.Show();
@@ -71,9 +71,9 @@ namespace AliveAPIDotNet
             writer.Write((short)0);
             writer.Write((short)id);
             writer.Write((short)0);
-            writer.Write(x);
+            writer.Write((short)(x - (width / 2)));
             writer.Write(y);
-            writer.Write((short)(x + width));
+            writer.Write((short)(x + (width/2)));
             writer.Write((short)(y + height));
             writer.Write(param);
 
@@ -82,7 +82,7 @@ namespace AliveAPIDotNet
 
             IntPtr mem = Marshal.AllocHGlobal(finalData.Length);
             Marshal.Copy(finalData, 0, mem, finalData.Length);
-            var o =  new AliveAPIDotNet.AliveObject(Ae_CreateObject(id, mem));
+            var o = new AliveAPIDotNet.AliveObject(Ae_CreateObject(id, mem));
             Marshal.FreeHGlobal(mem);
             return o;
         }

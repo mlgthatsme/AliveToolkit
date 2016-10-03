@@ -42,7 +42,7 @@ namespace AliveAPIDotNet
                         AliveAPI.LoadResource(b);
                     }
 
-                    AliveObject obj = AliveAPI.CreateObject(s.spawnEntry.PathID, (short)(AliveAPI.GetPlayerObject().PositionX + 37), (short)AliveAPI.GetPlayerObject().PositionY, 25, 25, s.parameters);
+                    AliveObject obj = AliveAPI.CreateObject(s.spawnEntry.PathID, (short)(AliveAPI.GetPlayerObject().PositionX + 50), (short)(AliveAPI.GetPlayerObject().PositionY - 20), (short)s.spawnEntry.Width, (short)s.spawnEntry.Height, s.parameters);
                 }
 
                 spawnQueues.Clear();
@@ -97,7 +97,7 @@ namespace AliveAPIDotNet
             new SpawnEntry(40, "Meat Sack",null, "MTHROW.BND"),
             new SpawnEntry(41, "Scrab",null, "SCRAB.BND"),
             new SpawnEntry(49, "Mudokon", CreateMudParams(), "ABEBSIC1.BAN","ABEKNFD.BAN","ABEKNBK.BAN","ABEEDGE.BAN","MUDIDLE.BAN","MUDPAL.BND", "MUDSCRUB.BAN","MUDCHSL.BAN","MUDWORK.BND"),
-            new SpawnEntry(82, "Flying Slig", null, "FLYSLIG.BND", "SLGBLOW.BAN", "GRENADE.BAN", "SMEXP.BAN","METAL.BAN", "BIGFLASH.BAN", "VAPOR.BAN"),
+            new SpawnEntry(82, "Flying Slig", null, 75, 25, "FLYSLIG.BND", "SLGBLOW.BAN", "GRENADE.BAN", "SMEXP.BAN","METAL.BAN", "BIGFLASH.BAN", "VAPOR.BAN"),
             new SpawnEntry(83, "Fleech",null, "FLEECH.BAN", "FLEEBLOW.BAN"),
             new SpawnEntry(84, "Slurg",null, "SLURG.BAN"),
             new SpawnEntry(93, "Mine Car",null, "BAYROLL.BAN", "ABECAR.BAN", "METAL.BAN", "EXPLO2.BAN"),
@@ -118,6 +118,16 @@ namespace AliveAPIDotNet
                 ParamsData = paramsData;
             }
 
+            public SpawnEntry(int pathId, string name, byte[] paramsData,int width, int height, params string[] resources)
+            {
+                PathID = pathId;
+                Name = name;
+                Resources = resources;
+                ParamsData = paramsData;
+                Width = width;
+                Height = height;
+            }
+
             public override string ToString()
             {
                 return Name;
@@ -127,6 +137,9 @@ namespace AliveAPIDotNet
             public int PathID;
             public string Name;
             public string[] Resources;
+
+            public int Width = 25;
+            public int Height = 25;
         }
 
         static string GetClipboardText()
@@ -302,11 +315,7 @@ namespace AliveAPIDotNet
         {
             if (SelectedSpawnObject != null)
             {
-                
-
                 byte[] defaultParams = new byte[100];
-                defaultParams[12] = 32;
-                defaultParams[14] = 32;
                 byte[] param = (SelectedSpawnObject.ParamsData == null) ? defaultParams : SelectedSpawnObject.ParamsData;
 
                 lock(spawnQueues)

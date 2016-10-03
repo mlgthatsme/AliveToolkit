@@ -86,6 +86,12 @@
     <Compile Include="ObjectEditor.Designer.cs">
       <DependentUpon>ObjectEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="ObjectHexEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ObjectHexEdit.Designer.cs">
+      <DependentUpon>ObjectHexEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ObjectEditor.resx">
       <DependentUpon>ObjectEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ObjectHexEdit.resx">
+      <DependentUpon>ObjectHexEdit.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

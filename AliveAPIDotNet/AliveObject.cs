@@ -133,12 +133,12 @@ namespace AliveAPIDotNet
             return string.Format("{5} [{4}, {2}, {3}]: {0} {1}", PositionX.ToString("0.00"), PositionY.ToString("0.00"), ObjectID, AllocatedSize, VTable.ToInt32().ToString("X8"), GetFriendlyName(ObjectID));
         }
 
-        float HalfFloatToFloat(int halfFloat)
+        public static float HalfFloatToFloat(int halfFloat)
         {
             return halfFloat / (float)0x10000;
         }
 
-        int FloatToHalfFloat(float v)
+        public static int FloatToHalfFloat(float v)
         {
             return (int)(v * 0x10000);
         }
@@ -148,31 +148,31 @@ namespace AliveAPIDotNet
             return (ptr.ToInt32() < mAddress.ToInt32() + AllocatedSize);
         }
 
-        void SafeWriteInt32(IntPtr addr, int value)
+        public void SafeWriteInt32(IntPtr addr, int value)
         {
             if (IsPtrInRange(addr))
                 Marshal.WriteInt32(addr, value);
         }
 
-        void SafeWriteInt16(IntPtr addr, short value)
+        public void SafeWriteInt16(IntPtr addr, short value)
         {
             if (IsPtrInRange(addr))
                 Marshal.WriteInt16(addr, value);
         }
 
-        void SafeWriteByte(IntPtr addr, byte value)
+        public void SafeWriteByte(IntPtr addr, byte value)
         {
             if (IsPtrInRange(addr))
                 Marshal.WriteByte(addr, value);
         }
 
-        void SafeWriteIntPtr(IntPtr addr, IntPtr value)
+        public void SafeWriteIntPtr(IntPtr addr, IntPtr value)
         {
             if (IsPtrInRange(addr))
                 Marshal.WriteIntPtr(addr, value);
         }
 
-        int SafeReadInt32(IntPtr addr)
+        public int SafeReadInt32(IntPtr addr)
         {
             if (IsPtrInRange(addr))
                 return Marshal.ReadInt32(addr);
@@ -180,7 +180,7 @@ namespace AliveAPIDotNet
             return 0;
         }
 
-        short SafeReadInt16(IntPtr addr)
+        public short SafeReadInt16(IntPtr addr)
         {
             if (IsPtrInRange(addr))
                 return Marshal.ReadInt16(addr);
@@ -188,7 +188,7 @@ namespace AliveAPIDotNet
             return 0;
         }
 
-        byte SafeReadByte(IntPtr addr)
+        public byte SafeReadByte(IntPtr addr)
         {
             if (IsPtrInRange(addr))
                 return Marshal.ReadByte(addr);
@@ -196,7 +196,7 @@ namespace AliveAPIDotNet
             return 0;
         }
 
-        IntPtr SafeReadIntPtr(IntPtr addr)
+        public IntPtr SafeReadIntPtr(IntPtr addr)
         {
             if (IsPtrInRange(addr))
                 return Marshal.ReadIntPtr(addr);
