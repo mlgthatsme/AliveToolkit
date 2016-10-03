@@ -15,7 +15,7 @@ namespace AliveAPIDotNet
 
         internal IntPtr mAddress;
 
-        public int AllocatedSize // This is a malloc hack and can go very wrong.
+        public virtual int AllocatedSize // This is a malloc hack and can go very wrong.
         {
             get { return Marshal.ReadInt32(mAddress - 0x04); }
         }

@@ -6,20 +6,55 @@ using System.Text;
 
 namespace AliveAPIDotNet
 {
-    [StructLayout(LayoutKind.Sequential)]
-    public struct PathEntry
+    public class PathLineObject : UnmanagedObject
     {
-        public short X1;
-        public short Y1;
-        public short X2;
-        public short Y2;
+        public PathLineObject(IntPtr addr) : base(addr)
+        {
+            
+        }
 
-        public short Mode;
-        public short Unknown2;
-        public short Unknown3;
-        public short Unknown4;
-        public short Unknown5;
-        public short Unknown6;
+        public override string ToString()
+        {
+            return string.Format("Path Line: {0} {1} {2} {3} {4}", X1, Y1, X2, Y2, Mode);
+        }
+
+        public override int AllocatedSize
+        {
+            get
+            {
+                return 20;
+            }
+        }
+
+        public short X1
+        {
+            get { return SafeReadInt16(mAddress + 0); }
+            set { SafeWriteInt16(mAddress + 0, value); }
+        }
+
+        public short Y1
+        {
+            get { return SafeReadInt16(mAddress + 2); }
+            set { SafeWriteInt16(mAddress + 2, value); }
+        }
+
+        public short X2
+        {
+            get { return SafeReadInt16(mAddress + 4); }
+            set { SafeWriteInt16(mAddress + 4, value); }
+        }
+
+        public short Y2
+        {
+            get { return SafeReadInt16(mAddress + 6); }
+            set { SafeWriteInt16(mAddress + 6, value); }
+        }
+
+        public short Mode
+        {
+            get { return SafeReadInt16(mAddress + 8); }
+            set { SafeWriteInt16(mAddress + 8, value); }
+        }
     }
 
     public class PathObjectList
@@ -43,16 +78,17 @@ namespace AliveAPIDotNet
             }
         }
 
-        public PathEntry[] PathEntries
+        public PathLineObject[] PathEntries
         {
             get
             {
-                List<PathEntry> objs = new List<PathEntry>();
+                List<PathLineObject> objs = new List<PathLineObject>();
                 IntPtr objAddr = Marshal.ReadIntPtr(Marshal.ReadIntPtr(mAddress));
+
                 for (int i = 0; i < Count; i++)
                 {
-                    PathEntry structObject = (PathEntry)Marshal.PtrToStructure(objAddr + (20 * i), typeof(PathEntry));
-                    objs.Add(structObject);
+                    PathLineObject pathObj = new PathLineObject(objAddr + (20 * i));
+                    objs.Add(pathObj);
                 }
 
                 return objs.ToArray();

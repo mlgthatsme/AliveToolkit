@@ -13,17 +13,17 @@ namespace AliveAPIDotNet
 {
     public partial class ObjectEditor : Form
     {
-        public ObjectEditor(AliveObject obj)
+        public ObjectEditor(UnmanagedObject obj)
         {
             InitializeComponent();
             aliveObj = obj;
         }
 
-        AliveObject aliveObj;
+        UnmanagedObject aliveObj;
 
         private void ObjectEditor_Load(object sender, EventArgs e)
         {
-            Text = string.Format("Editing {1} at {0}", aliveObj.Pointer.ToString("X"), AliveObject.GetFriendlyName(aliveObj.ObjectID));
+            Text = string.Format("Editing object at {0}", aliveObj.Pointer.ToString("X"));
 
             propertyGrid1.SelectedObject = aliveObj;
             foreach (Control control in propertyGrid1.Controls)

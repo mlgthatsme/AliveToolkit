@@ -119,6 +119,29 @@ namespace AliveAPIDotNet
             return p;
         }
 
+        static byte[] CreateFlySligParams()
+        {
+            byte[] p = new byte[32];
+            for (int i = 0; i < p.Length; i++)
+            {
+                p[i] = 0;
+            }
+
+            p[5] = 60;
+            p[7] = 30;
+            p[9] = 60;
+            p[13] = 45;
+            p[15] = 120;
+            p[17] = 30;
+            p[19] = 1;
+            p[21] = 90;
+            p[23] = 20;
+            p[25] = 12;
+            p[29] = 1;
+
+            return p;
+        }
+
         static byte[] CreateCustomParams(params int[] offsets)
         {
             byte[] b = new byte[100];
@@ -144,7 +167,7 @@ namespace AliveAPIDotNet
             new SpawnEntry(40, "Meat Sack",null, "MTHROW.BND"),
             new SpawnEntry(41, "Scrab",null, "SCRAB.BND"),
             new SpawnEntry(49, "Mudokon", CreateMudParams(), "ABEBSIC1.BAN","ABEKNFD.BAN","ABEKNBK.BAN","ABEEDGE.BAN","MUDIDLE.BAN","MUDPAL.BND", "MUDSCRUB.BAN","MUDCHSL.BAN","MUDWORK.BND"),
-            new SpawnEntry(82, "Flying Slig", null, "FLYSLIG.BND", "SLGBLOW.BAN", "GRENADE.BAN", "SMEXP.BAN","METAL.BAN", "BIGFLASH.BAN", "VAPOR.BAN"),
+            new SpawnEntry(82, "Flying Slig", CreateFlySligParams(), "FLYSLIG.BND", "SLGBLOW.BAN", "GRENADE.BAN", "SMEXP.BAN","METAL.BAN", "BIGFLASH.BAN", "VAPOR.BAN"),
             new SpawnEntry(83, "Fleech",null, "FLEECH.BAN", "FLEEBLOW.BAN"),
             new SpawnEntry(84, "Slurg",null, "SLURG.BAN"),
             new SpawnEntry(93, "Mine Car",null, "BAYROLL.BAN", "ABECAR.BAN", "METAL.BAN", "EXPLO2.BAN"),
@@ -385,7 +408,7 @@ namespace AliveAPIDotNet
         {
             if (listBoxPath.SelectedItem != null)
             {
-                new ObjectHexEdit((UnmanagedObject)listBoxPath.SelectedItem).Show();
+                new ObjectEditor((UnmanagedObject)listBoxPath.SelectedItem).Show();
             }
         }
 
@@ -397,14 +420,13 @@ namespace AliveAPIDotNet
 
             foreach (var o in pathEntries)
             {
-                string S = string.Format("{0} {1} {2} {3}", o.X1, o.Y1, o.X2, o.Y2);
-                listBoxPath.Items.Add(S);
+                listBoxPath.Items.Add(o);
             }
 
             panelCurrentScreen.Refresh();
         }
 
-        PathEntry[] pathEntries = null;
+        PathLineObject[] pathEntries = null;
 
         private void panelCurrentScreen_Paint(object sender, PaintEventArgs e)
         {
