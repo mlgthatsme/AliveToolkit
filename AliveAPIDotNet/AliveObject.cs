@@ -149,6 +149,12 @@ namespace AliveAPIDotNet
             set { SafeWriteInt16(mAddress + 0x04, value); }
         }
 
+        public short AliveState
+        {
+            get { return SafeReadInt16(mAddress + 0x106); }
+            set { SafeWriteInt16(mAddress + 0x106, value); }
+        }
+
         public byte ObjectState
         {
             get { return SafeReadByte(mAddress + 0x06); }

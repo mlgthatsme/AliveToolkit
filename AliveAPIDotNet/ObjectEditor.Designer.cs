@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.propertyGrid1 = new System.Windows.Forms.PropertyGrid();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // propertyGrid1
@@ -39,6 +41,11 @@
             this.propertyGrid1.Name = "propertyGrid1";
             this.propertyGrid1.Size = new System.Drawing.Size(352, 362);
             this.propertyGrid1.TabIndex = 0;
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 30;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // ObjectEditor
             // 
@@ -56,5 +63,6 @@
 
         #endregion
         private System.Windows.Forms.PropertyGrid propertyGrid1;
+        private System.Windows.Forms.Timer timer1;
     }
 }

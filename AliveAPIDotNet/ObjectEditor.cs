@@ -36,9 +36,19 @@ namespace AliveAPIDotNet
                     toolStrip.Items.Add(button);
                     button.Click += delegate { new AliveAPIDotNet.ObjectHexEdit(aliveObj).Show(); };
 
+                    var autoUpdateButton = new ToolStripButton("Auto Update");
+                    autoUpdateButton.CheckOnClick = true;
+                    toolStrip.Items.Add(autoUpdateButton);
+                    autoUpdateButton.Click += delegate { timer1.Enabled = autoUpdateButton.Checked; };
+
                     break;
                 }
             }
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            propertyGrid1.SelectedObject = aliveObj;
         }
     }
 }
