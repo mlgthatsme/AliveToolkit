@@ -429,6 +429,16 @@ __int16 __cdecl Hook_resourceHack(char *file, int type, int id, __int16 a4, __in
 	
 	return H_resourceHack.Real()(file, type, id, a4, a5);
 }
+
+typedef bool(__thiscall* T_Raycast)(void *thisPtr, signed int a2, signed int a3, signed int a4, signed int a5, _DWORD *a6, _DWORD *a7, _DWORD *a8, int mode);
+FunctionHook<T_Raycast> H_Raycast(0x00401258);
+bool __fastcall Hook_Raycast(void *thisPtr, void * _EDX, signed int a2, signed int a3, signed int a4, signed int a5, _DWORD *a6, _DWORD *a7, _DWORD *a8, int mode)
+{
+	bool r = H_Raycast.Real()(thisPtr, a2, a3, a4, a5, a6, a7, a8, mode);
+	AddRaycastEntry(r, a2, a3, a4, a5, *a6, *a7, *a8, mode);
+	return r;
+}
+
 void MLG_InitHook()
 {
 	MH_Initialize();
@@ -440,6 +450,7 @@ void MLG_InitHook()
 
 
 	H_LoopHook.Install(reinterpret_cast<T_LoopHook>(Hook_LoopHook));
+	H_Raycast.Install(reinterpret_cast<T_Raycast>(Hook_Raycast));
 
 	//H_resourceHack.Install(Hook_resourceHack);
 
