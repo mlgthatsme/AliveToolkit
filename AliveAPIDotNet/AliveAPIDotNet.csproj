@@ -80,7 +80,8 @@
     <Compile Include="LineGraph.Designer.cs">
       <DependentUpon>LineGraph.cs</DependentUpon>
     </Compile>
-    <Compile Include="Memory.cs" />
+    <Compile Include="MemoryAllocation.cs" />
+    <Compile Include="MemoryHelper.cs" />
     <Compile Include="ObjectEditor.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -350,6 +350,9 @@ public:
 	}
 };
 
+
+
+
 void Loop()
 {
 	Script_Init();
@@ -367,20 +370,6 @@ void Loop()
 			stream.close();
 		}
 		loadedSave = true;
-	}
-
-	if (GetAsyncKeyState('E'))
-	{
-		/*AliveAPI::ObjectList * Objects = *reinterpret_cast<AliveAPI::ObjectList **>(0x00BB47C4);
-		for (int i = 0; i < Objects->mCount; i++)
-		{
-			AE_abe * v9 = (AE_abe*)Objects->mData[i];
-			if (v9->type == 110)
-			{
-				int v17 = 0;
-				(*((int(__thiscall **)(AE_abe *, void*, _DWORD))v9->vtable + 7))(v9, &v17, 1);
-			}
-		}*/
 	}
 
 	CLROnTick();
@@ -440,7 +429,6 @@ __int16 __cdecl Hook_resourceHack(char *file, int type, int id, __int16 a4, __in
 	
 	return H_resourceHack.Real()(file, type, id, a4, a5);
 }
-
 void MLG_InitHook()
 {
 	MH_Initialize();
@@ -450,11 +438,10 @@ void MLG_InitHook()
 	*reinterpret_cast<bool*>(0x005BC000) = true; // Always Render
 	*reinterpret_cast<bool*>(0x005C1BD8) = false; // Extra Ai Info
 
+
 	H_LoopHook.Install(reinterpret_cast<T_LoopHook>(Hook_LoopHook));
 
 	//H_resourceHack.Install(Hook_resourceHack);
-
-	
 
 	bool hookMemory = false;
 

@@ -85,6 +85,9 @@ namespace AliveAPIDotNet
                 }
                 else
                 {
+                    if (dragObject != null)
+                        dragObject.FloorCollider = null;
+
                     dragObject = null;
                 }
                 foreach (var s in spawnQueues)
@@ -229,13 +232,7 @@ namespace AliveAPIDotNet
             string res = "";
             Thread staThread = new Thread(x =>
             {
-                try
-                {
-                    res = Clipboard.GetText();
-                }
-                catch (Exception ex)
-                {
-                }
+                res = Clipboard.GetText();
             });
             staThread.SetApartmentState(ApartmentState.STA);
             staThread.Start();
@@ -247,13 +244,7 @@ namespace AliveAPIDotNet
         {
             Thread staThread = new Thread(x =>
             {
-                try
-                {
-                    Clipboard.SetText(text);
-                }
-                catch (Exception ex)
-                {
-                }
+                Clipboard.SetText(text);
             });
             staThread.SetApartmentState(ApartmentState.STA);
             staThread.Start();
@@ -314,8 +305,6 @@ namespace AliveAPIDotNet
             }
 
             lineGraphMemory.SetValue(total / 1024.0f, 0);
-
-            
         }
 
         private void listBox1_DoubleClick(object sender, EventArgs e)
@@ -485,6 +474,11 @@ namespace AliveAPIDotNet
         private void btnStep_Click(object sender, EventArgs e)
         {
             stepFrame = true;
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            AliveAPI.PathData.AddLine((short)AliveAPI.GetPlayerObject().PositionX, (short)AliveAPI.GetPlayerObject().PositionY, (short)(AliveAPI.GetPlayerObject().PositionX + 100), (short)AliveAPI.GetPlayerObject().PositionY, 0);
         }
     }
 }

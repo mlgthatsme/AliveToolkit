@@ -157,6 +157,12 @@ namespace AliveAPIDotNet
             set { SafeWriteInt32(mAddress + 0xB8, FloatToHalfFloat(value)); }
         }
 
+        public PathLineObject FloorCollider
+        {
+            get { IntPtr a = SafeReadIntPtr(mAddress + 0x100); return (a == IntPtr.Zero) ? null : new PathLineObject(a); }
+            set { SafeWriteIntPtr(mAddress + 0x100, (value != null) ? value.Pointer : IntPtr.Zero); }
+        }
+
         public float PositionY
         {
             get { return HalfFloatToFloat(SafeReadInt32(mAddress + 0xBC)); }

@@ -49,7 +49,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lineGraphMemory = new AliveAPIDotNet.LineGraph();
             this.textBoxMemoryLog = new System.Windows.Forms.TextBox();
             this.labelTotal = new System.Windows.Forms.Label();
             this.buttonUpdateMemory = new System.Windows.Forms.Button();
@@ -58,12 +57,14 @@
             this.buttonSpawnObject = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.panelCurrentScreen = new AliveAPIDotNet.DoubleBufferPanel();
             this.btnPathRefresh = new System.Windows.Forms.Button();
             this.listBoxPath = new System.Windows.Forms.ListBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStep = new System.Windows.Forms.Button();
+            this.lineGraphMemory = new AliveAPIDotNet.LineGraph();
+            this.panelCurrentScreen = new AliveAPIDotNet.DoubleBufferPanel();
+            this.button2 = new System.Windows.Forms.Button();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -277,17 +278,6 @@
             this.tabPage2.Text = "Memory";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // lineGraphMemory
-            // 
-            this.lineGraphMemory.BackColor = System.Drawing.Color.White;
-            this.lineGraphMemory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(125)))), ((int)(((byte)(187)))));
-            this.lineGraphMemory.Location = new System.Drawing.Point(9, 215);
-            this.lineGraphMemory.MaxPoints = 256;
-            this.lineGraphMemory.Name = "lineGraphMemory";
-            this.lineGraphMemory.Size = new System.Drawing.Size(381, 185);
-            this.lineGraphMemory.TabIndex = 8;
-            this.lineGraphMemory.Title = "Memory Usage";
-            // 
             // textBoxMemoryLog
             // 
             this.textBoxMemoryLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -361,6 +351,7 @@
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.panelCurrentScreen);
+            this.tabPage5.Controls.Add(this.button2);
             this.tabPage5.Controls.Add(this.btnPathRefresh);
             this.tabPage5.Controls.Add(this.listBoxPath);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
@@ -369,15 +360,6 @@
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "Path";
             this.tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // panelCurrentScreen
-            // 
-            this.panelCurrentScreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelCurrentScreen.Location = new System.Drawing.Point(9, 212);
-            this.panelCurrentScreen.Name = "panelCurrentScreen";
-            this.panelCurrentScreen.Size = new System.Drawing.Size(383, 289);
-            this.panelCurrentScreen.TabIndex = 2;
-            this.panelCurrentScreen.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCurrentScreen_Paint);
             // 
             // btnPathRefresh
             // 
@@ -394,7 +376,7 @@
             this.listBoxPath.FormattingEnabled = true;
             this.listBoxPath.Location = new System.Drawing.Point(9, 4);
             this.listBoxPath.Name = "listBoxPath";
-            this.listBoxPath.Size = new System.Drawing.Size(383, 173);
+            this.listBoxPath.Size = new System.Drawing.Size(383, 147);
             this.listBoxPath.TabIndex = 0;
             this.listBoxPath.DoubleClick += new System.EventHandler(this.listBoxPath_DoubleClick);
             // 
@@ -428,6 +410,36 @@
             this.btnStep.Text = "Step";
             this.btnStep.UseVisualStyleBackColor = true;
             this.btnStep.Click += new System.EventHandler(this.btnStep_Click);
+            // 
+            // lineGraphMemory
+            // 
+            this.lineGraphMemory.BackColor = System.Drawing.Color.White;
+            this.lineGraphMemory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(125)))), ((int)(((byte)(187)))));
+            this.lineGraphMemory.Location = new System.Drawing.Point(9, 215);
+            this.lineGraphMemory.MaxPoints = 256;
+            this.lineGraphMemory.Name = "lineGraphMemory";
+            this.lineGraphMemory.Size = new System.Drawing.Size(381, 185);
+            this.lineGraphMemory.TabIndex = 8;
+            this.lineGraphMemory.Title = "Memory Usage";
+            // 
+            // panelCurrentScreen
+            // 
+            this.panelCurrentScreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelCurrentScreen.Location = new System.Drawing.Point(9, 212);
+            this.panelCurrentScreen.Name = "panelCurrentScreen";
+            this.panelCurrentScreen.Size = new System.Drawing.Size(383, 289);
+            this.panelCurrentScreen.TabIndex = 2;
+            this.panelCurrentScreen.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCurrentScreen_Paint);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(9, 157);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(383, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Add Test Collision Line";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // DebugWindow
             // 
@@ -492,5 +504,6 @@
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Button btnStep;
         private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button button2;
     }
 }

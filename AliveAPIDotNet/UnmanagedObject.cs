@@ -26,6 +26,11 @@ namespace AliveAPIDotNet
             return (aliveObj != null && mAddress == aliveObj.mAddress);
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         public IntPtr Pointer { get { return mAddress; } }
 
         public override string ToString()
@@ -45,7 +50,7 @@ namespace AliveAPIDotNet
 
         bool IsPtrInRange(IntPtr ptr)
         {
-            return (ptr.ToInt32() < mAddress.ToInt32() + AllocatedSize);
+            return ((ptr.ToInt32() < mAddress.ToInt32() + AllocatedSize) && MemoryHelper.IsMemoryRegionValid(ptr));
         }
 
         public void SafeWriteInt32(IntPtr addr, int value)
