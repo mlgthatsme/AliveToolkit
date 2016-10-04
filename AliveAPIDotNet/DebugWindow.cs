@@ -38,6 +38,9 @@ namespace AliveAPIDotNet
         bool freezeGame = false;
         bool stepFrame = false;
 
+        float mouseXPrev = 0;
+        float mouseYPrev = 0;
+
         private void AliveAPI_GameTick(object sender, EventArgs e)
         {
             while(freezeGame)
@@ -86,7 +89,13 @@ namespace AliveAPIDotNet
                 else
                 {
                     if (dragObject != null)
+                    {
+                        float velX = (AliveAPI.MouseX - mouseXPrev) * 200;
+                        float velY = (AliveAPI.MouseY - mouseYPrev) * 200;
                         dragObject.FloorCollider = null;
+                        dragObject.VelocityX = velX;
+                        dragObject.VelocityY = velY;
+                    }
 
                     dragObject = null;
                 }
@@ -107,6 +116,9 @@ namespace AliveAPIDotNet
 
                 spawnQueues.Clear();
             }
+
+            mouseXPrev = AliveAPI.MouseX;
+            mouseYPrev = AliveAPI.MouseY;
         }
 
         List<SpawnQueue> spawnQueues = new List<SpawnQueue>();
