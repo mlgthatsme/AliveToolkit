@@ -38,7 +38,7 @@ namespace AliveAPIDotNet
             public int Y2;
             public int CX;
             public int CY;
-            public PathLineObject PathLine;
+            public int CollidedObject;
             public int Mode;
         }
 
@@ -484,11 +484,19 @@ namespace AliveAPIDotNet
                         Point p1 = new Point(l.X1, l.Y1);
                         Point p2 = new Point(l.X2, l.Y2);
 
+                        if (l.Hit)
+                        {
+                            p2 = new Point(l.CX, l.CY);
+                        }
+
                         e.Graphics.DrawLine((l.Hit) ? Pens.Green : Pens.Blue, p1, p2);
 
-                        Console.WriteLine(l.CX + " " + l.CY);
-
                         e.Graphics.FillEllipse(Brushes.Yellow, new RectangleF(l.CX - 2, l.CY - 2, 4, 4));
+
+                        //if (l.Hit)
+                        //{
+                        //    e.Graphics.DrawString(l.CollidedObject.ToString(), Font, Brushes.White, new PointF((l.X1 + l.CX) / 2, (l.Y1 + l.CY) / 2), new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
+                        //}
                     }
                 }
             }
