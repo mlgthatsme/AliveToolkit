@@ -73,6 +73,9 @@ namespace AliveAPIDotNet
         [DllImport(DLLFileName, EntryPoint = "Ae_CreateObject")]
         static extern IntPtr Ae_CreateObject(int id, IntPtr param);
 
+        [DllImport(DLLFileName, EntryPoint = "Ae_QuikLoad")]
+        public static extern void QuikLoad(byte[] saveData);
+
         public static AliveObject CreateObject(int id, short x, short y, short width, short height, byte[] param)
         {
             MemoryStream str = new MemoryStream();
