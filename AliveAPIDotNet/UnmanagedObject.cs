@@ -1,11 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing.Design;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
 namespace AliveAPIDotNet
 {
+    internal class UnmanagedObjectEditor : UITypeEditor
+    {
+        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
+        {
+            ObjectEditor editor = new AliveAPIDotNet.ObjectEditor((UnmanagedObject)value);
+            editor.Show();
+            return base.EditValue(context, provider, value);
+        }
+
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
+        {
+            return UITypeEditorEditStyle.Modal;
+        }
+    }
+
     public class UnmanagedObject
     {
         public UnmanagedObject(IntPtr addr)

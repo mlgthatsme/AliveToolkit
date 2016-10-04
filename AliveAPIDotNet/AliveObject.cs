@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -104,6 +105,9 @@ namespace AliveAPIDotNet
             }
         }
 
+        // Lift
+        // 0x124 - Pointer to floor collider
+
         public AliveObject Duplicate()
         {
             int memSize = AllocatedSize;
@@ -157,6 +161,8 @@ namespace AliveAPIDotNet
             set { SafeWriteInt32(mAddress + 0xB8, FloatToHalfFloat(value)); }
         }
 
+        [Browsable(true)]
+        [Editor(typeof(UnmanagedObjectEditor),typeof(System.Drawing.Design.UITypeEditor))]
         public PathLineObject FloorCollider
         {
             get { IntPtr a = SafeReadIntPtr(mAddress + 0x100); return (a == IntPtr.Zero) ? null : new PathLineObject(a); }

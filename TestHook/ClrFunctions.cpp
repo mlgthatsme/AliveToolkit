@@ -27,6 +27,12 @@ void * Ae_CreateObject(int id, char * params)
 	return reinterpret_cast<void *(__cdecl*)(void * params, int a2, int a3, __int16 a4)>(*(int*)(0x00589724 + (id * 4)))(params, *(int*)(0x00BB47C0), 0, 0);
 }
 
+void Ae_QuikLoad(char * saveData)
+{
+	memcpy((void*)0x00BAF7F8, saveData, 8192);
+	reinterpret_cast<__int16*(__cdecl*)()>(0x004022A2)();
+}
+
 void CLROnTick()
 {
 	AliveAPIDotNet::AliveAPI::FireOnGameTick();

@@ -61,6 +61,22 @@ namespace AliveAPIDotNet
             }
         }
 
+        public int AddressOffset
+        {
+            get
+            {
+                return (obj.Pointer.ToInt32() + offset);
+            }
+        }
+
+        public string AddressOffsetHex
+        {
+            get
+            {
+                return (obj.Pointer + offset).ToString("X");
+            }
+        }
+
         public byte Byte
         {
             get
