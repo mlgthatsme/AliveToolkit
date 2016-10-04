@@ -8,6 +8,7 @@ SCRIPT_FUNCTION void Ae_QuikLoad(char * saveData);
 
 void AddAllocationEntry(int address, int size, int caller);
 void RemoveAllocationEntry(int address);
+void AddRaycastEntry(bool hit, int x1, int y1, int x2, int y2, int collidedLinePointer, int collisionX, int collisionY, int mode);
 
 void Script_Init();
 

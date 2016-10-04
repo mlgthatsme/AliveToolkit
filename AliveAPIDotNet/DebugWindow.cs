@@ -29,6 +29,21 @@ namespace AliveAPIDotNet
             AliveAPI.GameTick += AliveAPI_GameTick;
         }
 
+        public struct RaycastHit
+        {
+            public bool Hit;
+            public int X1;
+            public int Y1;
+            public int X2;
+            public int Y2;
+            public int CX;
+            public int CY;
+            public PathLineObject PathLine;
+            public int Mode;
+        }
+
+        public static List<RaycastHit> mRaycastHits = new List<RaycastHit>();
+
         float Distance(int x1, int y1, int x2, int y2)
         {
             return (float)Math.Sqrt(Math.Pow(Math.Abs(x1 - x2), 2) + Math.Pow(Math.Abs(y1 - y2), 2));
@@ -443,6 +458,7 @@ namespace AliveAPIDotNet
 
         private void panelCurrentScreen_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.Clear(Color.Gray);
             if (pathEntries != null)
             {
                 e.Graphics.ScaleTransform(panelCurrentScreen.Width / 368.0f, panelCurrentScreen.Height / 240.0f);
@@ -459,6 +475,21 @@ namespace AliveAPIDotNet
                 foreach(var o in AliveAPI.ObjectList.AsAliveObjects)
                 {
                     e.Graphics.FillEllipse(Brushes.Black, new RectangleF(o.PositionX - 4, o.PositionY - 8, 8, 8));
+                }
+
+                lock (mRaycastHits)
+                {
+                    foreach (var l in mRaycastHits)
+                    {
+                        Point p1 = new Point(l.X1, l.Y1);
+                        Point p2 = new Point(l.X2, l.Y2);
+
+                        e.Graphics.DrawLine((l.Hit) ? Pens.Green : Pens.Blue, p1, p2);
+
+                        Console.WriteLine(l.CX + " " + l.CY);
+
+                        e.Graphics.FillEllipse(Brushes.Yellow, new RectangleF(l.CX - 2, l.CY - 2, 4, 4));
+                    }
                 }
             }
             else

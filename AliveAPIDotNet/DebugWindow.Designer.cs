@@ -62,9 +62,9 @@
             this.tabPage6 = new System.Windows.Forms.TabPage();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStep = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.lineGraphMemory = new AliveAPIDotNet.LineGraph();
             this.panelCurrentScreen = new AliveAPIDotNet.DoubleBufferPanel();
-            this.button2 = new System.Windows.Forms.Button();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -363,6 +363,8 @@
             // 
             // btnPathRefresh
             // 
+            this.btnPathRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPathRefresh.Location = new System.Drawing.Point(9, 183);
             this.btnPathRefresh.Name = "btnPathRefresh";
             this.btnPathRefresh.Size = new System.Drawing.Size(383, 23);
@@ -373,6 +375,8 @@
             // 
             // listBoxPath
             // 
+            this.listBoxPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxPath.FormattingEnabled = true;
             this.listBoxPath.Location = new System.Drawing.Point(9, 4);
             this.listBoxPath.Name = "listBoxPath";
@@ -411,6 +415,18 @@
             this.btnStep.UseVisualStyleBackColor = true;
             this.btnStep.Click += new System.EventHandler(this.btnStep_Click);
             // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(9, 157);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(383, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Add Test Collision Line";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // lineGraphMemory
             // 
             this.lineGraphMemory.BackColor = System.Drawing.Color.White;
@@ -424,22 +440,15 @@
             // 
             // panelCurrentScreen
             // 
+            this.panelCurrentScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCurrentScreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelCurrentScreen.Location = new System.Drawing.Point(9, 212);
             this.panelCurrentScreen.Name = "panelCurrentScreen";
             this.panelCurrentScreen.Size = new System.Drawing.Size(383, 289);
             this.panelCurrentScreen.TabIndex = 2;
             this.panelCurrentScreen.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCurrentScreen_Paint);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(9, 157);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(383, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Add Test Collision Line";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // DebugWindow
             // 

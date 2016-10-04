@@ -27,6 +27,22 @@ void * Ae_CreateObject(int id, char * params)
 	return reinterpret_cast<void *(__cdecl*)(void * params, int a2, int a3, __int16 a4)>(*(int*)(0x00589724 + (id * 4)))(params, *(int*)(0x00BB47C0), 0, 0);
 }
 
+void AddRaycastEntry(bool hit, int x1, int y1, int x2, int y2, int collidedLinePointer, int collisionX, int collisionY, int mode)
+{
+	AliveAPIDotNet::DebugWindow::RaycastHit ray;
+	ray.Hit = hit;
+	ray.X1 = x1 >> 16;
+	ray.Y1 = y1 >> 16;
+	ray.X2 = x2 >> 16;
+	ray.Y2 = y2 >> 16;
+	ray.CX = collisionX >> 16;
+	ray.CY = collisionY >> 16;
+	ray.Mode = mode;
+	System::Threading::Monitor::Enter(AliveAPIDotNet::DebugWindow::mRaycastHits);
+	AliveAPIDotNet::DebugWindow::mRaycastHits->Add(ray);
+	System::Threading::Monitor::Exit(AliveAPIDotNet::DebugWindow::mRaycastHits);
+}
+
 void Ae_QuikLoad(char * saveData)
 {
 	memcpy((void*)0x00BAF7F8, saveData, 8192);
@@ -36,6 +52,10 @@ void Ae_QuikLoad(char * saveData)
 void CLROnTick()
 {
 	AliveAPIDotNet::AliveAPI::FireOnGameTick();
+
+	System::Threading::Monitor::Enter(AliveAPIDotNet::DebugWindow::mRaycastHits);
+	AliveAPIDotNet::DebugWindow::mRaycastHits->Clear();
+	System::Threading::Monitor::Exit(AliveAPIDotNet::DebugWindow::mRaycastHits);
 }
 
 void AddAllocationEntry(int address, int size, int caller)
