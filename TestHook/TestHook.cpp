@@ -439,6 +439,16 @@ bool __fastcall Hook_Raycast(void *thisPtr, void * _EDX, signed int a2, signed i
 	return r;
 }
 
+typedef char *(__thiscall* T_LoadFromDiskHook)(unsigned int ***thisPtr, char *a2);
+FunctionHook<T_LoadFromDiskHook> H_LoadFromDiskHook(0x00433160);
+char * __fastcall Hook_LoadFromDiskHook(unsigned int ***thisPtr, void * _EDX, char *a2)
+{
+	printf("Loading %s\n", a2);
+	char * result = H_LoadFromDiskHook.Real()(thisPtr, a2);
+	printf("%x\n", result);
+	return result;
+}
+
 void MLG_InitHook()
 {
 	MH_Initialize();
@@ -451,7 +461,7 @@ void MLG_InitHook()
 
 	H_LoopHook.Install(reinterpret_cast<T_LoopHook>(Hook_LoopHook));
 	H_Raycast.Install(reinterpret_cast<T_Raycast>(Hook_Raycast));
-
+	H_LoadFromDiskHook.Install(reinterpret_cast<T_LoadFromDiskHook>(Hook_LoadFromDiskHook));
 	//H_resourceHack.Install(Hook_resourceHack);
 
 	bool hookMemory = false;

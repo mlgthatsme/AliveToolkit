@@ -511,19 +511,14 @@ namespace AliveAPIDotNet
             freezeGame = !freezeGame;
 
             if (freezeGame)
-            {
-                btnStop.Text = "Continue";
                 Marshal.WriteByte(new IntPtr(0x005CA4D1), 1);
-            }
             else
-            {
-                btnStop.Text = "Stop";
                 Marshal.WriteByte(new IntPtr(0x005CA4D1), 0);
-            }
         }
 
         private void btnStep_Click(object sender, EventArgs e)
         {
+            freezeGame = true;
             stepFrame = true;
         }
 
