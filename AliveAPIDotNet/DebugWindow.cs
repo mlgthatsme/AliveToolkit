@@ -50,8 +50,8 @@ namespace AliveAPIDotNet
         }
 
         AliveObject dragObject = null;
-        bool freezeGame = false;
-        bool stepFrame = false;
+        public static bool freezeGame = false;
+        public static bool stepFrame = false;
 
         float mouseXPrev = 0;
         float mouseYPrev = 0;
@@ -532,18 +532,26 @@ namespace AliveAPIDotNet
             AliveAPI.PathData.AddLine((short)AliveAPI.GetPlayerObject().PositionX, (short)AliveAPI.GetPlayerObject().PositionY, (short)(AliveAPI.GetPlayerObject().PositionX + 100), (short)AliveAPI.GetPlayerObject().PositionY, 0);
         }
 
-        class LvlFileCache : UnmanagedObject
-        {
-            public LvlFileCache(IntPtr addr) : base(addr)
-            {
+        RecordWindow recordWindow = new RecordWindow();
 
-            }
+        private void toolStripButtonRecord_Click(object sender, EventArgs e)
+        {
+            recordWindow.Show();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        QuikSave quikSave;
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            var p = new AliveObjectList(Marshal.ReadIntPtr(Marshal.ReadIntPtr(new IntPtr(0x5C1BB0)) + 32), false).Pointers;
-            new ObjectEditor(p).Show();
+            quikSave = AliveAPI.QuikSave();
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            if (quikSave != null)
+            {
+                AliveAPI.QuikLoad(quikSave);
+            }
         }
     }
 }

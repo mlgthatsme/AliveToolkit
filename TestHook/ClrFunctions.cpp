@@ -50,6 +50,14 @@ void Ae_QuikLoad(char * saveData)
 	reinterpret_cast<__int16*(__cdecl*)()>(0x004022A2)();
 }
 
+static char mTempSaveData[8192];
+
+const char * Ae_QuikSave()
+{
+	reinterpret_cast<void*(__cdecl*)(char *)>(0x004C91A0)(mTempSaveData);
+	return mTempSaveData;
+}
+
 void CLROnTick()
 {
 	AliveAPIDotNet::AliveAPI::FireOnGameTick();

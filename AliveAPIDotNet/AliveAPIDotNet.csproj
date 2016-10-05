@@ -101,6 +101,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="QuikSave.cs" />
+    <Compile Include="RecordWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecordWindow.Designer.cs">
+      <DependentUpon>RecordWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="UnmanagedObject.cs" />
     <Compile Include="Win32Native.cs" />
   </ItemGroup>
@@ -123,6 +130,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecordWindow.resx">
+      <DependentUpon>RecordWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

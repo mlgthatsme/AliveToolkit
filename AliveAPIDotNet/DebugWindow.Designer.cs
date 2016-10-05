@@ -50,7 +50,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lineGraphMemory = new AliveAPIDotNet.LineGraph();
             this.textBoxMemoryLog = new System.Windows.Forms.TextBox();
             this.labelTotal = new System.Windows.Forms.Label();
             this.buttonUpdateMemory = new System.Windows.Forms.Button();
@@ -60,7 +59,6 @@
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.checkBoxRenderMode = new System.Windows.Forms.CheckBox();
-            this.panelCurrentScreen = new AliveAPIDotNet.DoubleBufferPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.btnPathRefresh = new System.Windows.Forms.Button();
             this.listBoxPath = new System.Windows.Forms.ListBox();
@@ -68,7 +66,13 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.button3 = new System.Windows.Forms.Button();
+            this.lineGraphMemory = new AliveAPIDotNet.LineGraph();
+            this.panelCurrentScreen = new AliveAPIDotNet.DoubleBufferPanel();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonRecord = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -78,7 +82,6 @@
             this.tabPage2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
-            this.tabPage6.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -283,17 +286,6 @@
             this.tabPage2.Text = "Memory";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // lineGraphMemory
-            // 
-            this.lineGraphMemory.BackColor = System.Drawing.Color.White;
-            this.lineGraphMemory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(125)))), ((int)(((byte)(187)))));
-            this.lineGraphMemory.Location = new System.Drawing.Point(9, 215);
-            this.lineGraphMemory.MaxPoints = 256;
-            this.lineGraphMemory.Name = "lineGraphMemory";
-            this.lineGraphMemory.Size = new System.Drawing.Size(381, 185);
-            this.lineGraphMemory.TabIndex = 8;
-            this.lineGraphMemory.Title = "Memory Usage";
-            // 
             // textBoxMemoryLog
             // 
             this.textBoxMemoryLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -367,9 +359,9 @@
             // tabPage5
             // 
             this.tabPage5.Controls.Add(this.checkBoxRenderMode);
-            this.tabPage5.Controls.Add(this.panelCurrentScreen);
             this.tabPage5.Controls.Add(this.button2);
             this.tabPage5.Controls.Add(this.btnPathRefresh);
+            this.tabPage5.Controls.Add(this.panelCurrentScreen);
             this.tabPage5.Controls.Add(this.listBoxPath);
             this.tabPage5.Location = new System.Drawing.Point(4, 22);
             this.tabPage5.Name = "tabPage5";
@@ -387,18 +379,6 @@
             this.checkBoxRenderMode.TabIndex = 3;
             this.checkBoxRenderMode.Text = "Mode";
             this.checkBoxRenderMode.UseVisualStyleBackColor = true;
-            // 
-            // panelCurrentScreen
-            // 
-            this.panelCurrentScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelCurrentScreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelCurrentScreen.Location = new System.Drawing.Point(9, 238);
-            this.panelCurrentScreen.Name = "panelCurrentScreen";
-            this.panelCurrentScreen.Size = new System.Drawing.Size(383, 238);
-            this.panelCurrentScreen.TabIndex = 2;
-            this.panelCurrentScreen.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCurrentScreen_Paint);
             // 
             // button2
             // 
@@ -437,7 +417,6 @@
             // 
             // tabPage6
             // 
-            this.tabPage6.Controls.Add(this.button3);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Size = new System.Drawing.Size(400, 484);
@@ -449,7 +428,12 @@
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
-            this.toolStripButton2});
+            this.toolStripButton2,
+            this.toolStripSeparator4,
+            this.toolStripButtonRecord,
+            this.toolStripSeparator5,
+            this.toolStripButton3,
+            this.toolStripButton4});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(408, 25);
@@ -476,15 +460,68 @@
             this.toolStripButton2.Text = "Step Frame";
             this.toolStripButton2.Click += new System.EventHandler(this.btnStep_Click);
             // 
-            // button3
+            // lineGraphMemory
             // 
-            this.button3.Location = new System.Drawing.Point(9, 14);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.lineGraphMemory.BackColor = System.Drawing.Color.White;
+            this.lineGraphMemory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(125)))), ((int)(((byte)(187)))));
+            this.lineGraphMemory.Location = new System.Drawing.Point(9, 215);
+            this.lineGraphMemory.MaxPoints = 256;
+            this.lineGraphMemory.Name = "lineGraphMemory";
+            this.lineGraphMemory.Size = new System.Drawing.Size(381, 185);
+            this.lineGraphMemory.TabIndex = 8;
+            this.lineGraphMemory.Title = "Memory Usage";
+            // 
+            // panelCurrentScreen
+            // 
+            this.panelCurrentScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelCurrentScreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelCurrentScreen.Location = new System.Drawing.Point(9, 238);
+            this.panelCurrentScreen.Name = "panelCurrentScreen";
+            this.panelCurrentScreen.Size = new System.Drawing.Size(383, 238);
+            this.panelCurrentScreen.TabIndex = 2;
+            this.panelCurrentScreen.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCurrentScreen_Paint);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonRecord
+            // 
+            this.toolStripButtonRecord.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRecord.Image")));
+            this.toolStripButtonRecord.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRecord.Name = "toolStripButtonRecord";
+            this.toolStripButtonRecord.Size = new System.Drawing.Size(64, 22);
+            this.toolStripButtonRecord.Text = "Record";
+            this.toolStripButtonRecord.ToolTipText = "Record";
+            this.toolStripButtonRecord.Click += new System.EventHandler(this.toolStripButtonRecord_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "toolStripButton3";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton4.Text = "toolStripButton4";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // DebugWindow
             // 
@@ -510,7 +547,6 @@
             this.tabPage4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
-            this.tabPage6.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -557,6 +593,10 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.CheckBox checkBoxRenderMode;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRecord;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
     }
 }

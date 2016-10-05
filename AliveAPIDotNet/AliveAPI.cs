@@ -74,7 +74,23 @@ namespace AliveAPIDotNet
         static extern IntPtr Ae_CreateObject(int id, IntPtr param);
 
         [DllImport(DLLFileName, EntryPoint = "Ae_QuikLoad")]
-        public static extern void QuikLoad(byte[] saveData);
+        static extern void Ae_QuikLoad(byte[] saveData);
+
+        [DllImport(DLLFileName, EntryPoint = "Ae_QuikSave")]
+        static extern IntPtr Ae_QuikSave();
+
+        public static QuikSave QuikSave()
+        {
+            IntPtr quickSavePtr = Ae_QuikSave();
+            byte[] saveData = new byte[8192];
+            Marshal.Copy(quickSavePtr, saveData, 0, saveData.Length);
+            return new QuikSave(saveData);
+        }
+
+        public static void QuikLoad(QuikSave save)
+        {
+            Ae_QuikLoad(save.Data);
+        }
 
         public static AliveObject CreateObject(int id, short x, short y, short width, short height, byte[] param)
         {

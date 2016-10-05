@@ -5,6 +5,7 @@ SCRIPT_FUNCTION void Ae_PlaySound(int id, int vol, float pitch, int a4);
 SCRIPT_FUNCTION void UpdateAllocationList();
 SCRIPT_FUNCTION void Ae_LoadResource(char * filename);
 SCRIPT_FUNCTION void Ae_QuikLoad(char * saveData);
+SCRIPT_FUNCTION const char * Ae_QuikSave();
 
 void AddAllocationEntry(int address, int size, int caller);
 void RemoveAllocationEntry(int address);
