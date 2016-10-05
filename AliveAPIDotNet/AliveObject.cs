@@ -141,7 +141,7 @@ namespace AliveAPIDotNet
 
         public UnmanagedObjectPointer[] LoadedBans
         {
-            get { return new AliveObjectList(mAddress + 0x10).Pointers; }
+            get { return new AliveObjectList(mAddress + 0x10, false).Pointers; }
         }
 
         public byte ThrowableCount
