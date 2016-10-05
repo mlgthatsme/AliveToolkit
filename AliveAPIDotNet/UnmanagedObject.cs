@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing.Design;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -23,6 +24,8 @@ namespace AliveAPIDotNet
         }
     }
 
+    [Browsable(true)]
+    [Editor(typeof(UnmanagedObjectEditor), typeof(System.Drawing.Design.UITypeEditor))]
     public class UnmanagedObject
     {
         public UnmanagedObject(IntPtr addr)
@@ -48,7 +51,7 @@ namespace AliveAPIDotNet
             return base.GetHashCode();
         }
 
-        public IntPtr Pointer { get { return mAddress; } }
+        public IntPtr Pointer { get { return mAddress; }set { mAddress = value; } }
 
         public override string ToString()
         {

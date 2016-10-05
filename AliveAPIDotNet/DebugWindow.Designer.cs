@@ -67,6 +67,7 @@
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.lineGraphMemory = new AliveAPIDotNet.LineGraph();
             this.panelCurrentScreen = new AliveAPIDotNet.DoubleBufferPanel();
+            this.checkBoxRenderMode = new System.Windows.Forms.CheckBox();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -352,6 +353,7 @@
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.checkBoxRenderMode);
             this.tabPage5.Controls.Add(this.panelCurrentScreen);
             this.tabPage5.Controls.Add(this.button2);
             this.tabPage5.Controls.Add(this.btnPathRefresh);
@@ -455,11 +457,21 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelCurrentScreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelCurrentScreen.Location = new System.Drawing.Point(9, 212);
+            this.panelCurrentScreen.Location = new System.Drawing.Point(9, 238);
             this.panelCurrentScreen.Name = "panelCurrentScreen";
-            this.panelCurrentScreen.Size = new System.Drawing.Size(383, 264);
+            this.panelCurrentScreen.Size = new System.Drawing.Size(383, 238);
             this.panelCurrentScreen.TabIndex = 2;
             this.panelCurrentScreen.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCurrentScreen_Paint);
+            // 
+            // checkBoxRenderMode
+            // 
+            this.checkBoxRenderMode.AutoSize = true;
+            this.checkBoxRenderMode.Location = new System.Drawing.Point(9, 215);
+            this.checkBoxRenderMode.Name = "checkBoxRenderMode";
+            this.checkBoxRenderMode.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxRenderMode.TabIndex = 3;
+            this.checkBoxRenderMode.Text = "Mode";
+            this.checkBoxRenderMode.UseVisualStyleBackColor = true;
             // 
             // DebugWindow
             // 
@@ -484,6 +496,7 @@
             this.tabPage2.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
+            this.tabPage5.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -529,5 +542,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.CheckBox checkBoxRenderMode;
     }
 }

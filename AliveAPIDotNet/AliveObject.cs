@@ -7,6 +7,8 @@ using System.Text;
 
 namespace AliveAPIDotNet
 {
+    [Browsable(true)]
+    [Editor(typeof(UnmanagedObjectEditor), typeof(System.Drawing.Design.UITypeEditor))]
     public class AliveObject : UnmanagedObject
     {
         public AliveObject(IntPtr addr) : base(addr)
@@ -137,6 +139,11 @@ namespace AliveAPIDotNet
             set { SafeWriteIntPtr(mAddress, value); }
         }
 
+        public UnmanagedObjectPointer[] LoadedBans
+        {
+            get { return new AliveObjectList(mAddress + 0x10).Pointers; }
+        }
+
         public byte ThrowableCount
         {
             get { return SafeReadByte(mAddress + 0x1A2); }
@@ -167,8 +174,7 @@ namespace AliveAPIDotNet
             set { SafeWriteInt32(mAddress + 0xB8, FloatToHalfFloat(value)); }
         }
 
-        [Browsable(true)]
-        [Editor(typeof(UnmanagedObjectEditor),typeof(System.Drawing.Design.UITypeEditor))]
+        
         public PathLineObject FloorCollider
         {
             get { IntPtr a = SafeReadIntPtr(mAddress + 0x100); return (a == IntPtr.Zero) ? null : new PathLineObject(a); }

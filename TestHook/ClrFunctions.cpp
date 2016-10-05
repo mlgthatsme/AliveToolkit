@@ -38,7 +38,7 @@ void AddRaycastEntry(bool hit, int x1, int y1, int x2, int y2, int collidedLineP
 	ray.CX = collisionX >> 16;
 	ray.CY = collisionY >> 16;
 	ray.CollidedObject = collidedLinePointer;
-	ray.Mode = mode;
+	ray.Mode = mode >> 1;
 	System::Threading::Monitor::Enter(AliveAPIDotNet::DebugWindow::mRaycastHits);
 	AliveAPIDotNet::DebugWindow::mRaycastHits->Add(ray);
 	System::Threading::Monitor::Exit(AliveAPIDotNet::DebugWindow::mRaycastHits);

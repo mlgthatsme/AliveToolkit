@@ -124,8 +124,8 @@ namespace AliveAPIDotNet
             return switchStates;
         }
 
-        public static AliveObjectList ObjectList = new AliveObjectList(new IntPtr(0x00BB47C4));
-        public static AliveObjectList ObjectListActive = new AliveObjectList(new IntPtr(0x005C1124));
+        public static AliveObjectList ObjectList = new AliveObjectList(new IntPtr(0x00BB47C4), true);
+        public static AliveObjectList ObjectListActive = new AliveObjectList(new IntPtr(0x005C1124), true);
 
         public static PathObjectList PathData = new PathObjectList(new IntPtr(0x005C1128));
 

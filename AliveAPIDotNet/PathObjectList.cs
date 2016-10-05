@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
 namespace AliveAPIDotNet
 {
+    [Browsable(true)]
+    [Editor(typeof(UnmanagedObjectEditor), typeof(System.Drawing.Design.UITypeEditor))]
     public class PathLineObject : UnmanagedObject
     {
         public PathLineObject(IntPtr addr) : base(addr)
@@ -100,11 +103,11 @@ namespace AliveAPIDotNet
         {
             get
             {
-                return Marshal.ReadInt16(Marshal.ReadIntPtr(mAddress) + 4);
+                return Marshal.ReadInt16(Marshal.ReadIntPtr(mAddress) + 0xC);
             }
             set
             {
-                Marshal.WriteInt16(Marshal.ReadIntPtr(mAddress) + 4, value);
+                Marshal.WriteInt16(Marshal.ReadIntPtr(mAddress) + 0xC, value);
             }
         }
 

@@ -461,7 +461,7 @@ void MLG_InitHook()
 
 	H_LoopHook.Install(reinterpret_cast<T_LoopHook>(Hook_LoopHook));
 	H_Raycast.Install(reinterpret_cast<T_Raycast>(Hook_Raycast));
-	H_LoadFromDiskHook.Install(reinterpret_cast<T_LoadFromDiskHook>(Hook_LoadFromDiskHook));
+	//H_LoadFromDiskHook.Install(reinterpret_cast<T_LoadFromDiskHook>(Hook_LoadFromDiskHook));
 	//H_resourceHack.Install(Hook_resourceHack);
 
 	bool hookMemory = false;

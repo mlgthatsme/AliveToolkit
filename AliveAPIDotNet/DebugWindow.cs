@@ -108,6 +108,9 @@ namespace AliveAPIDotNet
                         float velX = (AliveAPI.MouseX - mouseXPrev) * 200;
                         float velY = (AliveAPI.MouseY - mouseYPrev) * 200;
                         dragObject.FloorCollider = null;
+                        if (dragObject.ObjectID == 69)
+                            dragObject.AliveState = 85;
+
                         dragObject.VelocityX = velX;
                         dragObject.VelocityY = velY;
                     }
@@ -493,6 +496,8 @@ namespace AliveAPIDotNet
 
                         e.Graphics.FillEllipse(Brushes.Yellow, new RectangleF(l.CX - 2, l.CY - 2, 4, 4));
 
+                        if (checkBoxRenderMode.Checked)
+                            e.Graphics.DrawString(l.Mode.ToString(), new Font(FontFamily.GenericSansSerif, 5.0f), Brushes.White, new PointF((l.X1 + l.X2) / 2, (l.Y1 + l.Y2) / 2), new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
                         //if (l.Hit)
                         //{
                         //    e.Graphics.DrawString(l.CollidedObject.ToString(), Font, Brushes.White, new PointF((l.X1 + l.CX) / 2, (l.Y1 + l.CY) / 2), new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
