@@ -33,16 +33,19 @@ namespace AliveAPIDotNet
             }
         }
     }
-    public class AliveObjectList
+    public class AliveObjectList : UnmanagedObject
     {
-        public AliveObjectList(IntPtr addr, bool isPointer = false)
+        public AliveObjectList(IntPtr addr, bool isPointer = false) : base(addr)
         {
-            mAddress = addr;
             pointerMode = isPointer;
         }
 
-        private IntPtr mAddress;
-        private IntPtr Address
+        public AliveObjectList(IntPtr addr) : base(addr)
+        {
+            pointerMode = true;
+        }
+
+        public override IntPtr Pointer
         {
             get
             {
@@ -52,22 +55,24 @@ namespace AliveAPIDotNet
                     return mAddress;
             }
         }
+
         bool pointerMode = false;
+
         public short Count
         {
             get
             {
-                return Marshal.ReadInt16(Address + 4);
+                return Marshal.ReadInt16(Pointer + 4);
             }
             set
             {
-                Marshal.WriteInt16(Address + 4, value);
+                Marshal.WriteInt16(Pointer + 4, value);
             }
         }
 
         public void Add(UnmanagedObject objPointer)
         {
-            IntPtr objAddr = Marshal.ReadIntPtr(Address);
+            IntPtr objAddr = Marshal.ReadIntPtr(Pointer);
             Marshal.WriteIntPtr(objAddr + (4 * Count), objPointer.Pointer);
             Count++;
         }
@@ -77,7 +82,7 @@ namespace AliveAPIDotNet
             get
             {
                 List<UnmanagedObject> objs = new List<UnmanagedObject>();
-                IntPtr objAddr = Marshal.ReadIntPtr(Address);
+                IntPtr objAddr = Marshal.ReadIntPtr(Pointer);
 
                 for (int i = 0; i < Count; i++)
                 {
@@ -93,7 +98,7 @@ namespace AliveAPIDotNet
             get
             {
                 List<UnmanagedObjectPointer> objs = new List<UnmanagedObjectPointer>();
-                IntPtr objAddr = Marshal.ReadIntPtr(Address);
+                IntPtr objAddr = Marshal.ReadIntPtr(Pointer);
 
                 for (int i = 0; i < Count; i++)
                 {
@@ -104,12 +109,22 @@ namespace AliveAPIDotNet
             }
         }
 
+        public T[] AsType<T>() where T : UnmanagedObject
+        {
+            List<T> list = new List<T>();
+            foreach(var p in Pointers)
+            {
+                list.Add((T)Activator.CreateInstance(typeof(T), new object[] { p.mAddress }));
+            }
+            return list.ToArray();
+        }
+
         public AliveObject[] AsAliveObjects
         {
             get
             {
                 List<AliveObject> objs = new List<AliveObject>();
-                IntPtr objAddr = Marshal.ReadIntPtr(Address);
+                IntPtr objAddr = Marshal.ReadIntPtr(Pointer);
 
                 for (int i = 0; i < Count; i++)
                 {

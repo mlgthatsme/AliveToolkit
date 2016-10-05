@@ -13,38 +13,41 @@ namespace AliveAPIDotNet
 {
     public partial class ObjectEditor : Form
     {
-        public ObjectEditor(UnmanagedObject obj)
+        public ObjectEditor(object obj)
         {
             InitializeComponent();
             aliveObj = obj;
         }
 
-        UnmanagedObject aliveObj;
+        object aliveObj;
 
         private void ObjectEditor_Load(object sender, EventArgs e)
         {
-            Text = string.Format("Editing object at {0}", aliveObj.Pointer.ToString("X"));
-
             propertyGrid1.SelectedObject = aliveObj;
-            foreach (Control control in propertyGrid1.Controls)
+            if (aliveObj is UnmanagedObject)
             {
-                ToolStrip toolStrip = control as ToolStrip;
-
-                if (toolStrip != null)
+                Text = string.Format("Editing object at {0}", ((UnmanagedObject)aliveObj).Pointer.ToString("X"));
+                
+                foreach (Control control in propertyGrid1.Controls)
                 {
-                    var button = new ToolStripButton("Hex Edit");
-                    toolStrip.Items.Add(button);
-                    button.Click += delegate { new AliveAPIDotNet.ObjectHexEdit(aliveObj).Show(); };
+                    ToolStrip toolStrip = control as ToolStrip;
 
-                    var autoUpdateButton = new ToolStripButton("Auto Update");
-                    autoUpdateButton.CheckOnClick = true;
-                    toolStrip.Items.Add(autoUpdateButton);
-                    autoUpdateButton.Click += delegate { timer1.Enabled = autoUpdateButton.Checked; };
+                    if (toolStrip != null)
+                    {
+                        var button = new ToolStripButton("Hex Edit");
+                        toolStrip.Items.Add(button);
+                        button.Click += delegate { new AliveAPIDotNet.ObjectHexEdit((UnmanagedObject)aliveObj).Show(); };
 
-                    break;
+                        var autoUpdateButton = new ToolStripButton("Auto Update");
+                        autoUpdateButton.CheckOnClick = true;
+                        toolStrip.Items.Add(autoUpdateButton);
+                        autoUpdateButton.Click += delegate { timer1.Enabled = autoUpdateButton.Checked; };
+
+                        break;
+                    }
                 }
-            }
-        }
+
+            }        }
 
         private void timer1_Tick(object sender, EventArgs e)
         {

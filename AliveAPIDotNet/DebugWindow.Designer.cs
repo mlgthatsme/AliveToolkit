@@ -50,6 +50,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lineGraphMemory = new AliveAPIDotNet.LineGraph();
             this.textBoxMemoryLog = new System.Windows.Forms.TextBox();
             this.labelTotal = new System.Windows.Forms.Label();
             this.buttonUpdateMemory = new System.Windows.Forms.Button();
@@ -58,16 +59,16 @@
             this.buttonSpawnObject = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.checkBoxRenderMode = new System.Windows.Forms.CheckBox();
+            this.panelCurrentScreen = new AliveAPIDotNet.DoubleBufferPanel();
+            this.button2 = new System.Windows.Forms.Button();
             this.btnPathRefresh = new System.Windows.Forms.Button();
             this.listBoxPath = new System.Windows.Forms.ListBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.button2 = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.lineGraphMemory = new AliveAPIDotNet.LineGraph();
-            this.panelCurrentScreen = new AliveAPIDotNet.DoubleBufferPanel();
-            this.checkBoxRenderMode = new System.Windows.Forms.CheckBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -77,6 +78,7 @@
             this.tabPage2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage5.SuspendLayout();
+            this.tabPage6.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -281,6 +283,17 @@
             this.tabPage2.Text = "Memory";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // lineGraphMemory
+            // 
+            this.lineGraphMemory.BackColor = System.Drawing.Color.White;
+            this.lineGraphMemory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(125)))), ((int)(((byte)(187)))));
+            this.lineGraphMemory.Location = new System.Drawing.Point(9, 215);
+            this.lineGraphMemory.MaxPoints = 256;
+            this.lineGraphMemory.Name = "lineGraphMemory";
+            this.lineGraphMemory.Size = new System.Drawing.Size(381, 185);
+            this.lineGraphMemory.TabIndex = 8;
+            this.lineGraphMemory.Title = "Memory Usage";
+            // 
             // textBoxMemoryLog
             // 
             this.textBoxMemoryLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -365,6 +378,40 @@
             this.tabPage5.Text = "Path";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // checkBoxRenderMode
+            // 
+            this.checkBoxRenderMode.AutoSize = true;
+            this.checkBoxRenderMode.Location = new System.Drawing.Point(9, 215);
+            this.checkBoxRenderMode.Name = "checkBoxRenderMode";
+            this.checkBoxRenderMode.Size = new System.Drawing.Size(53, 17);
+            this.checkBoxRenderMode.TabIndex = 3;
+            this.checkBoxRenderMode.Text = "Mode";
+            this.checkBoxRenderMode.UseVisualStyleBackColor = true;
+            // 
+            // panelCurrentScreen
+            // 
+            this.panelCurrentScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelCurrentScreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelCurrentScreen.Location = new System.Drawing.Point(9, 238);
+            this.panelCurrentScreen.Name = "panelCurrentScreen";
+            this.panelCurrentScreen.Size = new System.Drawing.Size(383, 238);
+            this.panelCurrentScreen.TabIndex = 2;
+            this.panelCurrentScreen.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCurrentScreen_Paint);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Location = new System.Drawing.Point(9, 157);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(383, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Add Test Collision Line";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // btnPathRefresh
             // 
             this.btnPathRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -390,24 +437,13 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.button3);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Size = new System.Drawing.Size(400, 484);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "Dev";
             this.tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(9, 157);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(383, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Add Test Collision Line";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // toolStrip1
             // 
@@ -440,38 +476,15 @@
             this.toolStripButton2.Text = "Step Frame";
             this.toolStripButton2.Click += new System.EventHandler(this.btnStep_Click);
             // 
-            // lineGraphMemory
+            // button3
             // 
-            this.lineGraphMemory.BackColor = System.Drawing.Color.White;
-            this.lineGraphMemory.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(125)))), ((int)(((byte)(187)))));
-            this.lineGraphMemory.Location = new System.Drawing.Point(9, 215);
-            this.lineGraphMemory.MaxPoints = 256;
-            this.lineGraphMemory.Name = "lineGraphMemory";
-            this.lineGraphMemory.Size = new System.Drawing.Size(381, 185);
-            this.lineGraphMemory.TabIndex = 8;
-            this.lineGraphMemory.Title = "Memory Usage";
-            // 
-            // panelCurrentScreen
-            // 
-            this.panelCurrentScreen.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelCurrentScreen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelCurrentScreen.Location = new System.Drawing.Point(9, 238);
-            this.panelCurrentScreen.Name = "panelCurrentScreen";
-            this.panelCurrentScreen.Size = new System.Drawing.Size(383, 238);
-            this.panelCurrentScreen.TabIndex = 2;
-            this.panelCurrentScreen.Paint += new System.Windows.Forms.PaintEventHandler(this.panelCurrentScreen_Paint);
-            // 
-            // checkBoxRenderMode
-            // 
-            this.checkBoxRenderMode.AutoSize = true;
-            this.checkBoxRenderMode.Location = new System.Drawing.Point(9, 215);
-            this.checkBoxRenderMode.Name = "checkBoxRenderMode";
-            this.checkBoxRenderMode.Size = new System.Drawing.Size(53, 17);
-            this.checkBoxRenderMode.TabIndex = 3;
-            this.checkBoxRenderMode.Text = "Mode";
-            this.checkBoxRenderMode.UseVisualStyleBackColor = true;
+            this.button3.Location = new System.Drawing.Point(9, 14);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 0;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // DebugWindow
             // 
@@ -497,6 +510,7 @@
             this.tabPage4.ResumeLayout(false);
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            this.tabPage6.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -543,5 +557,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.CheckBox checkBoxRenderMode;
+        private System.Windows.Forms.Button button3;
     }
 }

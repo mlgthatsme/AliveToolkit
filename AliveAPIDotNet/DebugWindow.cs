@@ -531,5 +531,19 @@ namespace AliveAPIDotNet
         {
             AliveAPI.PathData.AddLine((short)AliveAPI.GetPlayerObject().PositionX, (short)AliveAPI.GetPlayerObject().PositionY, (short)(AliveAPI.GetPlayerObject().PositionX + 100), (short)AliveAPI.GetPlayerObject().PositionY, 0);
         }
+
+        class LvlFileCache : UnmanagedObject
+        {
+            public LvlFileCache(IntPtr addr) : base(addr)
+            {
+
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var p = new AliveObjectList(Marshal.ReadIntPtr(Marshal.ReadIntPtr(new IntPtr(0x5C1BB0)) + 32), false).Pointers;
+            new ObjectEditor(p).Show();
+        }
     }
 }

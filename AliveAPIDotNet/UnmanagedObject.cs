@@ -51,7 +51,7 @@ namespace AliveAPIDotNet
             return base.GetHashCode();
         }
 
-        public IntPtr Pointer { get { return mAddress; }set { mAddress = value; } }
+        public virtual IntPtr Pointer { get { return mAddress; }set { mAddress = value; } }
 
         public override string ToString()
         {
