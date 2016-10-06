@@ -14,11 +14,44 @@ namespace AliveAPIDotNet
     public class AlivePlugin
     {
         static DebugWindow window;
-        public static void Initialize()
+        public static void Initialize(GameTypes gameType)
         {
+            GameConfiguration.Instance = new GameConfiguration();
+
+            GameConfiguration.Instance.GameType = gameType;
+
+            if (gameType == GameTypes.Oddysee)
+            {
+                GameConfiguration.Instance.HeroTypeID = 43;
+
+                GameConfiguration.Instance.AddressObjectList = 0x009F2DF0;
+                GameConfiguration.Instance.AddressScreenInfo = 0x004FF7C8;
+                GameConfiguration.Instance.AddressPlayerPointer = 0x0050767C;
+                GameConfiguration.Instance.AddressPathData = 0x504C6C;
+                GameConfiguration.Instance.AddressSwitches = 0x00505568;
+
+                GameConfiguration.Instance.OffsetObjectPositionX = 0xA8;
+                GameConfiguration.Instance.OffsetObjectPositionY = 0xAC;
+                GameConfiguration.Instance.OffsetObjectVelocityX = 0xB4;
+                GameConfiguration.Instance.OffsetObjectVelocityY = 0xB8;
+                GameConfiguration.Instance.OffsetObjectScale = 0xBC;
+                GameConfiguration.Instance.OffsetObjectCurrentFloor = 0xF4;
+                GameConfiguration.Instance.OffsetObjectAliveState = 0xFC;
+
+                List<SpawnEntry> spawnEntries = new List<AliveAPIDotNet.SpawnEntry>();
+                for(int i = 0; i <= 115;i++)
+                {
+                    spawnEntries.Add(new AliveAPIDotNet.SpawnEntry(i, "Object " + i.ToString(), null));
+                }
+
+                GameConfiguration.Instance.SpawnEntries = spawnEntries.ToArray();
+            }
+
             Application.EnableVisualStyles();
 
-            Console.WriteLine("API Loaded");
+            Console.WriteLine("API Loaded for game: " + gameType.ToString());
+
+            AliveAPI.InitializeAPI();
 
             Thread thread = new Thread(new ThreadStart(delegate
             {
@@ -38,6 +71,17 @@ namespace AliveAPIDotNet
     public static class AliveAPI
     {
         const string DLLFileName = "TestHook.dll";
+
+        public static AliveObjectList ObjectList;
+        public static AliveObjectList ObjectListActive;
+        public static PathObjectList PathData;
+
+        public static void InitializeAPI()
+        {
+            ObjectList = new AliveObjectList(new IntPtr(GameConfiguration.Instance.AddressObjectList), true);
+            ObjectListActive = new AliveObjectList(new IntPtr(GameConfiguration.Instance.AddressObjectListActive), true);
+            PathData = new PathObjectList(new IntPtr(GameConfiguration.Instance.AddressPathData));
+        }
 
         public static event EventHandler<MemAllocEventArgs> OnMemoryAllocate;
         public static void FireOnMemoryAllocate(MemoryAllocation allocation)
@@ -66,6 +110,9 @@ namespace AliveAPIDotNet
 
         [DllImport(DLLFileName, EntryPoint = "Ae_PlaySound")]
         public static extern void PlaySound(int id, int volume, float pitch, int a4);
+
+        [DllImport(DLLFileName, EntryPoint = "Lazors")]
+        public static extern void Lazors();
 
         [DllImport(DLLFileName, EntryPoint = "UpdateAllocationList")]
         public static extern void UpdateAllocationList();
@@ -120,7 +167,7 @@ namespace AliveAPIDotNet
 
         public static AliveObject GetPlayerObject()
         {
-            IntPtr playerAddr = Marshal.ReadIntPtr(new IntPtr(0x5C1B8C));
+            IntPtr playerAddr = Marshal.ReadIntPtr(new IntPtr(GameConfiguration.Instance.AddressPlayerPointer));
             if (playerAddr.ToInt32() == 0)
                 return null;
 
@@ -129,27 +176,25 @@ namespace AliveAPIDotNet
 
         public static void SetPlayerObject(AliveObject obj)
         {
-            Marshal.WriteIntPtr(new IntPtr(0x5C1B8C), obj.Pointer);
+            Marshal.WriteIntPtr(new IntPtr(GameConfiguration.Instance.AddressPlayerPointer), obj.Pointer);
         }
 
         public static byte[] GetSwitchStates()
         {
-            IntPtr switchAddr = new IntPtr(0x005C1A28);
+            IntPtr switchAddr = new IntPtr(GameConfiguration.Instance.AddressSwitches);
             byte[] switchStates = new byte[256];
             Marshal.Copy(switchAddr, switchStates, 0, 256);
             return switchStates;
         }
 
-        public static AliveObjectList ObjectList = new AliveObjectList(new IntPtr(0x00BB47C4), true);
-        public static AliveObjectList ObjectListActive = new AliveObjectList(new IntPtr(0x005C1124), true);
-
-        public static PathObjectList PathData = new PathObjectList(new IntPtr(0x005C1128));
-
         public static float CameraOffsetX
         {
             get
             {
-                return AliveObject.HalfFloatToFloat(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(0x5BB5F4)) + 32)))));
+                if (GameConfiguration.Instance.GameType == GameTypes.Oddysee)
+                    return UnmanagedObject.HalfFloatToFloat(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(GameConfiguration.Instance.AddressScreenInfo)) + 16))))) - (368 / 2);
+
+                return UnmanagedObject.HalfFloatToFloat(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(GameConfiguration.Instance.AddressScreenInfo)) + 32)))));
             }
         }
 
@@ -157,7 +202,10 @@ namespace AliveAPIDotNet
         {
             get
             {
-                return AliveObject.HalfFloatToFloat(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(0x5BB5F4)) + 32)) + 4)));
+                if (GameConfiguration.Instance.GameType == GameTypes.Oddysee)
+                    return UnmanagedObject.HalfFloatToFloat(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(GameConfiguration.Instance.AddressScreenInfo)) + 16)) + 4))) - (240 / 2);
+
+                return UnmanagedObject.HalfFloatToFloat(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(Marshal.ReadInt32(new IntPtr(GameConfiguration.Instance.AddressScreenInfo)) + 32)) + 4)));
             }
         }
 

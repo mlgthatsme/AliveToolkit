@@ -350,9 +350,6 @@ public:
 	}
 };
 
-
-
-
 void Loop()
 {
 	Script_Init();
@@ -361,15 +358,18 @@ void Loop()
 
 	if (!loadedSave)
 	{
-		std::ifstream stream = std::ifstream("debug.sav");
-		if (stream.good())
+		if (GetGameType() == 2) // Exoddus
 		{
-			char saveData[8192];
-			stream.read(saveData, 8192);
-			mGame->mWorld->LoadQuikSave(saveData);
-			stream.close();
+			std::ifstream stream = std::ifstream("debug.sav");
+			if (stream.good())
+			{
+				char saveData[8192];
+				stream.read(saveData, 8192);
+				mGame->mWorld->LoadQuikSave(saveData);
+				stream.close();
+			}
+			loadedSave = true;
 		}
-		loadedSave = true;
 	}
 
 	CLROnTick();
@@ -381,7 +381,7 @@ void * __cdecl Hook_abe_malloc(size_t a1)
 {
 	void * allocatedMem = malloc(a1 + sizeof(int));
 	((int *)allocatedMem)[0] = a1;
-	AddAllocationEntry((int)allocatedMem + sizeof(int), (int)a1, 0);
+	//AddAllocationEntry((int)allocatedMem + sizeof(int), (int)a1, 0);
 	return (void*)((int)allocatedMem + sizeof(int));
 }
 
@@ -392,7 +392,7 @@ void * __cdecl Hook_abe_calloc(size_t num, size_t size)
 	int convertedSize = num * size;
 	void * allocatedMem = malloc(convertedSize + sizeof(int));
 	((int *)allocatedMem)[0] = convertedSize;
-	AddAllocationEntry((int)allocatedMem + sizeof(int), (int)convertedSize, 0);
+	//AddAllocationEntry((int)allocatedMem + sizeof(int), (int)convertedSize, 0);
 	return (void*)((int)allocatedMem + sizeof(int));
 }
 
@@ -402,7 +402,7 @@ void __cdecl Hook_abe_free(void * a1)
 {
 	if (a1)
 	{
-		RemoveAllocationEntry((int)a1);
+		//RemoveAllocationEntry((int)a1);
 		H_abe_free.Real()((void*)((int)a1));
 	}
 }
@@ -416,7 +416,7 @@ void * __cdecl Hook_abe_realloc(void *lpMem, size_t a2)
 	void * newMem = realloc((void*)((int)lpMem - sizeof(int)), a2 + sizeof(int));
 	((int *)newMem)[0] = a2;
 
-	AddAllocationEntry((int)newMem + sizeof(int), (int)a2, 0);
+	//AddAllocationEntry((int)newMem + sizeof(int), (int)a2, 0);
 
 	return (void*)((int)newMem + sizeof(int));
 }
@@ -449,22 +449,61 @@ char * __fastcall Hook_LoadFromDiskHook(unsigned int ***thisPtr, void * _EDX, ch
 	return result;
 }
 
+void Lazors()
+{
+	if (GetGameType() == 2)
+	{
+		AliveAPI::ObjectList * objList = *reinterpret_cast<AliveAPI::ObjectList **>(0x00BB47C4);
+		AliveAPI::ObjectList * objList2 = *reinterpret_cast<AliveAPI::ObjectList **>(0x5C1124);
+
+		AE_abe * newObj = (AE_abe*)(new CustomAEObject());
+		newObj->position_x = mGame->GetAbe()->position_x;
+		newObj->position_y = mGame->GetAbe()->position_y;
+
+		objList->AddObject(newObj);
+		objList2->AddObject(newObj);
+	}
+}
+
 void MLG_InitHook()
 {
 	MH_Initialize();
 
-	//Enable DDCHEAT
-	*reinterpret_cast<bool*>(0x005CA4B5) = true; // DDCheat Enabled
-	*reinterpret_cast<bool*>(0x005BC000) = true; // Always Render
-	*reinterpret_cast<bool*>(0x005C1BD8) = false; // Extra Ai Info
+	printf("Alive Toolkit by mlgthatsme\n");
+	printf("Installing hooks\n");
 
+	int gameType = GetGameType();
+
+	if (gameType == 1)
+	{
+		H_LoopHook = FunctionHook<T_LoopHook>(0x40DD20);
+
+		// Abe's oddysee doesn't include pointer size before the actual allocation unline Abe's Exoddus.
+		H_abe_malloc = FunctionHook<T_abe_malloc>(0x00447520);
+		H_abe_malloc.Install(Hook_abe_malloc); 
+
+		H_abe_free = FunctionHook<T_abe_free>(0x447540);
+		H_abe_free.Install(Hook_abe_free);
+
+		H_Raycast = FunctionHook<T_Raycast>(0x0040C410);
+
+		*reinterpret_cast<bool*>(0x00508BF8) = true; // DDCheat Enabled
+	}
+	else if (gameType == 2)
+	{
+		*reinterpret_cast<bool*>(0x005CA4B5) = true; // DDCheat Enabled
+		*reinterpret_cast<bool*>(0x005BC000) = true; // Always Render DDCheat
+		*reinterpret_cast<bool*>(0x005C1BD8) = false; // Extra Ai Info
+	}
+
+	H_Raycast.Install(reinterpret_cast<T_Raycast>(Hook_Raycast));
 
 	H_LoopHook.Install(reinterpret_cast<T_LoopHook>(Hook_LoopHook));
-	H_Raycast.Install(reinterpret_cast<T_Raycast>(Hook_Raycast));
+	
 	//H_LoadFromDiskHook.Install(reinterpret_cast<T_LoadFromDiskHook>(Hook_LoadFromDiskHook));
 	//H_resourceHack.Install(Hook_resourceHack);
 
-	bool hookMemory = false;
+	/*bool hookMemory = false;
 
 	if (hookMemory)
 	{
@@ -472,5 +511,5 @@ void MLG_InitHook()
 		H_abe_calloc.Install(Hook_abe_calloc);
 		H_abe_realloc.Install(Hook_abe_realloc);
 		H_abe_free.Install(Hook_abe_free);
-	}
+	}*/
 }

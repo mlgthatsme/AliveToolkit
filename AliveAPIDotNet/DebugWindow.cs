@@ -21,9 +21,17 @@ namespace AliveAPIDotNet
 
             AliveAPI.OnMemoryAllocate += AliveAPI_OnMemoryAllocate;
 
-            foreach(var v in mSpawnEntries.OrderBy(x=>x.PathID))
+            foreach(var v in GameConfiguration.Instance.SpawnEntries.OrderBy(x=>x.PathID))
             {
                 listBox2.Items.Add(v);
+            }
+
+            if (GameConfiguration.Instance.GameType != GameTypes.Exoddus)
+            {
+                toolStripButtonRecord.Dispose();
+                toolStripSeparator5.Dispose();
+                toolStripButton4.Dispose();
+                toolStripButton3.Dispose();
             }
 
             AliveAPI.GameTick += AliveAPI_GameTick;
@@ -108,7 +116,7 @@ namespace AliveAPIDotNet
                         float velX = (AliveAPI.MouseX - mouseXPrev) * 200;
                         float velY = (AliveAPI.MouseY - mouseYPrev) * 200;
                         dragObject.FloorCollider = null;
-                        if (dragObject.ObjectID == 69)
+                        if (dragObject.ObjectID == GameConfiguration.Instance.HeroTypeID)
                             dragObject.AliveState = 85;
 
                         dragObject.VelocityX = velX;
@@ -151,111 +159,6 @@ namespace AliveAPIDotNet
 
         AliveObject SelectedObject { get { return (AliveObject)listBox1.SelectedItem; } }
         SpawnEntry SelectedSpawnObject { get { return (SpawnEntry)listBox2.SelectedItem; } }
-
-        static byte[] CreateMudParams()
-        {
-            byte[] p = new byte[128];
-            for(int i = 0; i < p.Length;i++)
-            {
-                p[i] = 0;
-            }
-
-
-            return p;
-        }
-
-        static byte[] CreateFlySligParams()
-        {
-            byte[] p = new byte[32];
-            for (int i = 0; i < p.Length; i++)
-            {
-                p[i] = 0;
-            }
-
-            p[5] = 60;
-            p[7] = 30;
-            p[9] = 60;
-            p[13] = 45;
-            p[15] = 120;
-            p[17] = 30;
-            p[19] = 1;
-            p[21] = 90;
-            p[23] = 20;
-            p[25] = 12;
-            p[29] = 1;
-
-            return p;
-        }
-
-        static byte[] CreateCustomParams(params int[] offsets)
-        {
-            byte[] b = new byte[100];
-            foreach(int i in offsets)
-            {
-                b[i] = 1;
-            }
-            return b;
-        }
-
-        SpawnEntry[] mSpawnEntries = {
-            new SpawnEntry(10, "Rock Sack",null, "RTHROW.BND"),
-            new SpawnEntry(15, "Slig",null, "SLGLEVER.BAN","SLGLIFT.BAN","SLGSLEEP.BAN","SLGEDGE.BAN","SLGSMASH.BAN","SLGBEAT.BAN","SLGKNFD.BAN","SLIGZ.BND","SLIG.BND", "SLGBLOW.BAN"),
-            new SpawnEntry(16, "Slog",null, "SLOG.BND", "DOGKNFD.BAN"),
-            new SpawnEntry(17, "Switch",null, 75, 25, "SWITCH1.BAN", "ABEPULL.BAN"),
-            new SpawnEntry(19, "Anti Chant Orb", null, "MAIMORB.BAN","SPLINE.BAN", "SPARKS.BAN", "METAL.BAN", "EXPLO2.BAN"),
-            new SpawnEntry(24, "Mine", null, "MINE.BND","EXPLODE.BND"),
-            new SpawnEntry(25, "UXB", null, "UXB.BND","EXPLODE.BND"),
-            new SpawnEntry(26, "Paramite", null, "PARAMITE.BND"),
-            new SpawnEntry(27, "Stone", null, "ABESTONE.BAN"),
-            new SpawnEntry(28, "Bird Portal", null, "PORTAL.BND", "SHRYPORT.BND"),
-            new SpawnEntry(38, "Electric Wall", CreateCustomParams(4), "ELECWALL.BAN"),
-            new SpawnEntry(40, "Meat Sack",null, "MTHROW.BND"),
-            new SpawnEntry(41, "Scrab",null, "SCRAB.BND"),
-            new SpawnEntry(49, "Mudokon", CreateMudParams(), "ABEBSIC1.BAN","ABEKNFD.BAN","ABEKNBK.BAN","ABEEDGE.BAN","MUDIDLE.BAN","MUDPAL.BND", "MUDSCRUB.BAN","MUDCHSL.BAN","MUDWORK.BND"),
-            new SpawnEntry(82, "Flying Slig", CreateFlySligParams(), "FLYSLIG.BND", "SLGBLOW.BAN", "GRENADE.BAN", "SMEXP.BAN","METAL.BAN", "BIGFLASH.BAN", "VAPOR.BAN"),
-            new SpawnEntry(83, "Fleech",null, "FLEECH.BAN", "FLEEBLOW.BAN"),
-            new SpawnEntry(84, "Slurg",null, "SLURG.BAN"),
-            new SpawnEntry(93, "Mine Car",null, "BAYROLL.BAN", "ABECAR.BAN", "METAL.BAN", "EXPLO2.BAN"),
-            new SpawnEntry(94, "Bonebag",null, "BONEBAG.BAN", "BTHROW.BND"),
-            new SpawnEntry(98, "Ghost Trap",null, "GHOSTTRP.BAN"),
-            new SpawnEntry(101, "Fart Machine",null, "ABESTONE.BAN", "LCDFONT.FNT", "BREWBTN.BAN", "EVILFART.BAN", "EXPLO2.BAN"),
-            new SpawnEntry(103, "Naked Slig",null, "CRAWLSLG.BND", "GRENADE.BAN", "SLGBLOW.BAN", "SMEXP.BAN", "METAL.BAN", "BIGFLASH.BAN", "VAPOR.BAN"),
-            new SpawnEntry(106, "Greeter",null, "MFLARE.BAN", "MOTION.BAN", "GREETER.BAN", "SPLINE.BAN", "EXPLO2.BAN"),
-        };
-
-        class SpawnEntry
-        {
-            public SpawnEntry(int pathId, string name,byte[] paramsData ,params string[] resources)
-            {
-                PathID = pathId;
-                Name = name;
-                Resources = resources;
-                ParamsData = paramsData;
-            }
-
-            public SpawnEntry(int pathId, string name, byte[] paramsData,int width, int height, params string[] resources)
-            {
-                PathID = pathId;
-                Name = name;
-                Resources = resources;
-                ParamsData = paramsData;
-                Width = width;
-                Height = height;
-            }
-
-            public override string ToString()
-            {
-                return Name;
-            }
-
-            public byte[] ParamsData;
-            public int PathID;
-            public string Name;
-            public string[] Resources;
-
-            public int Width = 25;
-            public int Height = 25;
-        }
 
         static string GetClipboardText()
         {
@@ -389,7 +292,6 @@ namespace AliveAPIDotNet
             {
                 AliveObject clone = SelectedObject.Duplicate();
                 AliveAPI.ObjectList.Add(clone);
-                AliveAPI.ObjectListActive.Add(clone);
             }
         }
 
@@ -552,6 +454,11 @@ namespace AliveAPIDotNet
             {
                 AliveAPI.QuikLoad(quikSave);
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AliveAPI.Lazors();
         }
     }
 }

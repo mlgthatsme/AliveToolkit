@@ -8,23 +8,65 @@ public:
 
 bool gIsScriptInit = false;
 
+int GetGameType()
+{
+	char windowTitle[200];
+	GetWindowTextA(FindWindowA("ABE_WINCLASS", NULL), windowTitle, 200);
+
+	std::string title(windowTitle);
+
+	if (title.find("Oddysee") != std::string::npos)
+		return 1;
+	else if (title.find("Exoddus") != std::string::npos)
+		return 2;
+	else
+		return 0;
+}
+
 void Script_Init()
 {
 	if (gIsScriptInit)
 		return;
 
-	AliveAPIDotNet::AlivePlugin::Initialize();
+	switch (GetGameType())
+	{
+	case 1:
+		AliveAPIDotNet::AlivePlugin::Initialize(AliveAPIDotNet::GameTypes::Oddysee);
+		break;
+	case 2:
+		AliveAPIDotNet::AlivePlugin::Initialize(AliveAPIDotNet::GameTypes::Exoddus);
+		break;
+	default:
+		printf("Unknown Game Type. Alive Toolkit will not be loaded.\n");
+		break;
+	}
+	
 	gIsScriptInit = true;
 }
 
 void Ae_LoadResource(char * filename)
 {
-	BanLoadResource(filename, 0);
+	switch (AliveAPIDotNet::GameConfiguration::Instance->GameType)
+	{
+	case AliveAPIDotNet::GameTypes::Oddysee:
+		//reinterpret_cast<short(__cdecl*)(char *name, int a2)>(0x00403274)(filename, 0);
+		break;
+	case AliveAPIDotNet::GameTypes::Exoddus:
+		reinterpret_cast<short(__cdecl*)(char *name, int a2)>(0x00403274)(filename, 0);
+		break;
+	}
 }
 
 void * Ae_CreateObject(int id, char * params)
 {
-	return reinterpret_cast<void *(__cdecl*)(void * params, int a2, int a3, __int16 a4)>(*(int*)(0x00589724 + (id * 4)))(params, *(int*)(0x00BB47C0), 0, 0);
+	switch (AliveAPIDotNet::GameConfiguration::Instance->GameType)
+	{
+	case AliveAPIDotNet::GameTypes::Oddysee:
+		//reinterpret_cast<void *(__cdecl*)(void * params, int a2, int a3, __int16 a4)>(*(int*)(0x004D14CC + (id * 4)))(params, *(int*)(0x00507BA8), 0, 1);
+		return reinterpret_cast<void *(__cdecl*)(void * params, int a2, int a3, __int16 a4)>(*(int*)(0x004D14CC + (id * 4)))(params, *(int*)(0x00507BA8), 0, 0);
+	case AliveAPIDotNet::GameTypes::Exoddus:
+		return reinterpret_cast<void *(__cdecl*)(void * params, int a2, int a3, __int16 a4)>(*(int*)(0x00589724 + (id * 4)))(params, *(int*)(0x00BB47C0), 0, 0);
+	}
 }
 
 void AddRaycastEntry(bool hit, int x1, int y1, int x2, int y2, int collidedLinePointer, int collisionX, int collisionY, int mode)

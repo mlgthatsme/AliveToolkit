@@ -9,27 +9,25 @@
 #include "stdafx.h"
 #include "Injector.h"
 #include <iostream>
-
-#define PROC_NAME "Exoddus.exe" 
+#include <fstream>
 
 Injector * injector = new Injector();
 
-void StartProcess()
+void StartProcess(const char * target)
 {
-	DWORD procID = injector->GetTargetThreadIDFromProcName("exoddus.exe");
+	DWORD procID = injector->GetTargetThreadIDFromProcName(target);
 	if (procID == 0)
 	{
 		STARTUPINFO si = { sizeof(STARTUPINFO) };
 		si.cb = sizeof(si);
 		PROCESS_INFORMATION pi;
 
-
-		CreateProcess("exoddus.exe", NULL, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
-		//Sleep(1);
+		CreateProcess(target, NULL, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
+		Sleep(500);
 	}
 }
 
-void InjectDll(const char * file)
+void InjectDll(const char * file, char * target)
 {
 	TCHAR currentDir[MAX_PATH];
 	TCHAR dllDir[MAX_PATH];
@@ -38,19 +36,33 @@ void InjectDll(const char * file)
 	strcpy(dllDir, currentDir);
 	strcat(dllDir, file);
 
-	if (injector->Inject(PROC_NAME, dllDir)) {
+	if (injector->Inject(target, dllDir)) {
 		printf("DLL injected!\n");
 	}
 	else {
 		printf("Failed to inject dll...\n");
+
+		std::cin.get();
 	}
 }
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	StartProcess();
-
-	InjectDll("\\TestHook.dll");
+	if (std::ifstream("Exoddus.exe"))
+	{
+		StartProcess("Exoddus.exe");
+		InjectDll("\\TestHook.dll", "Exoddus.exe");
+	}
+	else if (std::ifstream("AbeWin.exe"))
+	{
+		StartProcess("AbeWin.exe");
+		InjectDll("\\TestHook.dll", "AbeWin.exe");
+	}
+	else
+	{
+		printf("Could not find Exoddus.exe or AbeWin.exe");
+		std::cin.get();
+	}
 
 	return 0;
 }

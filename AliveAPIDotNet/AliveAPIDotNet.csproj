@@ -53,6 +53,7 @@
     <Compile Include="DebugWindow.Designer.cs">
       <DependentUpon>DebugWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameConfiguration.cs" />
     <Compile Include="HexBox\BuiltInContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
