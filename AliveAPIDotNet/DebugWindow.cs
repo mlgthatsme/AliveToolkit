@@ -397,6 +397,13 @@ namespace AliveAPIDotNet
                         e.Graphics.DrawLine((l.Hit) ? Pens.Green : Pens.Blue, p1, p2);
 
                         e.Graphics.FillEllipse(Brushes.Yellow, new RectangleF(l.CX - 2, l.CY - 2, 4, 4));
+                        e.Graphics.FillEllipse(Brushes.Brown, new RectangleF(l.X1 - 2, l.Y1 - 2, 4, 4));
+
+                        if (l.Hit)
+                        {
+                            PathLineObject line = new PathLineObject(new IntPtr(l.CollidedObject));
+                            e.Graphics.DrawLine(Pens.Orange, line.X1, line.Y1, line.X2, line.Y2);
+                        }
 
                         if (checkBoxRenderMode.Checked)
                             e.Graphics.DrawString(l.Mode.ToString(), new Font(FontFamily.GenericSansSerif, 5.0f), Brushes.White, new PointF((l.X1 + l.X2) / 2, (l.Y1 + l.Y2) / 2), new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
