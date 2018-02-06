@@ -1,0 +1,27 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+configuration:
+- Release
+- Debug
+platform: x86
+environment:
+  abe_game_dir: c:\projects\alivetoolkit\archive\
+build:
+  project: HookLauncher.sln
+  verbosity: minimal
+after_build:
+- ps: >-
+    $projectDir = "c:\projects\alivetoolkit\"
+
+    $binPath = "$($projectDir)\archive"
+
+
+    $zipName = "alivetoolkit-$($env:APPVEYOR_BUILD_VERSION).zip"
+
+    $zipFullPath = "$($binPath)$($zipName)"
+
+
+    7z a "$($zipFullPath)" "$($binPath)*"
+
+
+    Push-AppveyorArtifact "$($zipFullPath)" -FileName $zipName
