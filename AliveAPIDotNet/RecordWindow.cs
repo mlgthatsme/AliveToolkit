@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using AliveAPIDotNet.Demos;
+using System.IO;
 
 namespace AliveAPIDotNet
 {
@@ -14,35 +16,16 @@ namespace AliveAPIDotNet
         public RecordWindow()
         {
             InitializeComponent();
-
-            AliveAPI.GameTick += AliveAPI_GameTick;
+            
         }
+        
 
-        class Replay
-        {
-            public List<QuikSave> SaveStates = new List<QuikSave>();
-            public int PlaybackFrame = 0;
-        }
+        DemoRecorder mRecorder = new DemoRecorder();
+        DemoPlayer mPlayer = new DemoPlayer();
 
-        Replay replay = new Replay();
         bool recording = false;
         bool playing = false;
-
-        private void AliveAPI_GameTick(object sender, EventArgs e)
-        {
-            if (recording)
-            {
-                replay.SaveStates.Add(AliveAPI.QuikSave());
-            }
-            else if (playing)
-            {
-                AliveAPI.QuikLoad(replay.SaveStates[replay.PlaybackFrame]);
-                replay.PlaybackFrame++;
-
-                if (replay.PlaybackFrame >= replay.SaveStates.Count)
-                    replay.PlaybackFrame = 0;
-            }
-        }
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -52,13 +35,21 @@ namespace AliveAPIDotNet
             {
                 button2.Enabled = false;
                 button1.Text = "Stop Recording";
-                replay.PlaybackFrame = 0;
-                replay.SaveStates.Clear();
+                mRecorder = new DemoRecorder();
+                mRecorder.Start();
             }
             else
             {
                 button2.Enabled = true;
                 button1.Text = "Start Recording";
+                var demoFile = mRecorder.Stop();
+                SaveFileDialog dialog = new SaveFileDialog();
+                dialog.AddExtension = true;
+                dialog.DefaultExt = ".demo2";
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllBytes(dialog.FileName, demoFile);
+                }
             }
         }
 
@@ -68,7 +59,13 @@ namespace AliveAPIDotNet
 
             if (playing)
             {
+                mPlayer = new DemoPlayer();
                 button2.Text = "Stop Playing";
+                OpenFileDialog dialog = new OpenFileDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    mPlayer.Open(File.Open(dialog.FileName, FileMode.Open));
+                }
             }
             else
             {

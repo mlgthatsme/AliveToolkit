@@ -521,7 +521,7 @@
             this.toolStripButtonRecord.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonRecord.Name = "toolStripButtonRecord";
             this.toolStripButtonRecord.Size = new System.Drawing.Size(64, 22);
-            this.toolStripButtonRecord.Text = "Record";
+            this.toolStripButtonRecord.Text = "Demos";
             this.toolStripButtonRecord.ToolTipText = "Record";
             this.toolStripButtonRecord.Click += new System.EventHandler(this.toolStripButtonRecord_Click);
             // 

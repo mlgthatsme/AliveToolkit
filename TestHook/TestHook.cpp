@@ -10,9 +10,10 @@ AliveAPI::Game * mGame = new AliveAPI::Game();
 
 #include <Xinput.h>
 
+#include "ClrFunctions.h"
 #include "game_functions.hpp"
 #include "Hooks.h"
-#include "ClrFunctions.h"
+
 #include "CustomObject.h"
 #include "Reimplementation.h"
 #include "XInputSupport.h"
@@ -80,8 +81,12 @@ int __fastcall LoopHook(void *thisPtr);
 ALIVE_FUNC_IMPLEX(0x40DD20, 0x45F040, LoopHook, true);
 int __fastcall LoopHook(void *thisPtr)
 {
+	int v = LoopHook_.Ptr()(thisPtr);
+
 	Loop();
-	return LoopHook_.Ptr()(thisPtr);
+	
+	
+	return v;
 }
 
 void MLG_InitHook()

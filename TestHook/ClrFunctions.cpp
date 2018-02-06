@@ -74,9 +74,8 @@ void AddRaycastEntry(bool hit, int x1, int y1, int x2, int y2, int collidedLineP
 	System::Threading::Monitor::Exit(AliveAPIDotNet::AliveAPI::RaycastHits);
 }
 
-void Ae_QuikLoad(char * saveData)
+void Ae_QuikLoad()
 {
-	memcpy((void*)0x00BAF7F8, saveData, 8192);
 	reinterpret_cast<__int16*(__cdecl*)()>(0x004022A2)();
 }
 
@@ -94,6 +93,20 @@ void CLROnTick()
 	System::Threading::Monitor::Enter(AliveAPIDotNet::AliveAPI::RaycastHits);
 	AliveAPIDotNet::AliveAPI::RaycastHits->Clear();
 	System::Threading::Monitor::Exit(AliveAPIDotNet::AliveAPI::RaycastHits);
+}
+
+int CLROnInput(int r, int index)
+{
+	if (AliveAPIDotNet::AliveAPI::Input != nullptr)
+	{
+		AliveAPIDotNet::AliveAPI::Input->Pads[index]->Pressed->Value = r;
+		AliveAPIDotNet::AliveAPI::FireOnInput(index);
+		return AliveAPIDotNet::AliveAPI::Input->Pads[index]->Pressed->Value;
+	}
+	else
+	{
+		return r;
+	}
 }
 
 void CLROnDebugDraw()

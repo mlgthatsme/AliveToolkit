@@ -17,7 +17,6 @@
 #include <iostream>
 
 #include "MinHook.h"
-
 #include "AeTypes.h"
 #include "AliveApi.h"
 

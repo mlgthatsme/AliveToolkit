@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using AliveAPIDotNet.Input;
 
 namespace AliveAPIDotNet
 {
@@ -58,8 +59,9 @@ namespace AliveAPIDotNet
             {
                 window = new AliveAPIDotNet.DebugWindow();
                 Application.Run(window);
+                
             }));
-            thread.SetApartmentState(ApartmentState.MTA);
+            thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
         }
     }
@@ -67,6 +69,12 @@ namespace AliveAPIDotNet
     public class MemAllocEventArgs : EventArgs
     {
         public MemoryAllocation Allocation;
+    }
+
+    public class InputEventArgs : EventArgs
+    {
+        public int Index;
+        public InputPad Pad { get { return AliveAPI.Input.Pads[Index]; }}
     }
 
     public struct RaycastHit
@@ -91,7 +99,7 @@ namespace AliveAPIDotNet
         public static PathObjectList PathData;
         public static LevelEntryList Levels;
         public static IntPtr ScreenHdc;
-
+        public static InputObject Input;
         
         public static List<RaycastHit> RaycastHits = new List<RaycastHit>();
 
@@ -101,6 +109,7 @@ namespace AliveAPIDotNet
             ObjectListActive = new AliveObjectList(new IntPtr(GameConfiguration.Instance.AddressObjectListActive), true);
             PathData = new PathObjectList(new IntPtr(GameConfiguration.Instance.AddressPathData));
             Levels = new LevelEntryList(new IntPtr(GameConfiguration.Instance.AddressLevelConfigs));
+            Input = new InputObject(new IntPtr(GameConfiguration.Instance.AddressInputObject));
         }
 
         public static event EventHandler<MemAllocEventArgs> OnMemoryAllocate;
@@ -113,6 +122,12 @@ namespace AliveAPIDotNet
         public static void FireOnDebugDraw()
         {
             OnDebugDraw?.Invoke(null, null);
+        }
+
+        public static event EventHandler<InputEventArgs> OnInput;
+        public static void FireOnInput(int index)
+        {
+            OnInput?.Invoke(null, new InputEventArgs() { Index = index });
         }
 
         public static event EventHandler<EventArgs> GameTick;
@@ -147,7 +162,7 @@ namespace AliveAPIDotNet
         static extern IntPtr Ae_CreateObject(int id, IntPtr param);
 
         [DllImport(DLLFileName, EntryPoint = "Ae_QuikLoad")]
-        static extern void Ae_QuikLoad(byte[] saveData);
+        static extern void Ae_QuikLoad();
 
         [DllImport(DLLFileName, EntryPoint = "Ae_QuikSave")]
         static extern IntPtr Ae_QuikSave();
@@ -162,7 +177,8 @@ namespace AliveAPIDotNet
 
         public static void QuikLoad(QuikSave save)
         {
-            Ae_QuikLoad(save.Data);
+            Marshal.Copy(save.Data, 0, new IntPtr(0x00BAF7F8), save.Data.Length);
+            Ae_QuikLoad();
         }
 
         public static AliveObject CreateObject(int id, short x, short y, short width, short height, byte[] param)
@@ -211,6 +227,30 @@ namespace AliveAPIDotNet
             byte[] switchStates = new byte[256];
             Marshal.Copy(switchAddr, switchStates, 0, 256);
             return switchStates;
+        }
+
+        public static int gnFrame
+        {
+            get
+            {
+                return Marshal.ReadInt32(new IntPtr(GameConfiguration.Instance.AddressGNFrame));
+            }
+            set
+            {
+                Marshal.WriteInt32(new IntPtr(GameConfiguration.Instance.AddressGNFrame), value);
+            }
+        }
+
+        public static int RandomSeed
+        {
+            get
+            {
+                return Marshal.ReadInt32(new IntPtr(GameConfiguration.Instance.AddressRandomSeed));
+            }
+            set
+            {
+                Marshal.WriteInt32(new IntPtr(GameConfiguration.Instance.AddressRandomSeed), value);
+            }
         }
 
         public static int CurrentLevel

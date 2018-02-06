@@ -63,6 +63,9 @@
     <Compile Include="DebugWindow.Designer.cs">
       <DependentUpon>DebugWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Demos\DemoInputState.cs" />
+    <Compile Include="Demos\DemoPlayer.cs" />
+    <Compile Include="Demos\DemoRecorder.cs" />
     <Compile Include="GameConfiguration.cs" />
     <Compile Include="HexBox\BuiltInContextMenu.cs">
       <SubType>Component</SubType>
@@ -85,6 +88,8 @@
     <Compile Include="HexBox\MemoryDataBlock.cs" />
     <Compile Include="HexBox\NativeMethods.cs" />
     <Compile Include="HexBox\Util.cs" />
+    <Compile Include="Input\InputObject.cs" />
+    <Compile Include="Input\InputPad.cs" />
     <Compile Include="LevelEntryList.cs" />
     <Compile Include="LineGraph.cs">
       <SubType>UserControl</SubType>

@@ -60,6 +60,9 @@ namespace AliveAPIDotNet
         public int AddressObjectListActive = 0x005C1124;
         public int AddressLevelConfigs = 0x00559660;
         public int AddressLevelPathCam = 0x005C3030;
+        public int AddressGNFrame = 0x005C1B84;
+        public int AddressInputObject = 0x005BD4E0;
+        public int AddressRandomSeed = 0x005D1E10;
 
         // Offsets
         public int OffsetObjectPositionX = 0xB8;

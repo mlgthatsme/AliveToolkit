@@ -31,7 +31,7 @@ namespace AliveAPIDotNet.DebugHelpers
             {
                 if (level == 0 && path == 1 && (cam == 1 || cam == 2 || cam == 3))
                 {
-                    DrawButton(g, Properties.Resources.ABE_XBOX_BUTTONS, src_btn_B, new Point(64, 481));
+                    DrawButton(g, Properties.Resources.ABE_XBOX_BUTTONS, src_btn_A, new Point(64, 481));
                 }
             }
         }

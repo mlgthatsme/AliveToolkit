@@ -39,6 +39,13 @@ int __fastcall AbeMusicManagerUpdate(void *thisPtr)
 	return 0;
 }
 
+int __cdecl Abe_InputGetPressed(int playerIndex);
+ALIVE_FUNC_IMPLEX(0x0, 0x004FA9C0, Abe_InputGetPressed, true);
+int __cdecl Abe_InputGetPressed(int playerIndex)
+{
+	return CLROnInput(Abe_InputGetPressed_.Ptr()(playerIndex), playerIndex);
+}
+
 signed int __cdecl AbeBMPNew(_DWORD *a1, int a2, int a3, int a4, int a5);
 ALIVE_FUNC_IMPLEX(0x0, 0x004F1990, AbeBMPNew, true);
 signed int __cdecl AbeBMPNew(_DWORD *a1, int a2, int a3, int a4, int a5)
@@ -62,6 +69,7 @@ signed int __cdecl sub_4F5BD0(AE_Rect *a1, unsigned __int8 a2, unsigned __int8 a
 	//printf("sub_4F5BD0: Rect: %i %i %i %i\n", a1->X, a1->Y, a1->Width, a1->Height);
 	return sub_4F5BD0_.Ptr()(a1, a2, a3, a4);
 }
+
 
 _DWORD * __cdecl  Abe_BlitScreen(const void *a1, char a2);
 ALIVE_FUNC_IMPLEX(0x0, 0x004F5640, Abe_BlitScreen, true);

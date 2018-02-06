@@ -36,6 +36,9 @@ namespace AliveAPIDotNet
 
             AliveAPI.GameTick += AliveAPI_GameTick;
             AliveAPI.OnDebugDraw += AliveAPI_OnDebugDraw;
+
+            Application.EnterThreadModal += delegate { modalMode = true; };
+            Application.LeaveThreadModal += delegate { modalMode = false; };
         }
 
         private void AliveAPI_OnDebugDraw(object sender, EventArgs e)
@@ -82,12 +85,18 @@ namespace AliveAPIDotNet
         public static bool freezeGame = false;
         public static bool stepFrame = false;
         VRamWindow vRamWindow = new VRamWindow();
+        bool modalMode = false;
 
         float mouseXPrev = 0;
         float mouseYPrev = 0;
 
         private void AliveAPI_GameTick(object sender, EventArgs e)
         {
+            if (modalMode)
+                return;
+
+            
+
             while(freezeGame)
             {
                 if (stepFrame)

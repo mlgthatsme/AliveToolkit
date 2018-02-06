@@ -4,7 +4,6 @@
 #include <sstream>
 #include <iostream>
 #include "detours\detours.h"
-#include "ClrFunctions.h"
 #include <Windows.h>
 
 #define ALIVE_HOOK_FATAL(x) ::MessageBoxA(NULL, x, "Alive hook error.", MB_ICONERROR | MB_OK); __debugbreak(); abort();
@@ -261,3 +260,4 @@ struct AddressFunction
 
 	using Type = AddressType;
 };
+
