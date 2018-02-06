@@ -30,10 +30,10 @@ bool Abe_Raycast(AE_PathList * collisionData, signed int _line1p1x, signed int _
 
 		// Converting to fixed point only needed for real game.
 		// Alive won't need this
-		float line1p1x = _line1p1x / 0x10000;
-		float line1p1y = _line1p1y / 0x10000;
-		float line1p2x = _line1p2x / 0x10000;
-		float line1p2y = _line1p2y / 0x10000;
+		int line1p1x = _line1p1x / 0x10000;
+		int line1p1y = _line1p1y / 0x10000;
+		int line1p2x = _line1p2x / 0x10000;
+		int line1p2y = _line1p2y / 0x10000;
 
 		int line2p1x = currentLine->X1;
 		int line2p1y = currentLine->Y1;

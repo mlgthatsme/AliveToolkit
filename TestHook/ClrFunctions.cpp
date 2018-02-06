@@ -53,6 +53,8 @@ void * Ae_CreateObject(int id, char * params)
 	case AliveAPIDotNet::GameTypes::Exoddus:
 		return reinterpret_cast<void *(__cdecl*)(void * params, int a2, int a3, __int16 a4)>(*(int*)(0x00589724 + (id * 4)))(params, *(int*)(0x00BB47C0), 0, 0);
 	}
+
+	return 0;
 }
 
 void AddRaycastEntry(bool hit, int x1, int y1, int x2, int y2, int collidedLinePointer, int collisionX, int collisionY, int mode)
