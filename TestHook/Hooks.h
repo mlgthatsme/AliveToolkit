@@ -28,7 +28,7 @@ signed int __cdecl AbeBMPNew(_DWORD *a1, int a2, int a3, int a4, int a5);
 ALIVE_FUNC_IMPLEX(0x0, 0x004F1990, AbeBMPNew, true);
 signed int __cdecl AbeBMPNew(_DWORD *a1, int a2, int a3, int a4, int a5)
 {
-	printf("BMPNew: %X %i %i %i %i\n", a1, a2, a3, a4, a5);
+	//printf("BMPNew: %X %i %i %i %i\n", a1, a2, a3, a4, a5);
 	return AbeBMPNew_.Ptr()(a1, a2, a3, a4, a5);
 }
 
@@ -36,7 +36,7 @@ signed int __cdecl GPU_LoadImage(AE_Rect *a1, char * a2);
 ALIVE_FUNC_IMPLEX(0x0, 0x004F5E90, GPU_LoadImage, true);
 signed int __cdecl GPU_LoadImage(AE_Rect *a1, char * a2)
 {
-	printf("GPU Load Image: Rect: %i %i %i %i\n", a1->X, a1->Y, a1->Width, a1->Height);
+	//printf("GPU Load Image: Rect: %i %i %i %i\n", a1->X, a1->Y, a1->Width, a1->Height);
 	return GPU_LoadImage_.Ptr()(a1, a2);
 }
 
@@ -44,7 +44,7 @@ signed int __cdecl sub_4F5BD0(AE_Rect *a1, unsigned __int8 a2, unsigned __int8 a
 ALIVE_FUNC_IMPLEX(0x0, 0x004F5BD0, sub_4F5BD0, true);
 signed int __cdecl sub_4F5BD0(AE_Rect *a1, unsigned __int8 a2, unsigned __int8 a3, unsigned __int8 a4)
 {
-	printf("sub_4F5BD0: Rect: %i %i %i %i\n", a1->X, a1->Y, a1->Width, a1->Height);
+	//printf("sub_4F5BD0: Rect: %i %i %i %i\n", a1->X, a1->Y, a1->Width, a1->Height);
 	return sub_4F5BD0_.Ptr()(a1, a2, a3, a4);
 }
 
@@ -87,7 +87,7 @@ signed int __cdecl Abe_LoadImage(AE_Rect *a1, char *a2);
 ALIVE_FUNC_IMPLEX(0x0, 0x004F5FB0, Abe_LoadImage, true);
 signed int __cdecl Abe_LoadImage(AE_Rect *a1, char *a2)
 {
-	printf("Load Image: Rect: %i %i %i %i\n", a1->X, a1->Y, a1->Width, a1->Height);
+	//printf("Load Image: Rect: %i %i %i %i\n", a1->X, a1->Y, a1->Width, a1->Height);
 	return Abe_LoadImage_.Ptr()(a1, a2);
 }
 
