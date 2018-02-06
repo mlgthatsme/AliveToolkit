@@ -60,8 +60,6 @@ void __cdecl Abe_GetJoystickInput(float *X1, float *Y1, float *X2, float *Y2, DW
 	vibrationAmount = 1;
 	}*/
 
-
-
 	if (XInputGetState(0, &state) == ERROR_SUCCESS)
 	{
 		float f_LX = state.Gamepad.sThumbLX / 32767.0f;

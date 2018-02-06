@@ -53,5 +53,10 @@ namespace AliveAPIDotNet
                 pictureBox1.Refresh();
             }));
         }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            Text = $"{e.X} - {e.Y}";
+        }
     }
 }

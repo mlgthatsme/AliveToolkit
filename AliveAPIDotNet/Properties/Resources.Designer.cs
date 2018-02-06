@@ -69,5 +69,15 @@ namespace AliveAPIDotNet.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ABE_XBOX_BUTTONS {
+            get {
+                object obj = ResourceManager.GetObject("ABE_XBOX_BUTTONS", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

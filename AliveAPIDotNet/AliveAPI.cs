@@ -213,6 +213,30 @@ namespace AliveAPIDotNet
             return switchStates;
         }
 
+        public static int CurrentLevel
+        {
+            get
+            {
+                return Marshal.ReadInt16(new IntPtr(GameConfiguration.Instance.AddressLevelPathCam));
+            }
+        }
+
+        public static int CurrentPath
+        {
+            get
+            {
+                return Marshal.ReadInt16(new IntPtr(GameConfiguration.Instance.AddressLevelPathCam + 2));
+            }
+        }
+
+        public static int CurrentCam
+        {
+            get
+            {
+                return Marshal.ReadInt16(new IntPtr(GameConfiguration.Instance.AddressLevelPathCam + 4));
+            }
+        }
+
         public static float CameraOffsetX
         {
             get

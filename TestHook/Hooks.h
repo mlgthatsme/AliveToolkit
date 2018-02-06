@@ -15,6 +15,21 @@ ALIVE_VAR(0x0, 0x005C2C08, bool, gDDCheatIsFlying);
 // Input
 ALIVE_VAR(0x0, 0x5C9F70, bool, gInputJoystickEnabled);
 ALIVE_VAR(0x0, 0x005BD4E0, InputPadObject, gInputObj);
+// Input Buttons
+
+ALIVE_VAR(0x0, 0x5C9908, char *, gInputJoyStrB1);
+ALIVE_VAR(0x0, 0x5C990C, char *, gInputJoyStrB2);
+ALIVE_VAR(0x0, 0x5C9910, char *, gInputJoyStrB3);
+ALIVE_VAR(0x0, 0x5C9914, char *, gInputJoyStrB4);
+ALIVE_VAR(0x0, 0x5C9918, char *, gInputJoyStrB5);
+ALIVE_VAR(0x0, 0x5C991C, char *, gInputJoyStrB6);
+ALIVE_VAR(0x0, 0x5C9920, char *, gInputJoyStrB7);
+ALIVE_VAR(0x0, 0x5C9924, char *, gInputJoyStrB8);
+ALIVE_VAR(0x0, 0x5C9928, char *, gInputJoyStrB9);
+ALIVE_VAR(0x0, 0x5C992C, char *, gInputJoyStrB0);
+
+// Globals
+ALIVE_VAR(0x0, 0x5C9F70, void *, gPtrPauseMenu);
 
 // Disable Music
 int __fastcall AbeMusicManagerUpdate(void *thisPtr);

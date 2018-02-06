@@ -10,5 +10,6 @@ namespace AliveAPIDotNet.DebugHelpers
     public abstract class OnScreenRenderHelper
     {
         public abstract void OnRender(Graphics g);
+        public virtual void OnRenderBackground(Graphics g, int level, int path, int cam, bool dirty) { }
     }
 }

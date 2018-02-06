@@ -56,6 +56,7 @@
     <Compile Include="DebugHelpers\OnScreenRenderHelper.cs" />
     <Compile Include="DebugHelpers\OnScreenRenderManager.cs" />
     <Compile Include="DebugHelpers\PathRenderer.cs" />
+    <Compile Include="DebugHelpers\XboxButtons.cs" />
     <Compile Include="DebugWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\8x8.bmp" />
+    <None Include="Resources\ABE_XBOX_BUTTONS.png" />
     <Content Include="todo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

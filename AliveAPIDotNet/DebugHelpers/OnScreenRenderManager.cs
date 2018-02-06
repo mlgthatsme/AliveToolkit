@@ -15,10 +15,15 @@ namespace AliveAPIDotNet.DebugHelpers
             Console.WriteLine("Initializing Renderer Helper");
             AliveAPI.OnDebugDraw += AliveAPI_OnDebugDraw;
 
+            Helpers.Add(new XboxButtons());
             Helpers.Add(new PathRenderer());
             Helpers.Add(new DDCheatNew());
             Helpers.Add(new AIHelper());
         }
+
+        private static int prevLevel;
+        private static int prevPath;
+        private static int prevCam;
 
         private static void AliveAPI_OnDebugDraw(object sender, EventArgs e)
         {
@@ -38,11 +43,22 @@ namespace AliveAPIDotNet.DebugHelpers
                 r = new Rectangle(0, 0, screenWipeX, screenWipeY);
             graphics.SetClip(r);
 
+            bool backgroundDirty = (prevLevel != AliveAPI.CurrentLevel || prevPath != AliveAPI.CurrentPath || prevCam != AliveAPI.CurrentCam);
+
             var t = Helpers.ToArray();
             foreach(var h in Helpers)
             {
                 h.OnRender(graphics);
             }
+            graphics.SetClip(new Rectangle(0, 272, 640, 240));
+            foreach (var h in Helpers)
+            {
+                h.OnRenderBackground(graphics, AliveAPI.CurrentLevel, AliveAPI.CurrentPath, AliveAPI.CurrentCam, backgroundDirty);
+            }
+
+            prevLevel = AliveAPI.CurrentLevel;
+            prevPath = AliveAPI.CurrentPath;
+            prevCam = AliveAPI.CurrentCam;
         }
 
         public static List<OnScreenRenderHelper> Helpers { get; set; } = new List<OnScreenRenderHelper>();
