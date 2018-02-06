@@ -6,349 +6,16 @@
 #include "stdafx.h"
 #include "TestHook.h"
 
-#include "ClrFunctions.h"
-
 AliveAPI::Game * mGame = new AliveAPI::Game();
 
-typedef AE_abe *(__cdecl* T_PathCreateObject)(int a1, int a3, __int16 a4);
+#include <Xinput.h>
 
-int * keyboardInput = reinterpret_cast<int*>(0x005BD4EC);
-bool * ddcheatFlying = reinterpret_cast<bool*>(0x005C2C08); // DDCheat fly Enabled
-
-template <typename T>
-inline MH_STATUS MH_CreateHookEx(LPVOID pTarget, LPVOID pDetour, T** ppOriginal)
-{
-	return MH_CreateHook(pTarget, pDetour, reinterpret_cast<LPVOID*>(ppOriginal));
-}
-
-template <typename T>
-inline MH_STATUS MH_CreateHookApiEx(
-	LPCWSTR pszModule, LPCSTR pszProcName, LPVOID pDetour, T** ppOriginal)
-{
-	return MH_CreateHookApi(
-		pszModule, pszProcName, pDetour, reinterpret_cast<LPVOID*>(ppOriginal));
-}
-
-// Types
-template<class FunctionType>
-class FunctionHook
-{
-public:
-	FunctionHook(DWORD func) : funcPointer(reinterpret_cast<FunctionType>(func))
-	{
-		originalFunc = reinterpret_cast<FunctionType>(func);
-	}
-
-	void Install(FunctionType newFunc)
-	{
-		printf("Hook %s\n", typeid(FunctionHook).name());
-		MH_STATUS r1 = MH_CreateHook(funcPointer, newFunc, (LPVOID*)&originalFunc);
-		MH_STATUS r2 = MH_EnableHook(funcPointer);
-
-		if (r1)
-			printf("Failed to create hook: %s\n", MH_StatusToString(r1));
-		if (r2)
-			printf("Failed to enable hook: %s\n", MH_StatusToString(r2));
-	}
-
-	FunctionType Real() const
-	{
-		return reinterpret_cast<FunctionType>(originalFunc);
-	}
-
-private:
-
-	FunctionType originalFunc;
-	FunctionType funcPointer;
-};
-
-typedef int( __thiscall* T_Abe_RenderText)(void *thisPtr, int a2, char *a3, int a4, short a5, int a6, int a7, int a8, int a9, char a10, char a11, char a12, int a13, int a14, int a15, int a16);
-
-void Loop();
-
-typedef char(__thiscall* T_LoopHook)(void * thisptr);
-FunctionHook<T_LoopHook> H_LoopHook(0x45F040);
-int __fastcall Hook_LoopHook(void *thisPtr)
-{
-	Loop();
-	return H_LoopHook.Real()(thisPtr);
-}
-
-typedef _DWORD *(__thiscall* T_LoadFnt)(void * thisPtr, int a1, int a2, int a3);
-T_LoadFnt LoadFnt = reinterpret_cast<T_LoadFnt>(0x00404390);
-
-class CustomAEObject
-{
-public:
-
-#define DBGPRINTFUNC printf(__FUNCTION__ "\n")
-
-	__int16 type = 180;
-	_BYTE objectMode;
-	char field_7;
-	char gap8;
-	int field_C;
-	char *field_10;
-	int field_14;
-	_BYTE gap18[14];
-	char field_26;
-	__declspec(align(2)) char field_28;
-	char gap29;
-	__int16 field_2A;
-	__int16 field_2C;
-	_BYTE gap2E[6];
-	__int16 field_34;
-	_BYTE gap36[6];
-	int field_3C;
-	_BYTE gap40[20];
-	int field_54;
-	_BYTE gap58[96];
-	int position_x;
-	int position_y;
-	char field_C0;
-	int velocity_x;
-	int velocity_y;
-	int scale;
-	char color_r;
-	__declspec(align(2)) char color_g;
-	__declspec(align(2)) char color_b;
-	__declspec(align(2)) char layer;
-	__int16 sprite_offset_x;
-	__int16 sprite_offset_y;
-	_BYTE gapDC[28];
-	int field_F8;
-	_BYTE gapFC[4];
-	int field_100;
-	__int16 gap104;
-	__int16 alive_state;
-	_BYTE gap108[40];
-	int field_130;
-	int field_134;
-	__int16 field_138;
-	_BYTE gap13A[253];
-	__declspec(align(1)) __int16 gap10A;
-
-	Ae_fonttype font;
-
-	CustomAEObject()
-	{
-		objectMode = 8; // Sets mode to update
-
-		LoadFnt(&font, 256, (int)0x554474, (int)0x5BC5C8);
-	}
-
-	virtual void * Func1(char a1) // Constructer?
-	{
-		DBGPRINTFUNC;
-		if (a1)
-			free(this);
-		
-		return this;
-	}
-
-	virtual int Func2()
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual void Update(int a1)
-	{
-		bool isGamePaused = *(bool*)0x005C1B66;
-
-		int renderOffsetX = *(int*)(*(int*)((*(int*)0x5BB5F4) + 32));
-		int renderOffsetY = *(int*)((*(int*)((*(int*)0x5BB5F4) + 32)) + 4);
-
-		int targetX = mGame->GetAbe()->position_x;
-		int targetY = mGame->GetAbe()->position_y - FLOAT_TO_FIXED(50) - FLOAT_TO_FIXED((sinf(mGame->GetgnFrame() / 50.0f) * 5));
-
-		if (!isGamePaused)
-		{
-			position_x = Lerp<int>(position_x, targetX, 0.1f);
-			position_y = Lerp<int>(position_y, targetY, 0.1f);
-		}
-
-		if (mGame->GetgnFrame() % 50 == 0)
-		{
-			if (!BanGetLoadedResource('minA', 301, 0, 0))
-				BanLoadResource("EXPLO2.BAN", 0);
-
-			for (int o = 0; o < mGame->mWorld->Objects->mCount; o++)
-			{
-				AE_abe *obj = (AE_abe *)mGame->mWorld->Objects->mData[o];
-
-				if ((int)obj->vtable == 0x005462E4 || (int)obj->vtable == 0x00547460)
-				{
-					// Shock Line
-					void * shock = malloc(154);
-					mGame->mWorld->SpawnShockLine(FIXED_TO_FLOAT(position_x), FIXED_TO_FLOAT(position_y), FIXED_TO_FLOAT(obj->position_x), FIXED_TO_FLOAT(obj->position_y));
-					
-					// Sparks
-					void * sparks = malloc(264);
-					reinterpret_cast<AE_abe *(__thiscall*)(void *thisPtr, int a2, int a3, __int16 a4, int a5, int a6, int a7)>(0x00403373)(sparks, position_x, position_y, 10, obj->scale, 3, 11);
-
-					if (!BanGetLoadedResource('minA', 6005, 0, 0))
-						BanLoadResource("GRENADE.BAN", 0);
-					if (!BanGetLoadedResource(1835626049, 372, 0, 0))
-						BanLoadResource("SMEXP.BAN", 0);
-					if (!BanGetLoadedResource(1835626049, 365, 0, 0))
-						BanLoadResource("METAL.BAN", 0);
-
-					AE_abe* grenade = reinterpret_cast<AE_abe*(__thiscall*)(void * thisPtr, int a2, int a3, __int16 a4, __int16 a5, __int16 a6, void * a7)>(0x402874)(malloc(316), obj->position_x, obj->position_y, 0, 1, 0, this);
-					grenade->scale = obj->scale;
-					grenade->layer = obj->layer;
-					(*((void(__thiscall **)(void *, int, unsigned int))grenade->vtable + 24))((void*)grenade, 0, 0);
-					break;
-				}
-			}
-		}
-		
-		static T_Abe_RenderText renderFunc = reinterpret_cast<T_Abe_RenderText>(0x004014C4);
-		renderFunc(&font, 0x005C11B0, "o", (position_x - renderOffsetX) / 0x10000, (position_y - renderOffsetY) / 0x10000, 0, 1, 0, 41, 233, 233, 233, 8, 0x10000, 640, 0);
-	}
-
-	virtual short Func4()
-	{
-		DBGPRINTFUNC;
-		//objectMode = 4; // Sets to be destroyed
-		
-		return *(int*)(0x005C3030);
-	}
-
-	virtual void Func5()
-	{
-		DBGPRINTFUNC;
-	}
-
-	virtual int SaveObject(unsigned char * saveBuffer) // 6
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual short Func7(void * a2, __int16 a3)
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual int Func8(int a2, __int16 a3)
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual void NullThing()
-	{
-		DBGPRINTFUNC;
-	}
-
-	virtual int Func10(int a1)
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual void NullThing2()
-	{
-		DBGPRINTFUNC;
-	}
-
-	virtual int Func12(int a1)
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual int Func13(unsigned short a1)
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual void Func14()
-	{
-		DBGPRINTFUNC;
-	}
-
-	virtual void Func15()
-	{
-		DBGPRINTFUNC;
-	}
-
-	virtual int Func16()
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual int Func17()
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual int Func18(__int16 a1)
-	{
-		DBGPRINTFUNC;
-		gap108[12];
-		alive_state = a1;
-		return a1;
-	}
-
-	virtual int Func19(__int16 a2, __int16 a3, int a4)
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual short Func20(int a1)
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual void Func21(int a1)
-	{
-		DBGPRINTFUNC;
-	}
-
-	virtual char Func22(short a1)
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual int Func23(short a1)
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual int Func24()
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual bool Func25()
-	{
-		DBGPRINTFUNC;
-		return false;
-	}
-
-	virtual int Func26()
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-
-	virtual int Func27()
-	{
-		DBGPRINTFUNC;
-		return 0;
-	}
-};
+#include "game_functions.hpp"
+#include "Hooks.h"
+#include "ClrFunctions.h"
+#include "CustomObject.h"
+#include "Reimplementation.h"
+#include "XInputSupport.h"
 
 void Loop()
 {
@@ -356,10 +23,31 @@ void Loop()
 
 	static bool loadedSave = false;
 
+	//if (GetAsyncKeyState('R'))
+	//{
+	//	printf("Particle\n");
+
+	//	void * particle = malloc(248); 
+	//	//BanLoadResource("MUDIDLE.BAN", 0);
+	//	char * resource = BanGetLoadedResource('minA', 512, 0, 0);
+	//	reinterpret_cast<void *(__thiscall*)(void *thisPtr, int xpos, int ypos, int a4, int a5, int a6, int a2)>(0x00403BE3)(particle, mGame->GetAbe()->mPosition.X, mGame->GetAbe()->mPosition.Y, 9640, 0, 0, (int)resource);
+	//}
+
+	//static bool objCreated = false;
+	//if (!objCreated && GetAsyncKeyState('Q'))
+	//{
+	//	AE_abe * newObj = (AE_abe *)CreateCustomObject();
+	//	objCreated = true;
+	//}
+
+	//printf("%i\n", gInputObj.mPressed);
+
 	if (!loadedSave)
 	{
 		if (GetGameType() == 2) // Exoddus
 		{
+			SetupCustomObjectVTable();
+
 			std::ifstream stream = std::ifstream("debug.sav");
 			if (stream.good())
 			{
@@ -369,259 +57,46 @@ void Loop()
 				stream.close();
 			}
 			loadedSave = true;
+
+			void * mainMenuPtr = (void*)0x5C9F70;
+			
+			if (mainMenuPtr == 0)
+			{
+				mainMenuPtr = j_Abe_CreatePauseMenu(malloc(268));
+			}
 		}
 	}
 
 	CLROnTick();
 }
 
-typedef void *(__cdecl* T_abe_malloc)(size_t a1);
-FunctionHook<T_abe_malloc> H_abe_malloc(0x005212C0);
-void * __cdecl Hook_abe_malloc(size_t a1)
+int __fastcall LoopHook(void *thisPtr);
+ALIVE_FUNC_IMPLEX(0x40DD20, 0x45F040, LoopHook, true);
+int __fastcall LoopHook(void *thisPtr)
 {
-	void * allocatedMem = malloc(a1 + sizeof(int));
-	((int *)allocatedMem)[0] = a1;
-	//AddAllocationEntry((int)allocatedMem + sizeof(int), (int)a1, 0);
-	return (void*)((int)allocatedMem + sizeof(int));
-}
-
-typedef void *(__cdecl* T_abe_calloc)(size_t a1, size_t a2);
-FunctionHook<T_abe_calloc> H_abe_calloc(0x00528DD7);
-void * __cdecl Hook_abe_calloc(size_t num, size_t size)
-{
-	int convertedSize = num * size;
-	void * allocatedMem = malloc(convertedSize + sizeof(int));
-	((int *)allocatedMem)[0] = convertedSize;
-	//AddAllocationEntry((int)allocatedMem + sizeof(int), (int)convertedSize, 0);
-	return (void*)((int)allocatedMem + sizeof(int));
-}
-
-typedef void (__cdecl* T_abe_free)(void * a1);
-FunctionHook<T_abe_free> H_abe_free(0x00521334);
-void __cdecl Hook_abe_free(void * a1)
-{
-	if (a1)
-	{
-		//RemoveAllocationEntry((int)a1);
-		H_abe_free.Real()((void*)((int)a1));
-	}
-}
-
-typedef void*(__cdecl* T_abe_realloc)(void *lpMem, size_t a2);
-FunctionHook<T_abe_realloc> H_abe_realloc(0x00522335);
-void * __cdecl Hook_abe_realloc(void *lpMem, size_t a2)
-{
-	RemoveAllocationEntry((int)lpMem);
-
-	void * newMem = realloc((void*)((int)lpMem - sizeof(int)), a2 + sizeof(int));
-	((int *)newMem)[0] = a2;
-
-	//AddAllocationEntry((int)newMem + sizeof(int), (int)a2, 0);
-
-	return (void*)((int)newMem + sizeof(int));
-}
-
-typedef __int16(__cdecl* T_ResourceLoadHack)(char *a1, int a2, int a3, __int16 a4, __int16 a5);
-FunctionHook<T_ResourceLoadHack> H_resourceHack(0x004DBE00);
-__int16 __cdecl Hook_resourceHack(char *file, int type, int id, __int16 a4, __int16 a5)
-{
-	BanLoadResource(file, 0);
-	
-	return H_resourceHack.Real()(file, type, id, a4, a5);
-}
-
-struct AE_pathLine
-{
-	_WORD X1;
-	_WORD Y1;
-	_WORD X2;
-	_WORD Y2;
-	_BYTE Mode;
-	_BYTE Gap;
-	_WORD Unknown1;
-	_WORD Unknown2;
-	_WORD Unknown3;
-	_WORD Unknown4;
-	_WORD Unknown5;
-};
-
-struct AE_PathList 
-{
-	AE_pathLine * Data; 
-	char gap[8]; 
-	int Count;
-};
-
-bool Abe_Raycast(AE_PathList * collisionData, signed int _line1p1x, signed int _line1p1y, signed int _line1p2x, signed int _line1p2y, AE_pathLine ** collision, _DWORD *collisionX, _DWORD *collisionY, int mode)
-{
-	AE_pathLine * nearestLine = nullptr;
-	float nearestCollisionX = 0;
-	float nearestCollisionY = 0;
-	float nearestDistance = 0.f;
-	bool hasCollided = false;
-	bool firstCollision = true;
-
-	if (!collisionData->Count)
-	{
-		*collision = nullptr;
-		return false;
-	}
-
-	for (int i = 0; i < collisionData->Count; i++)
-	{
-		AE_pathLine * currentLine = &collisionData->Data[i];
-
-		// Game specific
-		if (!(((1 << currentLine->Mode) % 32) & mode)) // if (!(currentLine->Mode & mode))
-			continue;
-
-		bool segments_intersect = false;
-		float intersectionX = 0;
-		float intersectionY = 0;
-
-		// Converting to fixed point only needed for real game.
-		// Alive won't need this
-		float line1p1x = _line1p1x / 0x10000;
-		float line1p1y = _line1p1y / 0x10000;
-		float line1p2x = _line1p2x / 0x10000;
-		float line1p2y = _line1p2y / 0x10000;
-
-		int line2p1x = currentLine->X1;
-		int line2p1y = currentLine->Y1;
-		int line2p2x = currentLine->X2;
-		int line2p2y = currentLine->Y2;
-
-		// Get the segments' parameters.
-		int dx12 = line1p2x - line1p1x;
-		int dy12 = line1p2y - line1p1y;
-		int dx34 = line2p2x - line2p1x;
-		int dy34 = line2p2y - line2p1y;
-
-		// Solve for t1 and t2
-		float denominator = (dy12 * dx34 - dx12 * dy34);
-		float t1 = ((line1p1x - line2p1x) * dy34 + (line2p1y - line1p1y) * dx34) / denominator;
-
-		if (isinf(t1))
-			continue;
-
-		float t2 = ((line2p1x - line1p1x) * dy12 + (line1p1y - line2p1y) * dx12) / -denominator;
-
-		// Find the point of intersection.
-		intersectionX = line1p1x + dx12 * t1;
-		intersectionY = line1p1y + dy12 * t1;
-
-		// The segments intersect if t1 and t2 are between 0 and 1.
-		hasCollided = ((t1 >= 0) && (t1 <= 1) && (t2 >= 0) && (t2 <= 1));
-
-		if (hasCollided)
-		{
-			float distance = sqrtf(powf((line1p1x - intersectionX), 2) + powf((line1p1y - intersectionY), 2));
-
-			if (firstCollision || distance < nearestDistance)
-			{
-				nearestCollisionX = intersectionX;
-				nearestCollisionY = intersectionY;
-				nearestDistance = distance;
-				nearestLine = currentLine;
-
-				firstCollision = false;
-			}
-		}
-	}
-
-	if (nearestLine)
-	{
-		*collisionX = (int)(nearestCollisionX * 0x10000);
-		*collisionY = (int)(nearestCollisionY * 0x10000);
-		*collision = nearestLine;
-		return true;
-	}
-
-	*collision = nullptr;
-	return false;
-}
-
-typedef bool(__thiscall* T_Raycast)(void *thisPtr, signed int a2, signed int a3, signed int a4, signed int a5, _DWORD *a6, _DWORD *a7, _DWORD *a8, int mode);
-FunctionHook<T_Raycast> H_Raycast(0x00401258);
-bool __fastcall Hook_Raycast(void *thisPtr, void * _EDX, signed int a2, signed int a3, signed int a4, signed int a5, _DWORD *a6, _DWORD *a7, _DWORD *a8, int mode)
-{
-	bool r = Abe_Raycast((AE_PathList *)thisPtr, a2, a3, a4, a5, (AE_pathLine **)a6, a7, a8, mode);
-	//r = H_Raycast.Real()(thisPtr, a2, a3, a4, a5, a6, a7, a8, mode);
-	AddRaycastEntry(r, a2, a3, a4, a5, *a6, *a7, *a8, mode);
-	return r;
-}
-
-typedef char *(__thiscall* T_LoadFromDiskHook)(unsigned int ***thisPtr, char *a2);
-FunctionHook<T_LoadFromDiskHook> H_LoadFromDiskHook(0x00433160);
-char * __fastcall Hook_LoadFromDiskHook(unsigned int ***thisPtr, void * _EDX, char *a2)
-{
-	printf("Loading %s\n", a2);
-	char * result = H_LoadFromDiskHook.Real()(thisPtr, a2);
-	printf("%x\n", result);
-	return result;
-}
-
-void Lazors()
-{
-	if (GetGameType() == 2)
-	{
-		AliveAPI::ObjectList * objList = *reinterpret_cast<AliveAPI::ObjectList **>(0x00BB47C4);
-		AliveAPI::ObjectList * objList2 = *reinterpret_cast<AliveAPI::ObjectList **>(0x5C1124);
-
-		AE_abe * newObj = (AE_abe*)(new CustomAEObject());
-		newObj->position_x = mGame->GetAbe()->position_x;
-		newObj->position_y = mGame->GetAbe()->position_y;
-
-		objList->AddObject(newObj);
-		objList2->AddObject(newObj);
-	}
+	Loop();
+	return LoopHook_.Ptr()(thisPtr);
 }
 
 void MLG_InitHook()
 {
-	MH_Initialize();
-
 	printf("Alive Toolkit by mlgthatsme\n");
-	printf("Installing hooks\n");
 
 	int gameType = GetGameType();
-
+	printf("Game Found: ");
 	if (gameType == 1)
-	{
-		H_LoopHook = FunctionHook<T_LoopHook>(0x40DD20);
-
-		// Abe's oddysee doesn't include pointer size before the actual allocation unline Abe's Exoddus.
-		H_abe_malloc = FunctionHook<T_abe_malloc>(0x00447520);
-		H_abe_malloc.Install(Hook_abe_malloc); 
-
-		H_abe_free = FunctionHook<T_abe_free>(0x447540);
-		H_abe_free.Install(Hook_abe_free);
-
-		H_Raycast = FunctionHook<T_Raycast>(0x0040C410);
-
-		*reinterpret_cast<bool*>(0x00508BF8) = true; // DDCheat Enabled
-	}
+		printf("Oddworld: Abe's Oddysee\n");
 	else if (gameType == 2)
-	{
-		*reinterpret_cast<bool*>(0x005CA4B5) = true; // DDCheat Enabled
-		*reinterpret_cast<bool*>(0x005BC000) = true; // Always Render DDCheat
-		*reinterpret_cast<bool*>(0x005C1BD8) = false; // Extra Ai Info
-	}
+		printf("Oddworld: Abe's Exoddus\n");
+	else
+		printf("Unknown Game !\n");
 
-	H_Raycast.Install(reinterpret_cast<T_Raycast>(Hook_Raycast));
+	printf("Installing hooks...");
+	BaseFunction::HookAll();
+	printf("Done!\n");
 
-	H_LoopHook.Install(reinterpret_cast<T_LoopHook>(Hook_LoopHook));
-	
-	//H_LoadFromDiskHook.Install(reinterpret_cast<T_LoadFromDiskHook>(Hook_LoadFromDiskHook));
-	//H_resourceHack.Install(Hook_resourceHack);
-
-	/*bool hookMemory = false;
-
-	if (hookMemory)
-	{
-		H_abe_malloc.Install(Hook_abe_malloc);
-		H_abe_calloc.Install(Hook_abe_calloc);
-		H_abe_realloc.Install(Hook_abe_realloc);
-		H_abe_free.Install(Hook_abe_free);
-	}*/
+	gInputJoystickEnabled = true;
+	gDDCheatEnabled = true;
+	gDDCheatAlwaysRender = true;
+	gDDCheatShowAI = false;
 }

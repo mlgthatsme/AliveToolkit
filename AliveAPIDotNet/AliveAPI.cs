@@ -52,6 +52,7 @@ namespace AliveAPIDotNet
             Console.WriteLine("API Loaded for game: " + gameType.ToString());
 
             AliveAPI.InitializeAPI();
+            DebugHelpers.OnScreenRenderManager.Init();
 
             Thread thread = new Thread(new ThreadStart(delegate
             {
@@ -68,6 +69,19 @@ namespace AliveAPIDotNet
         public MemoryAllocation Allocation;
     }
 
+    public struct RaycastHit
+    {
+        public bool Hit;
+        public int X1;
+        public int Y1;
+        public int X2;
+        public int Y2;
+        public int CX;
+        public int CY;
+        public int CollidedObject;
+        public int Mode;
+    }
+
     public static class AliveAPI
     {
         const string DLLFileName = "TestHook.dll";
@@ -75,18 +89,30 @@ namespace AliveAPIDotNet
         public static AliveObjectList ObjectList;
         public static AliveObjectList ObjectListActive;
         public static PathObjectList PathData;
+        public static LevelEntryList Levels;
+        public static IntPtr ScreenHdc;
+
+        
+        public static List<RaycastHit> RaycastHits = new List<RaycastHit>();
 
         public static void InitializeAPI()
         {
             ObjectList = new AliveObjectList(new IntPtr(GameConfiguration.Instance.AddressObjectList), true);
             ObjectListActive = new AliveObjectList(new IntPtr(GameConfiguration.Instance.AddressObjectListActive), true);
             PathData = new PathObjectList(new IntPtr(GameConfiguration.Instance.AddressPathData));
+            Levels = new LevelEntryList(new IntPtr(GameConfiguration.Instance.AddressLevelConfigs));
         }
 
         public static event EventHandler<MemAllocEventArgs> OnMemoryAllocate;
         public static void FireOnMemoryAllocate(MemoryAllocation allocation)
         {
             OnMemoryAllocate?.Invoke(null, new MemAllocEventArgs() { Allocation = allocation });
+        }
+
+        public static event EventHandler<EventArgs> OnDebugDraw;
+        public static void FireOnDebugDraw()
+        {
+            OnDebugDraw?.Invoke(null, null);
         }
 
         public static event EventHandler<EventArgs> GameTick;

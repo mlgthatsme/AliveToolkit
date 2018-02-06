@@ -16,6 +16,24 @@ namespace AliveAPIDotNet
 
         }
 
+        public static string GetVTableName(IntPtr vtable)
+        {
+            switch(vtable.ToInt32())
+            {
+                case 0x00545EBC:
+                    return "Resource Mgr";
+                case 0x005463C0:
+                    return "Music Mgr";
+                case 0x005441E4:
+                    return "Screen Mgr";
+                case 0x00544518:
+                    return "DDCheat";
+                case 0x00544B44:
+                    return "Cheats Mgr";
+            }
+            return vtable.ToInt32().ToString("X8");
+        }
+
         public static string GetFriendlyName(int type)
         {
             if (GameConfiguration.Instance.GameType == GameTypes.Oddysee)
@@ -40,6 +58,8 @@ namespace AliveAPIDotNet
                         return "Brew Machine";
                     case 30:
                         return "Grinder";
+                    case 31:
+                        return "Laughing Gas";
                     case 33:
                         return "Door";
                     case 34:
@@ -94,6 +114,8 @@ namespace AliveAPIDotNet
                         return "Red Laser";
                     case 112:
                         return "Scrab";
+                    case 118:
+                        return "Screen Shake";
                     case 122:
                         return "Gate";
                     case 124:
@@ -141,7 +163,7 @@ namespace AliveAPIDotNet
 
         public override string ToString()
         {
-            return string.Format("{5} [{4}, {2}, {3}]: {0} {1}", PositionX.ToString("0.00"), PositionY.ToString("0.00"), ObjectID, AllocatedSize, VTable.ToInt32().ToString("X8"), GetFriendlyName(ObjectID));
+            return string.Format("{5} [{4}, {2}, {3}]: {0} {1}", PositionX.ToString("0.00"), PositionY.ToString("0.00"), ObjectID, AllocatedSize, GetVTableName(VTable), GetFriendlyName(ObjectID));
         }
 
         // Variables

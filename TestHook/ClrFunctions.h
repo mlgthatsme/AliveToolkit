@@ -1,5 +1,7 @@
 #pragma once
 
+#define SCRIPT_FUNCTION extern "C" __declspec(dllexport)
+
 SCRIPT_FUNCTION void * Ae_CreateObject(int id, char * params);
 SCRIPT_FUNCTION void Ae_PlaySound(int id, int vol, float pitch, int a4);
 SCRIPT_FUNCTION void UpdateAllocationList();
@@ -15,3 +17,4 @@ int GetGameType();
 void Script_Init();
 
 void CLROnTick();
+void CLROnDebugDraw();

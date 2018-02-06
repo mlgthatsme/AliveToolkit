@@ -1,13 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HookLauncher", "HookLauncher\HookLauncher.vcxproj", "{B2435A01-36E9-4DB0-99D3-0143D6A61D52}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AliveToolkit", "HookLauncher\HookLauncher.vcxproj", "{B2435A01-36E9-4DB0-99D3-0143D6A61D52}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestHook", "TestHook\TestHook.vcxproj", "{69BE53FF-A311-4EB2-A220-223D3C0E7478}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AliveAPIDotNet", "AliveAPIDotNet\AliveAPIDotNet.csproj", "{8A58BB31-F2A5-42D5-B25D-7181BA86EEA4}"
+EndProject
+Project("{911E67C6-3D85-4FCE-B560-20A9C3E3FF48}") = "Exoddus_AliveEdition", "..\..\..\Games\GOG Games\Abes Exoddus\Exoddus_AliveEdition.exe", "{9E228D39-0A0F-4F67-9C52-E39AE96DFCD6}"
+	ProjectSection(DebuggerProjectSystem) = preProject
+		PortSupplier = 00000000-0000-0000-0000-000000000000
+		Executable = E:\Games\GOG Games\Abes Exoddus\Exoddus_AliveEdition.exe
+		RemoteMachine = DESKTOP-UVOTMUF
+		StartingDirectory = E:\Games\GOG Games\Abes Exoddus
+		Environment = Default
+		LaunchingEngine = 00000000-0000-0000-0000-000000000000
+		UseLegacyDebugEngines = No
+		LaunchSQLEngine = No
+		AttachLaunchAction = No
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,23 +33,19 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B2435A01-36E9-4DB0-99D3-0143D6A61D52}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{B2435A01-36E9-4DB0-99D3-0143D6A61D52}.Debug|x64.ActiveCfg = Debug|x64
-		{B2435A01-36E9-4DB0-99D3-0143D6A61D52}.Debug|x64.Build.0 = Debug|x64
+		{B2435A01-36E9-4DB0-99D3-0143D6A61D52}.Debug|x64.ActiveCfg = Debug|Win32
 		{B2435A01-36E9-4DB0-99D3-0143D6A61D52}.Debug|x86.ActiveCfg = Debug|Win32
 		{B2435A01-36E9-4DB0-99D3-0143D6A61D52}.Debug|x86.Build.0 = Debug|Win32
 		{B2435A01-36E9-4DB0-99D3-0143D6A61D52}.Release|Any CPU.ActiveCfg = Release|Win32
-		{B2435A01-36E9-4DB0-99D3-0143D6A61D52}.Release|x64.ActiveCfg = Release|x64
-		{B2435A01-36E9-4DB0-99D3-0143D6A61D52}.Release|x64.Build.0 = Release|x64
+		{B2435A01-36E9-4DB0-99D3-0143D6A61D52}.Release|x64.ActiveCfg = Release|Win32
 		{B2435A01-36E9-4DB0-99D3-0143D6A61D52}.Release|x86.ActiveCfg = Release|Win32
 		{B2435A01-36E9-4DB0-99D3-0143D6A61D52}.Release|x86.Build.0 = Release|Win32
 		{69BE53FF-A311-4EB2-A220-223D3C0E7478}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{69BE53FF-A311-4EB2-A220-223D3C0E7478}.Debug|x64.ActiveCfg = Debug|x64
-		{69BE53FF-A311-4EB2-A220-223D3C0E7478}.Debug|x64.Build.0 = Debug|x64
+		{69BE53FF-A311-4EB2-A220-223D3C0E7478}.Debug|x64.ActiveCfg = Debug|Win32
 		{69BE53FF-A311-4EB2-A220-223D3C0E7478}.Debug|x86.ActiveCfg = Debug|Win32
 		{69BE53FF-A311-4EB2-A220-223D3C0E7478}.Debug|x86.Build.0 = Debug|Win32
 		{69BE53FF-A311-4EB2-A220-223D3C0E7478}.Release|Any CPU.ActiveCfg = Release|Win32
-		{69BE53FF-A311-4EB2-A220-223D3C0E7478}.Release|x64.ActiveCfg = Release|x64
-		{69BE53FF-A311-4EB2-A220-223D3C0E7478}.Release|x64.Build.0 = Release|x64
+		{69BE53FF-A311-4EB2-A220-223D3C0E7478}.Release|x64.ActiveCfg = Release|Win32
 		{69BE53FF-A311-4EB2-A220-223D3C0E7478}.Release|x86.ActiveCfg = Release|Win32
 		{69BE53FF-A311-4EB2-A220-223D3C0E7478}.Release|x86.Build.0 = Release|Win32
 		{8A58BB31-F2A5-42D5-B25D-7181BA86EEA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -51,6 +60,12 @@ Global
 		{8A58BB31-F2A5-42D5-B25D-7181BA86EEA4}.Release|x64.Build.0 = Release|Any CPU
 		{8A58BB31-F2A5-42D5-B25D-7181BA86EEA4}.Release|x86.ActiveCfg = Release|Any CPU
 		{8A58BB31-F2A5-42D5-B25D-7181BA86EEA4}.Release|x86.Build.0 = Release|Any CPU
+		{9E228D39-0A0F-4F67-9C52-E39AE96DFCD6}.Debug|Any CPU.ActiveCfg = Release|x86
+		{9E228D39-0A0F-4F67-9C52-E39AE96DFCD6}.Debug|x64.ActiveCfg = Release|x86
+		{9E228D39-0A0F-4F67-9C52-E39AE96DFCD6}.Debug|x86.ActiveCfg = Release|x86
+		{9E228D39-0A0F-4F67-9C52-E39AE96DFCD6}.Release|Any CPU.ActiveCfg = Release|x86
+		{9E228D39-0A0F-4F67-9C52-E39AE96DFCD6}.Release|x64.ActiveCfg = Release|x86
+		{9E228D39-0A0F-4F67-9C52-E39AE96DFCD6}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

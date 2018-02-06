@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ClrFunctions.h"
+#include <vector>
 
 ref class ManagedGlobals {
 public:
@@ -7,21 +8,6 @@ public:
 };
 
 bool gIsScriptInit = false;
-
-int GetGameType()
-{
-	char windowTitle[200];
-	GetWindowTextA(FindWindowA("ABE_WINCLASS", NULL), windowTitle, 200);
-
-	std::string title(windowTitle);
-
-	if (title.find("Oddysee") != std::string::npos)
-		return 1;
-	else if (title.find("Exoddus") != std::string::npos)
-		return 2;
-	else
-		return 0;
-}
 
 void Script_Init()
 {
@@ -71,7 +57,7 @@ void * Ae_CreateObject(int id, char * params)
 
 void AddRaycastEntry(bool hit, int x1, int y1, int x2, int y2, int collidedLinePointer, int collisionX, int collisionY, int mode)
 {
-	AliveAPIDotNet::DebugWindow::RaycastHit ray;
+	AliveAPIDotNet::RaycastHit ray;
 	ray.Hit = hit;
 	ray.X1 = x1 >> 16;
 	ray.Y1 = y1 >> 16;
@@ -81,9 +67,9 @@ void AddRaycastEntry(bool hit, int x1, int y1, int x2, int y2, int collidedLineP
 	ray.CY = collisionY >> 16;
 	ray.CollidedObject = collidedLinePointer;
 	ray.Mode = mode >> 1;
-	System::Threading::Monitor::Enter(AliveAPIDotNet::DebugWindow::mRaycastHits);
-	AliveAPIDotNet::DebugWindow::mRaycastHits->Add(ray);
-	System::Threading::Monitor::Exit(AliveAPIDotNet::DebugWindow::mRaycastHits);
+	System::Threading::Monitor::Enter(AliveAPIDotNet::AliveAPI::RaycastHits);
+	AliveAPIDotNet::AliveAPI::RaycastHits->Add(ray);
+	System::Threading::Monitor::Exit(AliveAPIDotNet::AliveAPI::RaycastHits);
 }
 
 void Ae_QuikLoad(char * saveData)
@@ -103,10 +89,18 @@ const char * Ae_QuikSave()
 void CLROnTick()
 {
 	AliveAPIDotNet::AliveAPI::FireOnGameTick();
+	System::Threading::Monitor::Enter(AliveAPIDotNet::AliveAPI::RaycastHits);
+	AliveAPIDotNet::AliveAPI::RaycastHits->Clear();
+	System::Threading::Monitor::Exit(AliveAPIDotNet::AliveAPI::RaycastHits);
+}
 
-	System::Threading::Monitor::Enter(AliveAPIDotNet::DebugWindow::mRaycastHits);
-	AliveAPIDotNet::DebugWindow::mRaycastHits->Clear();
-	System::Threading::Monitor::Exit(AliveAPIDotNet::DebugWindow::mRaycastHits);
+void CLROnDebugDraw()
+{
+	int ddHdc = 0x00C1D160;
+	int screenHdc = reinterpret_cast<int(__cdecl*)(void * ddrawPtr)>(0x004F2150)((void*)ddHdc);
+	AliveAPIDotNet::AliveAPI::ScreenHdc = System::IntPtr(screenHdc);
+	AliveAPIDotNet::AliveAPI::FireOnDebugDraw();
+	reinterpret_cast<int(__cdecl*)(int a1, int a2)>(0x4F21A0)(ddHdc, screenHdc);
 }
 
 void AddAllocationEntry(int address, int size, int caller)

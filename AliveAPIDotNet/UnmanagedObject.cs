@@ -28,16 +28,20 @@ namespace AliveAPIDotNet
     [Editor(typeof(UnmanagedObjectEditor), typeof(System.Drawing.Design.UITypeEditor))]
     public class UnmanagedObject
     {
-        public UnmanagedObject(IntPtr addr)
+        public UnmanagedObject(IntPtr addr, bool staticMemory = false, int predeterminedSize = 0)
         {
             mAddress = addr;
+            mIsStaticMemory = staticMemory;
+            mPredeterminedSize = predeterminedSize;
         }
 
         internal IntPtr mAddress;
+        internal bool mIsStaticMemory;
+        private int mPredeterminedSize;
 
         public virtual int AllocatedSize // This is a malloc hack and can go very wrong.
         {
-            get { return Marshal.ReadInt32(mAddress - 0x04); }
+            get { return (mPredeterminedSize == 0) ? Marshal.ReadInt32(mAddress - 0x04) : mPredeterminedSize; }
         }
 
         public override bool Equals(object obj)
@@ -70,6 +74,9 @@ namespace AliveAPIDotNet
 
         bool IsPtrInRange(IntPtr ptr)
         {
+            if (mIsStaticMemory)
+                return true;
+
             return ((ptr.ToInt32() < mAddress.ToInt32() + AllocatedSize) && MemoryHelper.IsMemoryRegionValid(ptr));
         }
 

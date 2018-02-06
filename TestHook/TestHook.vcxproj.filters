@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Detours">
+      <UniqueIdentifier>{c2d7a66d-9052-4115-b82f-dde6a781cff5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Features">
+      <UniqueIdentifier>{d6ef710b-60d5-4d2e-b70d-1facdff5ec05}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -36,6 +42,21 @@
     <ClInclude Include="ClrFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="game_functions.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomObject.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Reimplementation.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="XInputSupport.h">
+      <Filter>Source Files\Features</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -48,6 +69,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ClrFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="detours\detours.cpp">
+      <Filter>Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="detours\creatwth.cpp">
+      <Filter>Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="detours\disasm.cpp">
+      <Filter>Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="detours\disolx86.cpp">
+      <Filter>Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="detours\image.cpp">
+      <Filter>Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="detours\modules.cpp">
+      <Filter>Detours</Filter>
+    </ClCompile>
+    <ClCompile Include="game_functions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

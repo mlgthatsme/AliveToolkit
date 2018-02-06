@@ -9,18 +9,20 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AliveAPIDotNet</RootNamespace>
     <AssemblyName>AliveAPIDotNet</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\..\..\Games\GOG Games\Abes Exoddus\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -47,6 +50,12 @@
     <Compile Include="AliveAPI.cs" />
     <Compile Include="AliveObject.cs" />
     <Compile Include="AliveObjectList.cs" />
+    <Compile Include="BitmapFont.cs" />
+    <Compile Include="DebugHelpers\AIHelper.cs" />
+    <Compile Include="DebugHelpers\DDCheatNew.cs" />
+    <Compile Include="DebugHelpers\OnScreenRenderHelper.cs" />
+    <Compile Include="DebugHelpers\OnScreenRenderManager.cs" />
+    <Compile Include="DebugHelpers\PathRenderer.cs" />
     <Compile Include="DebugWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,6 +84,7 @@
     <Compile Include="HexBox\MemoryDataBlock.cs" />
     <Compile Include="HexBox\NativeMethods.cs" />
     <Compile Include="HexBox\Util.cs" />
+    <Compile Include="LevelEntryList.cs" />
     <Compile Include="LineGraph.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -109,7 +119,17 @@
     <Compile Include="RecordWindow.Designer.cs">
       <DependentUpon>RecordWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="UnmanagedArray.cs" />
+    <Compile Include="UnmanagedInt16.cs" />
     <Compile Include="UnmanagedObject.cs" />
+    <Compile Include="UnmanagedInt32.cs" />
+    <Compile Include="UnmanagedString.cs" />
+    <Compile Include="VRamWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VRamWindow.Designer.cs">
+      <DependentUpon>VRamWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Win32Native.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -135,8 +155,12 @@
     <EmbeddedResource Include="RecordWindow.resx">
       <DependentUpon>RecordWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VRamWindow.resx">
+      <DependentUpon>VRamWindow.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\8x8.bmp" />
     <Content Include="todo.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

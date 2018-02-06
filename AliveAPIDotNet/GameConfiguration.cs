@@ -58,6 +58,7 @@ namespace AliveAPIDotNet
         public int AddressPathData = 0x005C1128;
         public int AddressObjectList = 0x00BB47C4;
         public int AddressObjectListActive = 0x005C1124;
+        public int AddressLevelConfigs = 0x00559660;
 
         // Offsets
         public int OffsetObjectPositionX = 0xB8;

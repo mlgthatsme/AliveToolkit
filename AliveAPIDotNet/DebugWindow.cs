@@ -35,22 +35,43 @@ namespace AliveAPIDotNet
             }
 
             AliveAPI.GameTick += AliveAPI_GameTick;
+            AliveAPI.OnDebugDraw += AliveAPI_OnDebugDraw;
         }
 
-        public struct RaycastHit
+        private void AliveAPI_OnDebugDraw(object sender, EventArgs e)
         {
-            public bool Hit;
-            public int X1;
-            public int Y1;
-            public int X2;
-            public int Y2;
-            public int CX;
-            public int CY;
-            public int CollidedObject;
-            public int Mode;
+            //graphics.DrawLine(Pens.Red, 0, 0, 150, 150);
+
+            //IntPtr blockPtr = new IntPtr(0x5B86C8);
+
+            //Font f = new Font(FontFamily.GenericMonospace, 8.0f);
+
+            //if (blockPtr!= IntPtr.Zero)
+            //{
+            //    for (int i = 0; i < 300;i++)
+            //    {
+            //        IntPtr blockOffset = blockPtr + (40 * i);
+
+            //        int x = Marshal.ReadInt16(blockOffset + 0xC);
+            //        int y = Marshal.ReadInt16(blockOffset + 0xE);
+
+            //        //int u1 = (int)((((UInt16)Marshal.ReadInt16(blockOffset + 0x10)) / (float)UInt16.MaxValue) * 255);
+
+            //        // int xOffset = Marshal.ReadInt16(blockOffset + 23);
+            //        int xOffset = Marshal.ReadByte(blockOffset + 40);
+
+            //        int width = Marshal.ReadInt16(blockOffset + 0x14);
+            //        int height = Marshal.ReadInt16(blockOffset + 0x16);
+
+            //        graphics.DrawRectangle(new Pen(Color.FromArgb(255,255,0,0)), new Rectangle(x, y, width-1, height-1));
+            //        graphics.DrawString(xOffset.ToString(), f, Brushes.LawnGreen, new Point(x, y));
+            //    }
+
+            //    graphics.DrawString("Blocks Enabled", Font, Brushes.Red, new PointF(0, 0));
+            //}
         }
 
-        public static List<RaycastHit> mRaycastHits = new List<RaycastHit>();
+        
 
         float Distance(int x1, int y1, int x2, int y2)
         {
@@ -60,6 +81,7 @@ namespace AliveAPIDotNet
         AliveObject dragObject = null;
         public static bool freezeGame = false;
         public static bool stepFrame = false;
+        VRamWindow vRamWindow = new VRamWindow();
 
         float mouseXPrev = 0;
         float mouseYPrev = 0;
@@ -349,9 +371,7 @@ namespace AliveAPIDotNet
         {
             listBoxPath.Items.Clear();
 
-            pathEntries = AliveAPI.PathData.PathEntries;
-
-            foreach (var o in pathEntries)
+            foreach (var o in AliveAPI.PathData.PathEntries)
             {
                 listBoxPath.Items.Add(o);
             }
@@ -359,65 +379,10 @@ namespace AliveAPIDotNet
             panelCurrentScreen.Refresh();
         }
 
-        PathLineObject[] pathEntries = null;
-
         private void panelCurrentScreen_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.Clear(Color.Gray);
-            if (pathEntries != null)
-            {
-                e.Graphics.ScaleTransform(panelCurrentScreen.Width / 368.0f, panelCurrentScreen.Height / 240.0f);
-                e.Graphics.TranslateTransform(-AliveAPI.CameraOffsetX, -AliveAPI.CameraOffsetY);
-                
-                foreach (var l in pathEntries)
-                {
-                    Point p1 = new Point(l.X1, l.Y1);
-                    Point p2 = new Point(l.X2, l.Y2);
-
-                    e.Graphics.DrawLine(Pens.Red, p1, p2);
-                }
-
-                foreach(var o in AliveAPI.ObjectList.AsAliveObjects)
-                {
-                    e.Graphics.FillEllipse(Brushes.Black, new RectangleF(o.PositionX - 4, o.PositionY - 8, 8, 8));
-                }
-
-                lock (mRaycastHits)
-                {
-                    foreach (var l in mRaycastHits)
-                    {
-                        Point p1 = new Point(l.X1, l.Y1);
-                        Point p2 = new Point(l.X2, l.Y2);
-
-                        if (l.Hit)
-                        {
-                            p2 = new Point(l.CX, l.CY);
-                        }
-
-                        e.Graphics.DrawLine((l.Hit) ? Pens.Green : Pens.Blue, p1, p2);
-
-                        e.Graphics.FillEllipse(Brushes.Yellow, new RectangleF(l.CX - 2, l.CY - 2, 4, 4));
-                        e.Graphics.FillEllipse(Brushes.Brown, new RectangleF(l.X1 - 2, l.Y1 - 2, 4, 4));
-
-                        if (l.Hit)
-                        {
-                            PathLineObject line = new PathLineObject(new IntPtr(l.CollidedObject));
-                            e.Graphics.DrawLine(Pens.Orange, line.X1, line.Y1, line.X2, line.Y2);
-                        }
-
-                        if (checkBoxRenderMode.Checked)
-                            e.Graphics.DrawString(l.Mode.ToString(), new Font(FontFamily.GenericSansSerif, 5.0f), Brushes.White, new PointF((l.X1 + l.X2) / 2, (l.Y1 + l.Y2) / 2), new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-                        //if (l.Hit)
-                        //{
-                        //    e.Graphics.DrawString(l.CollidedObject.ToString(), Font, Brushes.White, new PointF((l.X1 + l.CX) / 2, (l.Y1 + l.CY) / 2), new StringFormat() { Alignment = StringAlignment.Center, LineAlignment = StringAlignment.Center });
-                        //}
-                    }
-                }
-            }
-            else
-            {
-                e.Graphics.DrawString("Refresh", Font, Brushes.Black, PointF.Empty);
-            }
+            DebugHelpers.PathRenderer.DrawPathLines(e.Graphics, panelCurrentScreen.Width, panelCurrentScreen.Height, checkBoxRenderMode.Checked);
         }
 
         private void btnStop_Click(object sender, EventArgs e)
@@ -466,6 +431,26 @@ namespace AliveAPIDotNet
         private void button3_Click(object sender, EventArgs e)
         {
             AliveAPI.Lazors();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            new ObjectEditor(AliveAPI.Levels).Show();
+
+            foreach(var l in AliveAPI.Levels.Levels)
+            {
+                foreach(var p in l.PathList)
+                {
+                    //var offset = Marshal.ReadInt32(new IntPtr(p.PathConstructorTable.Value)) + 28 + (49 * 4);
+                    //Console.WriteLine(Marshal.ReadInt32(new IntPtr(p.PathConstructorTable.Value)).ToString("X"));
+                    Marshal.WriteInt32(new IntPtr(0x005A80A8), 0x00403E90);
+                }
+            }
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            vRamWindow.Show();
         }
     }
 }

@@ -1,7 +1,5 @@
 #pragma once
 
-#define SCRIPT_FUNCTION extern "C" __declspec(dllexport)
-
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "targetver.h"
@@ -10,7 +8,7 @@
 
 // Windows Header Files:
 #include <windows.h>
-
+#include <vector>
 #include <iostream>
 #include <fstream>
 #include <stdio.h>
@@ -22,3 +20,5 @@
 
 #include "AeTypes.h"
 #include "AliveApi.h"
+
+int GetGameType();

@@ -21,9 +21,11 @@ T Lerp(T from, T to, float t)
 
 typedef int16_t(*T_Abe_LoadResource)(char *name, int a2);
 typedef char*(*T_Abe_GetLoadedResource)(int type, int a2, __int16 a3, __int16 a4);
+typedef char*(*T_Abe_AddLoadedResourceToObject)(void *thisPtr, int type, int resourceID);
 
 static T_Abe_LoadResource BanLoadResource = reinterpret_cast<T_Abe_LoadResource>(0x00403274);
 static T_Abe_GetLoadedResource BanGetLoadedResource = reinterpret_cast<T_Abe_GetLoadedResource>(0x00401AC8);
+static T_Abe_AddLoadedResourceToObject AddLoadedResourceToObject = reinterpret_cast<T_Abe_AddLoadedResourceToObject>(0x004DC130);
 
 namespace AliveAPI
 {
