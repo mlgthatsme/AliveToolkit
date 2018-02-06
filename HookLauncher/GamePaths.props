@@ -1,15 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
-  <PropertyGroup Label="UserMacros">
-    <abe_game_dir>E:\Games\GOG Games\Abes Exoddus</abe_game_dir>
-  </PropertyGroup>
+  <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
   <ItemDefinitionGroup />
-  <ItemGroup>
-    <BuildMacro Include="abe_game_dir">
-      <Value>$(abe_game_dir)</Value>
-      <EnvironmentVariable>true</EnvironmentVariable>
-    </BuildMacro>
-  </ItemGroup>
+  <ItemGroup />
 </Project>

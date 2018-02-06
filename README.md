@@ -8,3 +8,6 @@ Get the latest version here: https://ci.appveyor.com/project/mlgthatsme/alivetoo
 Figure out how to run Abe's Exoddus in windowed mode.
 Make sure before using the program, to go into Abe's Exoddus and create a save called "debug".
 The hook will load into this save straight away.
+
+# Build
+To build, open the project in Visual Studio 2017, and set environment variable *ABE_GAME_DIR* to your copy of Abes Exoddus/Oddysee.
