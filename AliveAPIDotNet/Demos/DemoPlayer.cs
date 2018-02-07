@@ -82,6 +82,7 @@ namespace AliveAPIDotNet.Demos
                     {
                         mPlaying = false;
                         mReady = false;
+                        IsDemoPlaying = false;
                     }
                 }
 
