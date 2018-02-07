@@ -19,6 +19,8 @@ namespace AliveAPIDotNet.Input
         /// </summary>
         public InputPad[] Pads { get; private set; }
 
+        public bool JoystickEnabled { get { return SafeReadInt32(new IntPtr(GameConfiguration.Instance.AddressJoystickEnabled)) == 1; } }
+
         // Todo, rest of input object
     }
 }

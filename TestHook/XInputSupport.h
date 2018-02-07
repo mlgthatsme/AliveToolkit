@@ -22,10 +22,10 @@ void UpdateVibration()
 	else if (vibrationAmount > 1)
 		vibrationAmount = 1;
 
-	bool pauseMenuCreated = *(int*)0x005C9300 != 0;
+	bool pauseMenuCreated = gPtrPauseMenu != 0;
 	bool pauseMenuActive = false;
 	if (pauseMenuCreated)
-		pauseMenuActive = (((char*)(*(int*)0x005C9300))[300] & 1) > 1;
+		pauseMenuActive = (((char*)(*(int*)&gPtrPauseMenu))[300] & 1) > 1;
 
 	XINPUT_VIBRATION vib;
 	USHORT vibLR = vibrationAmount * 65535;
@@ -41,33 +41,46 @@ void UpdateVibration()
 	vibrationAmount -= 1 / 16.0f;
 }
 
+void SetupXInputHooks()
+{
+	gInputJoyStrB1 = "X";
+	gInputJoyStrB2 = "A";
+	gInputJoyStrB3 = "B";
+	gInputJoyStrB4 = "Y";
+	gInputJoyStrB5 = "LB";
+	gInputJoyStrB6 = "RB";
+	gInputJoyStrB7 = "LT";
+	gInputJoyStrB8 = "RT";
+	gInputJoyStrB9 = "";
+	gInputJoyStrB0 = "";
+
+	const char * newGamepadName = "Xbox Controller";
+	memcpy(&gInputGamepadString, newGamepadName, strlen(newGamepadName));
+
+	gInputJoystickEnabled = true;
+}
+
 int Abe_InitInput();
 ALIVE_FUNC_IMPLEX(0x0, 0x00491BC0, Abe_InitInput, true);
 int Abe_InitInput()
 {
 	int r = Abe_InitInput_.Ptr()();
-
-	gInputJoyStrB1 = "X";
-	gInputJoyStrB2 = "A";
-	gInputJoyStrB3 = "B";
-	gInputJoyStrB4 = "Y";
-	gInputJoyStrB5 = "L1";
-	gInputJoyStrB6 = "R1";
-	gInputJoyStrB7 = "L2";
-	gInputJoyStrB8 = "R2";
-	gInputJoyStrB9 = "";
-	gInputJoyStrB0 = "";
-	gMainMenuStrX = ' ';
-
+	SetupXInputHooks();
 	return r;
+}
+
+void __cdecl Abe_LoadControllerSettings();
+ALIVE_FUNC_IMPLEX(0x0, 0x00492D40, Abe_LoadControllerSettings, true);
+void __cdecl Abe_LoadControllerSettings()
+{
+	Abe_LoadControllerSettings_.Ptr()();
+	SetupXInputHooks();
 }
 
 void __cdecl Abe_GetJoystickInput(float *X1, float *Y1, float *X2, float *Y2, DWORD *Buttons);
 ALIVE_FUNC_IMPLEX(0x0, 0x00460280, Abe_GetJoystickInput, true);
 void __cdecl Abe_GetJoystickInput(float *X1, float *Y1, float *X2, float *Y2, DWORD *Buttons)
 {
-	
-
 	XINPUT_STATE state;
 	ZeroMemory(&state, sizeof(XINPUT_STATE));
 
@@ -78,12 +91,6 @@ void __cdecl Abe_GetJoystickInput(float *X1, float *Y1, float *X2, float *Y2, DW
 	*Y1 = 0;
 	*X2 = 0;
 	*Y2 = 0;
-
-	/*int screenShake = (*(int*)0x00BD30E4);
-	if (abs(screenShake) > 0)
-	{
-	vibrationAmount = 1;
-	}*/
 
 	if (XInputGetState(0, &state) == ERROR_SUCCESS)
 	{
@@ -142,13 +149,6 @@ void __cdecl Abe_GetJoystickInput(float *X1, float *Y1, float *X2, float *Y2, DW
 		// 8 Back
 		// 9 Start
 
-		static int vibTick = 0;
-		vibTick++;
-
-		if (vibTick % 1 == 0)
-		{
-
-		}
 		UpdateVibration();
 	}
 }

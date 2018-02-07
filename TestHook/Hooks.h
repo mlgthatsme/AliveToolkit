@@ -1,5 +1,9 @@
 #pragma once
 
+// If Oddysee's pointers are unknown just write em here lel.
+char AO_Dump[1024];
+#define AO_UNKNOWN (int)&AO_Dump
+
 // Abe Functions
 ALIVE_FUNC_NOT_IMPL(0x0, 0x00402CA2, void *__fastcall (void * a2), j_Abe_CreatePauseMenu);
 //ALIVE_FUNC_NOT_IMPL(0x0, 0x00404390, void *__fastcall (void * thisPtr, int a1, int a2, int a3), Abe_ObjectInitFont);
@@ -8,28 +12,28 @@ ALIVE_FUNC_NOT_IMPL(0x0, 0x00402CA2, void *__fastcall (void * a2), j_Abe_CreateP
 // Abe Variables
 // DDCheat
 ALIVE_VAR(0x00508BF8, 0x005CA4B5, bool, gDDCheatEnabled);
-ALIVE_VAR(0x0, 0x005BC000, bool, gDDCheatAlwaysRender);
-ALIVE_VAR(0x0, 0x005C1BD8, bool, gDDCheatShowAI);
-ALIVE_VAR(0x0, 0x005C2C08, bool, gDDCheatIsFlying);
+ALIVE_VAR(AO_UNKNOWN, 0x005BC000, bool, gDDCheatAlwaysRender);
+ALIVE_VAR(AO_UNKNOWN, 0x005C1BD8, bool, gDDCheatShowAI);
+ALIVE_VAR(AO_UNKNOWN, 0x005C2C08, bool, gDDCheatIsFlying);
 
 // Input
-ALIVE_VAR(0x0, 0x5C9F70, bool, gInputJoystickEnabled);
-ALIVE_VAR(0x0, 0x005BD4E0, InputPadObject, gInputObj);
+ALIVE_VAR(AO_UNKNOWN, 0x5C9F70, bool, gInputJoystickEnabled);
+ALIVE_VAR(AO_UNKNOWN, 0x005BD4E0, InputPadObject, gInputObj);
+ALIVE_VAR(AO_UNKNOWN, 0x0055E85C, char, gInputGamepadString);
 // Input Buttons
-ALIVE_VAR(0x0, 0x5C9908, char *, gInputJoyStrB1);
-ALIVE_VAR(0x0, 0x5C990C, char *, gInputJoyStrB2);
-ALIVE_VAR(0x0, 0x5C9910, char *, gInputJoyStrB3);
-ALIVE_VAR(0x0, 0x5C9914, char *, gInputJoyStrB4);
-ALIVE_VAR(0x0, 0x5C9918, char *, gInputJoyStrB5);
-ALIVE_VAR(0x0, 0x5C991C, char *, gInputJoyStrB6);
-ALIVE_VAR(0x0, 0x5C9920, char *, gInputJoyStrB7);
-ALIVE_VAR(0x0, 0x5C9924, char *, gInputJoyStrB8);
-ALIVE_VAR(0x0, 0x5C9928, char *, gInputJoyStrB9);
-ALIVE_VAR(0x0, 0x5C992C, char *, gInputJoyStrB0);
-ALIVE_VAR(0x0, 0x00562D38, char, gMainMenuStrX);
+ALIVE_VAR(AO_UNKNOWN, 0x5C9908, char *, gInputJoyStrB1);
+ALIVE_VAR(AO_UNKNOWN, 0x5C990C, char *, gInputJoyStrB2);
+ALIVE_VAR(AO_UNKNOWN, 0x5C9910, char *, gInputJoyStrB3);
+ALIVE_VAR(AO_UNKNOWN, 0x5C9914, char *, gInputJoyStrB4);
+ALIVE_VAR(AO_UNKNOWN, 0x5C9918, char *, gInputJoyStrB5);
+ALIVE_VAR(AO_UNKNOWN, 0x5C991C, char *, gInputJoyStrB6);
+ALIVE_VAR(AO_UNKNOWN, 0x5C9920, char *, gInputJoyStrB7);
+ALIVE_VAR(AO_UNKNOWN, 0x5C9924, char *, gInputJoyStrB8);
+ALIVE_VAR(AO_UNKNOWN, 0x5C9928, char *, gInputJoyStrB9);
+ALIVE_VAR(AO_UNKNOWN, 0x5C992C, char *, gInputJoyStrB0);
 
 // Globals
-ALIVE_VAR(0x0, 0x5C9F70, void *, gPtrPauseMenu);
+ALIVE_VAR(0x0, 0x005C9300, void *, gPtrPauseMenu);
 
 //Level Info
 ALIVE_VAR(0x0, 0x005C3030, unsigned short, gCurrentLevel);
@@ -49,6 +53,23 @@ int __fastcall AbeMusicManagerUpdate(void *thisPtr)
 		return 0;
 }
 
+// Fixes the infamous Stereo swap bug that the PC port of Abe's Exoddus has.
+int __cdecl SND_PlayUnknown(int a1, int a2, int a3, int a4, int a5, int volume);
+ALIVE_FUNC_IMPLEX(0x0, 0x004FCB30, SND_PlayUnknown, true);
+int __cdecl SND_PlayUnknown(int a1, int a2, int a3, int a4, int a5, int volume)
+{
+	
+	if (gAppEnableLog)
+		printf("SND_PlayUnknown: A1: %X A2: %i A3: %i A4: %i A5: %i Vol:%i\n", a1, a2, a3, a4, a5, volume);
+
+	int swap1 = a5;
+	a5 = a4;
+	a4 = swap1;
+	
+
+	return SND_PlayUnknown_.Ptr()(a1, a2, a3, a4, a5, volume);
+}
+
 // Use these to find out where strings being rendered are located.
 char __cdecl Abe_LoadString(char *src, char *dst, int a3, char a4);
 ALIVE_FUNC_IMPLEX(0x0, 0x004969D0, Abe_LoadString, true);
@@ -60,13 +81,15 @@ char __cdecl Abe_LoadString(char *src, char *dst, int a3, char a4)
 		{
 			if (!strcmp(src, "esc"))
 				src = "";
+			else if (!strcmp(src, "x"))
+				src = "";
 		}
 	}
 	
 	char r = Abe_LoadString_.Ptr()(src, dst, a3, a4);
 
-	if (gAppEnableLog)
-		printf("Abe_LoadString: Src: %x Dst: %x Str: %s StrOut: %s a4: %i\n", src, dst, src, dst, a4);
+	//if (gAppEnableLog)
+	//	printf("Abe_LoadString: Src: %x Dst: %x Str: %s StrOut: %s a4: %i\n", src, dst, src, dst, a4);
 
 	return r;
 }
@@ -75,8 +98,8 @@ int __fastcall Abe_RenderText(void *font,void* ecx, int a2, char *text, int x, i
 ALIVE_FUNC_IMPLEX(0x0, 0x004337D0, Abe_RenderText, true);
 int __fastcall Abe_RenderText(void *font, void* ecx, int a2, char *text, int x, int y, int renderInGameLayer, int a7, int a8, int a9, char a10, char a11, char a12, int a13, int a14, int a15, int a16)
 {
-	if (gAppEnableLog)
-		printf("Abe_RenderText: Addr: %x %s\n", text, text);
+	//if (gAppEnableLog)
+	//	printf("Abe_RenderText: Addr: %x %s\n", text, text);
 
 	return Abe_RenderText_.Ptr()(font, 0, a2, text, x, y, renderInGameLayer, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16);
 }
@@ -118,8 +141,7 @@ ALIVE_FUNC_IMPLEX(0x0, 0x004F5640, Abe_BlitScreen, true);
 _DWORD * __cdecl  Abe_BlitScreen(const void *a1, char a2)
 {
 	CLROnDebugDraw();
-	auto r = Abe_BlitScreen_.Ptr()(a1, a2);
-	return r;
+	return Abe_BlitScreen_.Ptr()(a1, a2);
 }
 
 // Disable original ddcheat rendering

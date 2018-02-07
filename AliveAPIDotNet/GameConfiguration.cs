@@ -63,6 +63,7 @@ namespace AliveAPIDotNet
         public int AddressGNFrame = 0x005C1B84;
         public int AddressInputObject = 0x005BD4E0;
         public int AddressRandomSeed = 0x005D1E10;
+        public int AddressJoystickEnabled = 0x5C9F70;
 
         // Offsets
         public int OffsetObjectPositionX = 0xB8;
