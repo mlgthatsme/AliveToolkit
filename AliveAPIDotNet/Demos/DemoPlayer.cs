@@ -7,15 +7,19 @@ using System.Threading.Tasks;
 
 namespace AliveAPIDotNet.Demos
 {
-    public class DemoPlayer
+    public class DemoPlayer : IDisposable
     {
         QuikSave mSave;
         private bool mReady = false;
         private bool mPlaying = false;
         private int mRandomSeed = 0;
         private int mCurrentState = 0;
-
         private List<DemoInputState> mInputStates = new List<DemoInputState>();
+
+        public void Dispose()
+        {
+            AliveAPI.OnInput -= AliveAPI_OnInput;
+        }
 
         public void Open(Stream file)
         {
@@ -34,7 +38,14 @@ namespace AliveAPIDotNet.Demos
 
             AliveAPI.OnInput += AliveAPI_OnInput;
 
-            mReady = true;
+            if (mInputStates.Count > 0)
+                Console.WriteLine($"First Replay State at frame {mInputStates[0].gnFrame}");
+
+            lock(mInputStates)
+            {
+                mReady = true;
+            }
+            file.Close();
         }
 
         private void AliveAPI_OnInput(object sender, InputEventArgs e)
@@ -42,31 +53,34 @@ namespace AliveAPIDotNet.Demos
             if (e.Index != 0)
                 return;
 
-            if (mReady && !mPlaying)
+            lock (mInputStates)
             {
-                AliveAPI.QuikLoad(mSave);
-                AliveAPI.RandomSeed = mRandomSeed;
-                mPlaying = true;
-            }
-            if (mPlaying)
-            {
-                if (mInputStates.Count > 0)
+                if (mReady && !mPlaying)
                 {
-                    if (mInputStates[0].gnFrame == AliveAPI.gnFrame + 1)
+                    AliveAPI.QuikLoad(mSave);
+                    AliveAPI.RandomSeed = mRandomSeed;
+                    mPlaying = true;
+                }
+                if (mPlaying)
+                {
+                    if (mInputStates.Count > 0)
                     {
-                        mCurrentState = (int)mInputStates[0].Pressed;
-                        Console.WriteLine($"State Change: {mCurrentState.ToString("X")}");
-                        mInputStates.RemoveAt(0);
-                    }
+                        if (mInputStates[0].gnFrame == AliveAPI.gnFrame)
+                        {
+                            mCurrentState = (int)mInputStates[0].Pressed;
+                            Console.WriteLine($"State Change: {mCurrentState.ToString("X")}");
+                            mInputStates.RemoveAt(0);
+                        }
 
-                    e.Pad.Pressed.Value = mCurrentState;
+                        e.Pad.Pressed.Value = mCurrentState;
+                    }
+                    else
+                    {
+                        mPlaying = false;
+                        mReady = false;
+                    }
                 }
-                else
-                {
-                    mPlaying = false;
-                    mReady = false;
-                }
-            }
-        }
+
+            }        }
     }
 }

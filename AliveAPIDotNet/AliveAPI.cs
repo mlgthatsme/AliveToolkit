@@ -100,7 +100,8 @@ namespace AliveAPIDotNet
         public static LevelEntryList Levels;
         public static IntPtr ScreenHdc;
         public static InputObject Input;
-        
+        public static bool MusicEnabled = false;
+
         public static List<RaycastHit> RaycastHits = new List<RaycastHit>();
 
         public static void InitializeAPI()
@@ -166,6 +167,14 @@ namespace AliveAPIDotNet
 
         [DllImport(DLLFileName, EntryPoint = "Ae_QuikSave")]
         static extern IntPtr Ae_QuikSave();
+
+        [DllImport(DLLFileName, EntryPoint = "Ae_SetMusic")]
+        static extern IntPtr Ae_SetMusic(int song, IntPtr obj, short unknown1, byte unknown2);
+
+        public static void SetMusic(int song, AliveObject obj)
+        {
+            Ae_SetMusic(song, obj.mAddress, 0, 0);
+        }
 
         public static QuikSave QuikSave()
         {

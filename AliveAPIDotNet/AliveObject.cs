@@ -30,6 +30,8 @@ namespace AliveAPIDotNet
                     return "DDCheat";
                 case 0x00544B44:
                     return "Cheats Mgr";
+                case 0x00544B20:
+                    return "Event System";
             }
             return vtable.ToInt32().ToString("X8");
         }

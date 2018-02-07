@@ -16,7 +16,6 @@ ALIVE_VAR(0x0, 0x005C2C08, bool, gDDCheatIsFlying);
 ALIVE_VAR(0x0, 0x5C9F70, bool, gInputJoystickEnabled);
 ALIVE_VAR(0x0, 0x005BD4E0, InputPadObject, gInputObj);
 // Input Buttons
-
 ALIVE_VAR(0x0, 0x5C9908, char *, gInputJoyStrB1);
 ALIVE_VAR(0x0, 0x5C990C, char *, gInputJoyStrB2);
 ALIVE_VAR(0x0, 0x5C9910, char *, gInputJoyStrB3);
@@ -27,16 +26,54 @@ ALIVE_VAR(0x0, 0x5C9920, char *, gInputJoyStrB7);
 ALIVE_VAR(0x0, 0x5C9924, char *, gInputJoyStrB8);
 ALIVE_VAR(0x0, 0x5C9928, char *, gInputJoyStrB9);
 ALIVE_VAR(0x0, 0x5C992C, char *, gInputJoyStrB0);
+ALIVE_VAR(0x0, 0x00562D38, char, gMainMenuStrX);
 
 // Globals
 ALIVE_VAR(0x0, 0x5C9F70, void *, gPtrPauseMenu);
+
+//Level Info
+ALIVE_VAR(0x0, 0x005C3030, unsigned short, gCurrentLevel);
+ALIVE_VAR(0x0, 0x005C3032, unsigned short, gCurrentPath);
+ALIVE_VAR(0x0, 0x005C3034, unsigned short, gCurrentCam);
+
+
 
 // Disable Music
 int __fastcall AbeMusicManagerUpdate(void *thisPtr);
 ALIVE_FUNC_IMPLEX(0x0, 0x47F730, AbeMusicManagerUpdate, true);
 int __fastcall AbeMusicManagerUpdate(void *thisPtr)
 {
-	return 0;
+	if (IsMusicEnabled())
+		return AbeMusicManagerUpdate_.Ptr()(thisPtr);
+	else
+		return 0;
+}
+
+// Use these to find out where strings being rendered are located.
+char __cdecl Abe_LoadString(char *src, char *dst, int a3, char a4);
+ALIVE_FUNC_IMPLEX(0x0, 0x004969D0, Abe_LoadString, true);
+char __cdecl Abe_LoadString(char *src, char *dst, int a3, char a4)
+{
+	if (gInputJoystickEnabled)
+	{
+		if (gCurrentLevel == 0)
+		{
+			if (!strcmp(src, "esc"))
+				src = "";
+		}
+	}
+	
+	char r = Abe_LoadString_.Ptr()(src, dst, a3, a4);
+	printf("Abe_LoadString: Src: %x Dst: %x Str: %s StrOut: %s a4: %i\n", src, dst, src, dst, a4);
+	return r;
+}
+
+int __fastcall Abe_RenderText(void *font,void* ecx, int a2, char *text, int x, int y, int renderInGameLayer, int a7, int a8, int a9, char a10, char a11, char a12, int a13, int a14, int a15, int a16);
+ALIVE_FUNC_IMPLEX(0x0, 0x004337D0, Abe_RenderText, true);
+int __fastcall Abe_RenderText(void *font, void* ecx, int a2, char *text, int x, int y, int renderInGameLayer, int a7, int a8, int a9, char a10, char a11, char a12, int a13, int a14, int a15, int a16)
+{
+	printf("Abe_RenderText: Addr: %x %s\n", text, text);
+	return Abe_RenderText_.Ptr()(font, 0, a2, text, x, y, renderInGameLayer, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16);
 }
 
 int __cdecl Abe_InputGetPressed(int playerIndex);

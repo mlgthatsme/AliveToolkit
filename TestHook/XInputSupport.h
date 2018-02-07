@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Xinput.h>
+
 float vibrationAmount = 0;
 
 __int16 __fastcall Abe_ScreenShakeUpdate(AE_ScreenShake *thisPtr);
@@ -39,10 +41,33 @@ void UpdateVibration()
 	vibrationAmount -= 1 / 16.0f;
 }
 
+int Abe_InitInput();
+ALIVE_FUNC_IMPLEX(0x0, 0x00491BC0, Abe_InitInput, true);
+int Abe_InitInput()
+{
+	int r = Abe_InitInput_.Ptr()();
+
+	gInputJoyStrB1 = "X";
+	gInputJoyStrB2 = "A";
+	gInputJoyStrB3 = "B";
+	gInputJoyStrB4 = "Y";
+	gInputJoyStrB5 = "L1";
+	gInputJoyStrB6 = "R1";
+	gInputJoyStrB7 = "L2";
+	gInputJoyStrB8 = "R2";
+	gInputJoyStrB9 = "";
+	gInputJoyStrB0 = "";
+	gMainMenuStrX = ' ';
+
+	return r;
+}
+
 void __cdecl Abe_GetJoystickInput(float *X1, float *Y1, float *X2, float *Y2, DWORD *Buttons);
 ALIVE_FUNC_IMPLEX(0x0, 0x00460280, Abe_GetJoystickInput, true);
 void __cdecl Abe_GetJoystickInput(float *X1, float *Y1, float *X2, float *Y2, DWORD *Buttons)
 {
+	
+
 	XINPUT_STATE state;
 	ZeroMemory(&state, sizeof(XINPUT_STATE));
 
@@ -97,12 +122,12 @@ void __cdecl Abe_GetJoystickInput(float *X1, float *Y1, float *X2, float *Y2, DW
 		M_XINPUT_BIND(2, XINPUT_GAMEPAD_B);
 		M_XINPUT_BIND(3, XINPUT_GAMEPAD_Y);
 		M_XINPUT_BIND(4, XINPUT_GAMEPAD_LEFT_SHOULDER);
-		M_XINPUT_BIND(6, XINPUT_GAMEPAD_RIGHT_SHOULDER);
+		M_XINPUT_BIND(5, XINPUT_GAMEPAD_RIGHT_SHOULDER);
 		M_XINPUT_BIND(8, XINPUT_GAMEPAD_BACK);
 		M_XINPUT_BIND(9, XINPUT_GAMEPAD_START);
 
 		if (state.Gamepad.bLeftTrigger > 32)
-			*Buttons |= (1 << 5);
+			*Buttons |= (1 << 6);
 		if (state.Gamepad.bRightTrigger > 32)
 			*Buttons |= (1 << 7);
 
@@ -111,10 +136,10 @@ void __cdecl Abe_GetJoystickInput(float *X1, float *Y1, float *X2, float *Y2, DW
 		// 2 Circle
 		// 3 Triangle
 		// 4 L1
-		// 5 L2
-		// 6 R1
+		// 5 R1
+		// 6 L2
 		// 7 R2
-		// 8 Back?
+		// 8 Back
 		// 9 Start
 
 		static int vibTick = 0;

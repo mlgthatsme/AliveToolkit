@@ -8,8 +8,6 @@
 
 AliveAPI::Game * mGame = new AliveAPI::Game();
 
-#include <Xinput.h>
-
 #include "ClrFunctions.h"
 #include "game_functions.hpp"
 #include "Hooks.h"
@@ -47,17 +45,6 @@ void Loop()
 	{
 		if (GetGameType() == 2) // Exoddus
 		{
-			gInputJoyStrB1 = "X";
-			gInputJoyStrB2 = "A";
-			gInputJoyStrB3 = "B";
-			gInputJoyStrB4 = "Y";
-			gInputJoyStrB5 = "L1";
-			gInputJoyStrB6 = "R1";
-			gInputJoyStrB7 = "L2";
-			gInputJoyStrB8 = "R2";
-			gInputJoyStrB9 = "";
-			gInputJoyStrB0 = "";
-
 			SetupCustomObjectVTable();
 
 			std::ifstream stream = std::ifstream("debug.sav");

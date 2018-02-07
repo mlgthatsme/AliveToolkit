@@ -19,3 +19,4 @@ void Script_Init();
 void CLROnTick();
 void CLROnDebugDraw();
 int CLROnInput(int r, int index);
+bool IsMusicEnabled();

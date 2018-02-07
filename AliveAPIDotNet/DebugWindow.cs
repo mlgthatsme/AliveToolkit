@@ -95,8 +95,6 @@ namespace AliveAPIDotNet
             if (modalMode)
                 return;
 
-            
-
             while(freezeGame)
             {
                 if (stepFrame)
@@ -189,7 +187,21 @@ namespace AliveAPIDotNet
         }
 
         AliveObject SelectedObject { get { return (AliveObject)listBox1.SelectedItem; } }
-        SpawnEntry SelectedSpawnObject { get { return (SpawnEntry)listBox2.SelectedItem; } }
+        SpawnEntry SelectedSpawnObject { get {
+
+                if (InvokeRequired)
+                {
+                    SpawnEntry se = null;
+                    Invoke(new MethodInvoker(delegate {
+                        se = (SpawnEntry)listBox2.SelectedItem;
+                        
+                    }));
+                    return se;
+                }
+                else
+                    return (SpawnEntry)listBox2.SelectedItem;
+            }
+        }
 
         static string GetClipboardText()
         {
@@ -460,6 +472,16 @@ namespace AliveAPIDotNet
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
             vRamWindow.Show();
+        }
+
+        private void checkBoxMusic_CheckedChanged(object sender, EventArgs e)
+        {
+            AliveAPI.MusicEnabled = checkBoxMusic.Checked;
+        }
+
+        private void btnSetSong_Click(object sender, EventArgs e)
+        {
+            AliveAPI.SetMusic((int)numSongNum.Value, AliveAPI.GetPlayerObject());
         }
     }
 }

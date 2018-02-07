@@ -16,7 +16,7 @@ namespace AliveAPIDotNet.DebugHelpers
             AliveAPI.OnDebugDraw += AliveAPI_OnDebugDraw;
 
             Helpers.Add(new XboxButtons());
-            Helpers.Add(new PathRenderer());
+            //Helpers.Add(new PathRenderer());
             Helpers.Add(new DDCheatNew());
             Helpers.Add(new AIHelper());
         }

@@ -65,6 +65,7 @@
             this.panelCurrentScreen = new AliveAPIDotNet.DoubleBufferPanel();
             this.listBoxPath = new System.Windows.Forms.ListBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.checkBoxMusic = new System.Windows.Forms.CheckBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -76,6 +77,9 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numSongNum = new System.Windows.Forms.NumericUpDown();
+            this.btnSetSong = new System.Windows.Forms.Button();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -87,6 +91,8 @@
             this.tabPage5.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSongNum)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -444,6 +450,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.groupBox1);
             this.tabPage6.Controls.Add(this.button4);
             this.tabPage6.Controls.Add(this.button3);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
@@ -453,9 +460,20 @@
             this.tabPage6.Text = "Dev";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // checkBoxMusic
+            // 
+            this.checkBoxMusic.AutoSize = true;
+            this.checkBoxMusic.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxMusic.Name = "checkBoxMusic";
+            this.checkBoxMusic.Size = new System.Drawing.Size(96, 17);
+            this.checkBoxMusic.TabIndex = 2;
+            this.checkBoxMusic.Text = "Music Enabled";
+            this.checkBoxMusic.UseVisualStyleBackColor = true;
+            this.checkBoxMusic.CheckedChanged += new System.EventHandler(this.checkBoxMusic_CheckedChanged);
+            // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(18, 11);
+            this.button4.Location = new System.Drawing.Point(8, 85);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 1;
@@ -465,7 +483,8 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(317, 12);
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.Location = new System.Drawing.Point(317, 85);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 0;
@@ -560,6 +579,35 @@
             this.toolStripButton5.Text = "VRAM";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnSetSong);
+            this.groupBox1.Controls.Add(this.numSongNum);
+            this.groupBox1.Controls.Add(this.checkBoxMusic);
+            this.groupBox1.Location = new System.Drawing.Point(8, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(384, 76);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Music";
+            // 
+            // numSongNum
+            // 
+            this.numSongNum.Location = new System.Drawing.Point(6, 42);
+            this.numSongNum.Name = "numSongNum";
+            this.numSongNum.Size = new System.Drawing.Size(120, 20);
+            this.numSongNum.TabIndex = 3;
+            // 
+            // btnSetSong
+            // 
+            this.btnSetSong.Location = new System.Drawing.Point(132, 41);
+            this.btnSetSong.Name = "btnSetSong";
+            this.btnSetSong.Size = new System.Drawing.Size(75, 22);
+            this.btnSetSong.TabIndex = 4;
+            this.btnSetSong.Text = "Set Song";
+            this.btnSetSong.UseVisualStyleBackColor = true;
+            this.btnSetSong.Click += new System.EventHandler(this.btnSetSong_Click);
+            // 
             // DebugWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -587,6 +635,9 @@
             this.tabPage6.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSongNum)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -639,5 +690,9 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.CheckBox checkBoxMusic;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnSetSong;
+        private System.Windows.Forms.NumericUpDown numSongNum;
     }
 }

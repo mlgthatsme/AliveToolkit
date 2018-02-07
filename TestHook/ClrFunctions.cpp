@@ -79,6 +79,11 @@ void Ae_QuikLoad()
 	reinterpret_cast<__int16*(__cdecl*)()>(0x004022A2)();
 }
 
+SCRIPT_FUNCTION void Ae_SetMusic(int song, void * object, __int16 unknown1, bool unknown2)
+{
+	reinterpret_cast<__int16*(__cdecl*)(__int16 a1, int a2, __int16 a3, bool a4)>(0x47FD60)(song, (int)object, unknown1, unknown2);
+}
+
 static char mTempSaveData[8192];
 
 const char * Ae_QuikSave()
@@ -156,4 +161,9 @@ void UpdateAllocationList()
 void Ae_PlaySound(int id, int vol, float pitch, int a4)
 {
 	reinterpret_cast<int *(__cdecl*)(int a1, int a2, int a3, int a4)>(0x0046FBA0)(id, vol, (int)(pitch * 0x10000), a4);
+}
+
+bool IsMusicEnabled()
+{
+	return AliveAPIDotNet::AliveAPI::MusicEnabled;
 }

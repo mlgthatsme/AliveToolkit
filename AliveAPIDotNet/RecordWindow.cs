@@ -50,6 +50,7 @@ namespace AliveAPIDotNet
                 {
                     File.WriteAllBytes(dialog.FileName, demoFile);
                 }
+                mRecorder.Dispose();
             }
         }
 
@@ -70,6 +71,7 @@ namespace AliveAPIDotNet
             else
             {
                 button2.Text = "Start Playing";
+                mPlayer.Dispose();
             }
         }
     }
