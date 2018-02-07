@@ -16,9 +16,12 @@ namespace AliveAPIDotNet.Demos
         private int mCurrentState = 0;
         private List<DemoInputState> mInputStates = new List<DemoInputState>();
 
+        public static bool IsDemoPlaying = false;
+
         public void Dispose()
         {
             AliveAPI.OnInput -= AliveAPI_OnInput;
+            IsDemoPlaying = false;
         }
 
         public void Open(Stream file)
@@ -44,6 +47,7 @@ namespace AliveAPIDotNet.Demos
             lock(mInputStates)
             {
                 mReady = true;
+                IsDemoPlaying = true;
             }
             file.Close();
         }

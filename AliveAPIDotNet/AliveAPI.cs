@@ -14,7 +14,20 @@ namespace AliveAPIDotNet
 {
     public class AlivePlugin
     {
-        static DebugWindow window;
+        public static DebugWindow DevWindow;
+
+        public static void HideUI()
+        {
+            if (DevWindow != null)
+                DevWindow.Invoke(new MethodInvoker(delegate { DevWindow.Hide(); }));
+        }
+
+        public static void ShowUI()
+        {
+            if (DevWindow != null)
+                DevWindow.Invoke(new MethodInvoker(delegate { DevWindow.Show(); }));
+        }
+
         public static void Initialize(GameTypes gameType)
         {
             GameConfiguration.Instance = new GameConfiguration();
@@ -57,9 +70,8 @@ namespace AliveAPIDotNet
 
             Thread thread = new Thread(new ThreadStart(delegate
             {
-                window = new AliveAPIDotNet.DebugWindow();
-                Application.Run(window);
-                
+                DevWindow = new AliveAPIDotNet.DebugWindow();
+                Application.Run(DevWindow);
             }));
             thread.SetApartmentState(ApartmentState.STA);
             thread.Start();
@@ -111,6 +123,8 @@ namespace AliveAPIDotNet
             PathData = new PathObjectList(new IntPtr(GameConfiguration.Instance.AddressPathData));
             Levels = new LevelEntryList(new IntPtr(GameConfiguration.Instance.AddressLevelConfigs));
             Input = new InputObject(new IntPtr(GameConfiguration.Instance.AddressInputObject));
+
+            //AliveAPI.EnableVerboseLog();
         }
 
         public static event EventHandler<MemAllocEventArgs> OnMemoryAllocate;
@@ -167,6 +181,9 @@ namespace AliveAPIDotNet
 
         [DllImport(DLLFileName, EntryPoint = "Ae_QuikSave")]
         static extern IntPtr Ae_QuikSave();
+
+        [DllImport(DLLFileName, EntryPoint = "EnableVerboseLog")]
+        public static extern void EnableVerboseLog();
 
         [DllImport(DLLFileName, EntryPoint = "Ae_SetMusic")]
         static extern IntPtr Ae_SetMusic(int song, IntPtr obj, short unknown1, byte unknown2);

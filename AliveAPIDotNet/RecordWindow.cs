@@ -16,12 +16,17 @@ namespace AliveAPIDotNet
         public RecordWindow()
         {
             InitializeComponent();
-            
+            FormClosing += RecordWindow_FormClosing;
         }
-        
 
-        DemoRecorder mRecorder = new DemoRecorder();
-        DemoPlayer mPlayer = new DemoPlayer();
+        private void RecordWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
+        }
+
+        public static DemoRecorder mRecorder = new DemoRecorder();
+        public static DemoPlayer mPlayer = new DemoPlayer();
 
         bool recording = false;
         bool playing = false;

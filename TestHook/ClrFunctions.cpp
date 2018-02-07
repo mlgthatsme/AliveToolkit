@@ -2,6 +2,8 @@
 #include "ClrFunctions.h"
 #include <vector>
 
+bool gAppEnableLog = false;
+
 ref class ManagedGlobals {
 public:
 	static System::Collections::Generic::List<AliveAPIDotNet::MemoryAllocation>^ mMemAllocations = gcnew System::Collections::Generic::List<AliveAPIDotNet::MemoryAllocation>();
@@ -166,4 +168,32 @@ void Ae_PlaySound(int id, int vol, float pitch, int a4)
 bool IsMusicEnabled()
 {
 	return AliveAPIDotNet::AliveAPI::MusicEnabled;
+}
+
+// Dev Functions
+
+SCRIPT_FUNCTION bool IsCustomDemoPlaying()
+{
+	return AliveAPIDotNet::Demos::DemoPlayer::IsDemoPlaying;
+}
+
+SCRIPT_FUNCTION void PlayDemo(const char * filePath)
+{
+	AliveAPIDotNet::RecordWindow::mPlayer = gcnew AliveAPIDotNet::Demos::DemoPlayer();
+	AliveAPIDotNet::RecordWindow::mPlayer->Open(System::IO::File::Open(gcnew System::String(filePath), System::IO::FileMode::Open));
+}
+
+SCRIPT_FUNCTION void HideUI()
+{
+	AliveAPIDotNet::AlivePlugin::HideUI();
+}
+
+SCRIPT_FUNCTION void ShowUI()
+{
+	AliveAPIDotNet::AlivePlugin::ShowUI();
+}
+
+SCRIPT_FUNCTION void EnableVerboseLog()
+{
+	gAppEnableLog = true;
 }

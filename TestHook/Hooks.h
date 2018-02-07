@@ -64,7 +64,10 @@ char __cdecl Abe_LoadString(char *src, char *dst, int a3, char a4)
 	}
 	
 	char r = Abe_LoadString_.Ptr()(src, dst, a3, a4);
-	printf("Abe_LoadString: Src: %x Dst: %x Str: %s StrOut: %s a4: %i\n", src, dst, src, dst, a4);
+
+	if (gAppEnableLog)
+		printf("Abe_LoadString: Src: %x Dst: %x Str: %s StrOut: %s a4: %i\n", src, dst, src, dst, a4);
+
 	return r;
 }
 
@@ -72,7 +75,9 @@ int __fastcall Abe_RenderText(void *font,void* ecx, int a2, char *text, int x, i
 ALIVE_FUNC_IMPLEX(0x0, 0x004337D0, Abe_RenderText, true);
 int __fastcall Abe_RenderText(void *font, void* ecx, int a2, char *text, int x, int y, int renderInGameLayer, int a7, int a8, int a9, char a10, char a11, char a12, int a13, int a14, int a15, int a16)
 {
-	printf("Abe_RenderText: Addr: %x %s\n", text, text);
+	if (gAppEnableLog)
+		printf("Abe_RenderText: Addr: %x %s\n", text, text);
+
 	return Abe_RenderText_.Ptr()(font, 0, a2, text, x, y, renderInGameLayer, a7, a8, a9, a10, a11, a12, a13, a14, a15, a16);
 }
 
@@ -139,7 +144,9 @@ signed __int16 __cdecl Abe_LoadResource(char *resourceFilename, int a2);
 ALIVE_FUNC_IMPLEX(0x0, 0x0049C170, Abe_LoadResource, true);
 signed __int16 __cdecl Abe_LoadResource(char *resourceFilename, int a2)
 {
-	printf("Loading Resource File: %s\n", resourceFilename);
+	if (gAppEnableLog)
+		printf("Loading Resource File: %s\n", resourceFilename);
+
 	return Abe_LoadResource_.Ptr()(resourceFilename, a2);
 }
 

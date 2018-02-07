@@ -1,5 +1,7 @@
 #pragma once
 
+extern bool gAppEnableLog;
+
 #define SCRIPT_FUNCTION extern "C" __declspec(dllexport)
 
 SCRIPT_FUNCTION void * Ae_CreateObject(int id, char * params);
