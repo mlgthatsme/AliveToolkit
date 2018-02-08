@@ -4,7 +4,7 @@
 */
 
 #include "stdafx.h"
-#include "TestHook.h"
+#include "Main.h"
 
 static bool hookInitDone = false;
 

@@ -188,6 +188,9 @@ namespace AliveAPIDotNet
         [DllImport(DLLFileName, EntryPoint = "Ae_SetMusic")]
         static extern IntPtr Ae_SetMusic(int song, IntPtr obj, short unknown1, byte unknown2);
 
+        [DllImport(DLLFileName, EntryPoint = "PlayMidiNote")]
+        public static extern void PlayMidiNote(int program, int note, float pan, float volume);
+
         public static void SetMusic(int song, AliveObject obj)
         {
             Ae_SetMusic(song, obj.mAddress, 0, 0);
@@ -253,6 +256,24 @@ namespace AliveAPIDotNet
             byte[] switchStates = new byte[256];
             Marshal.Copy(switchAddr, switchStates, 0, 256);
             return switchStates;
+        }
+
+        public static bool DDCheatAlwaysRender
+        {
+            get { return Marshal.ReadByte(new IntPtr(GameConfiguration.Instance.AddressDDCheatAlwaysRender)) == 1; }
+            set { Marshal.WriteByte(new IntPtr(GameConfiguration.Instance.AddressDDCheatAlwaysRender), (byte)((value) ? 1 : 0)); }
+        }
+
+        public static bool DDCheatEnabled
+        {
+            get { return Marshal.ReadByte(new IntPtr(GameConfiguration.Instance.AddressDDCheatEnabled)) == 1; }
+            set { Marshal.WriteByte(new IntPtr(GameConfiguration.Instance.AddressDDCheatEnabled), (byte)((value) ? 1 : 0)); }
+        }
+
+        public static bool DDCheatIsFlying
+        {
+            get { return Marshal.ReadByte(new IntPtr(GameConfiguration.Instance.AddressDDCheatIsFlying)) == 1; }
+            set { Marshal.WriteByte(new IntPtr(GameConfiguration.Instance.AddressDDCheatIsFlying), (byte)((value) ? 1 : 0)); }
         }
 
         public static int gnFrame

@@ -203,6 +203,8 @@ namespace AliveAPIDotNet
             }
         }
 
+        SoundPlayer mSoundPlayerWindow = new SoundPlayer();
+
         static string GetClipboardText()
         {
             string res = "";
@@ -487,6 +489,16 @@ namespace AliveAPIDotNet
         private void toolStripButton6_Click(object sender, EventArgs e)
         {
             AliveAPI.EnableVerboseLog();
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            mSoundPlayerWindow.Show();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            DebugHelpers.PathRenderer.Enabled = checkboxPathOverlay.Checked;
         }
     }
 }

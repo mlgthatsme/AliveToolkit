@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "ClrFunctions.h"
 #include <vector>
 
@@ -81,11 +80,6 @@ void Ae_QuikLoad()
 	reinterpret_cast<__int16*(__cdecl*)()>(0x004022A2)();
 }
 
-SCRIPT_FUNCTION void Ae_SetMusic(int song, void * object, __int16 unknown1, bool unknown2)
-{
-	reinterpret_cast<__int16*(__cdecl*)(__int16 a1, int a2, __int16 a3, bool a4)>(0x47FD60)(song, (int)object, unknown1, unknown2);
-}
-
 static char mTempSaveData[8192];
 
 const char * Ae_QuikSave()
@@ -100,6 +94,8 @@ void CLROnTick()
 	System::Threading::Monitor::Enter(AliveAPIDotNet::AliveAPI::RaycastHits);
 	AliveAPIDotNet::AliveAPI::RaycastHits->Clear();
 	System::Threading::Monitor::Exit(AliveAPIDotNet::AliveAPI::RaycastHits);
+
+	
 }
 
 int CLROnInput(int r, int index)
@@ -118,6 +114,8 @@ int CLROnInput(int r, int index)
 
 void CLROnDebugDraw()
 {
+	//reinterpret_cast<char *(__fastcall*)(int thisPtr, void * ecx, int a2, int a3, int a4)>(0x0040EC10)(0x005BB5F4, 0, 0, 640, 240); // Forces screen refresh.
+
 	int ddHdc = 0x00C1D160;
 	int screenHdc = reinterpret_cast<int(__cdecl*)(void * ddrawPtr)>(0x004F2150)((void*)ddHdc);
 	AliveAPIDotNet::AliveAPI::ScreenHdc = System::IntPtr(screenHdc);
@@ -172,6 +170,11 @@ bool IsMusicEnabled()
 
 // Dev Functions
 
+SCRIPT_FUNCTION void Ae_SetMusic(int song, void * object, __int16 unknown1, bool unknown2)
+{
+	reinterpret_cast<__int16*(__cdecl*)(__int16 a1, int a2, __int16 a3, bool a4)>(0x47FD60)(song, (int)object, unknown1, unknown2);
+}
+
 SCRIPT_FUNCTION bool IsCustomDemoPlaying()
 {
 	return AliveAPIDotNet::Demos::DemoPlayer::IsDemoPlaying;
@@ -196,4 +199,20 @@ SCRIPT_FUNCTION void ShowUI()
 SCRIPT_FUNCTION void EnableVerboseLog()
 {
 	gAppEnableLog = true;
+}
+
+SCRIPT_FUNCTION void PlayMidiNote(int program, int note, float pan, float volume)
+{
+	int vLeft = 127;
+	int vRight = 127;
+	if (pan < 0)
+		vRight *= (1.0f - abs(pan));
+	if (pan > 0)
+		vLeft *= (1.0f - abs(pan));
+
+	reinterpret_cast<int(__cdecl*)(int a1, int program, int note, int leftVolume, int rightVolume, int volume)>(0x004FCB30)(0, program, note << 8, vLeft, vRight, (int)(volume * 127));
+}
+
+SCRIPT_FUNCTION void Lazors()
+{
 }

@@ -64,6 +64,9 @@ namespace AliveAPIDotNet
         public int AddressInputObject = 0x005BD4E0;
         public int AddressRandomSeed = 0x005D1E10;
         public int AddressJoystickEnabled = 0x5C9F70;
+        public int AddressDDCheatAlwaysRender = 0x005BC000;
+        public int AddressDDCheatEnabled = 0x005CA4B5;
+        public int AddressDDCheatIsFlying = 0x005C2C08;
 
         // Offsets
         public int OffsetObjectPositionX = 0xB8;

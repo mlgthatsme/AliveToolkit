@@ -1,6 +1,5 @@
 #include "stdafx.h"
-
-#include "game_functions.hpp"
+#include "HookAPI.h"
 
 std::map<DWORD, BaseFunction*>& BaseFunction::FunctionTable()
 {

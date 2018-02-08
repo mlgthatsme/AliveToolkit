@@ -4,15 +4,19 @@
 */
 
 #include "stdafx.h"
-#include "TestHook.h"
+#include "Main.h"
+
+#include "AeTypes.h"
+#include "AliveApi.h"
+
+#include "HookAPI.h"
 
 AliveAPI::Game * mGame = new AliveAPI::Game();
 
 #include "ClrFunctions.h"
-#include "game_functions.hpp"
 #include "Hooks.h"
 
-#include "CustomObject.h"
+//#include "CustomObject.h"
 #include "Reimplementation.h"
 #include "XInputSupport.h"
 
@@ -45,7 +49,7 @@ void Loop()
 	{
 		if (GetGameType() == 2) // Exoddus
 		{
-			SetupCustomObjectVTable();
+			
 
 			std::ifstream stream = std::ifstream("debug.sav");
 			if (stream.good())
@@ -95,6 +99,6 @@ void MLG_InitHook()
 
 	gInputJoystickEnabled = true;
 	gDDCheatEnabled = true;
-	gDDCheatAlwaysRender = true;
+	gDDCheatAlwaysRender = false;
 	gDDCheatShowAI = false;
 }

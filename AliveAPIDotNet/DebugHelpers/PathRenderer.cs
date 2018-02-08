@@ -23,11 +23,16 @@ namespace AliveAPIDotNet.DebugHelpers
             DrawPathLines(g, 640, 240);
         }
 
+        public static bool Enabled = false;
+
         static PathLineObject[] PathLines;
         int Tick = 0;
 
         public static void DrawPathLines(Graphics g, int width, int height, bool showDetails = false)
         {
+            if (!Enabled)
+                return;
+
             if (PathLines != null)
             {
                 g.ScaleTransform(width / 368.0f, height / 240.0f);

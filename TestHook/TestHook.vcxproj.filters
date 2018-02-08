@@ -30,9 +30,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TestHook.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AeTypes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -42,20 +39,23 @@
     <ClInclude Include="ClrFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="game_functions.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="CustomObject.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Reimplementation.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="XInputSupport.h">
       <Filter>Source Files\Features</Filter>
+    </ClInclude>
+    <ClInclude Include="HookAPI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Main.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Reimplementation.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -63,9 +63,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TestHook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ClrFunctions.cpp">
@@ -89,7 +86,10 @@
     <ClCompile Include="detours\modules.cpp">
       <Filter>Detours</Filter>
     </ClCompile>
-    <ClCompile Include="game_functions.cpp">
+    <ClCompile Include="HookAPI.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

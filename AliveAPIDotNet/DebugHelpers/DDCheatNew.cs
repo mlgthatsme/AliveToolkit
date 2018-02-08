@@ -15,7 +15,8 @@ namespace AliveAPIDotNet.DebugHelpers
         {
             // Newer and cleaner ddcheat text
             
-            g.RenderBitmapFont(BitmapFont.EightByEight, ddcheatStringBuffer, new Point(8, 8), Color.FromArgb(200, 0, 255, 255));
+            if (AliveAPI.DDCheatAlwaysRender || AliveAPI.DDCheatIsFlying)
+                g.RenderBitmapFont(BitmapFont.EightByEight, ddcheatStringBuffer, new Point(8, 8), Color.FromArgb(200, 0, 255, 255));
         }
     }
 }

@@ -15,9 +15,7 @@
 #include <typeinfo.h>
 #include <string>
 #include <iostream>
-
-#include "MinHook.h"
-#include "AeTypes.h"
-#include "AliveApi.h"
+#include <map>
 
 int GetGameType();
+

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "stdafx.h"
+
 // If Oddysee's pointers are unknown just write em here lel.
 char AO_Dump[1024];
 #define AO_UNKNOWN (int)&AO_Dump
@@ -54,20 +56,31 @@ int __fastcall AbeMusicManagerUpdate(void *thisPtr)
 }
 
 // Fixes the infamous Stereo swap bug that the PC port of Abe's Exoddus has.
-int __cdecl SND_PlayUnknown(int a1, int a2, int a3, int a4, int a5, int volume);
-ALIVE_FUNC_IMPLEX(0x0, 0x004FCB30, SND_PlayUnknown, true);
-int __cdecl SND_PlayUnknown(int a1, int a2, int a3, int a4, int a5, int volume)
+int __cdecl SND_PlayMidiNote(int a1, int program, int note, int leftVolume, int rightVolume, int volume);
+ALIVE_FUNC_IMPLEX(0x0, 0x004FCB30, SND_PlayMidiNote, true);
+int __cdecl SND_PlayMidiNote(int a1, int program, int note, int leftVolume, int rightVolume, int volume)
 {
-	
+	int noteConverted = (note >> 8) & 0x7F;
+
 	if (gAppEnableLog)
-		printf("SND_PlayUnknown: A1: %X A2: %i A3: %i A4: %i A5: %i Vol:%i\n", a1, a2, a3, a4, a5, volume);
+		printf("SND_PlayMidiNote: A1: %X A2: %i A3: %i A4: %i A5: %i Vol:%i\n", a1, program, noteConverted, leftVolume, rightVolume, volume);
 
-	int swap1 = a5;
-	a5 = a4;
-	a4 = swap1;
-	
+	int swap1 = rightVolume;
+	rightVolume = leftVolume;
+	leftVolume = swap1;
 
-	return SND_PlayUnknown_.Ptr()(a1, a2, a3, a4, a5, volume);
+	//program = 17;
+	//note = 36 << 8;
+
+	return SND_PlayMidiNote_.Ptr()(a1, program, note, rightVolume, rightVolume, volume);
+}
+
+signed int __cdecl Abe_MusicParseMidiMessage(int a1);
+ALIVE_FUNC_IMPLEX(0x0, 0x004FD100, Abe_MusicParseMidiMessage, true);
+signed int __cdecl Abe_MusicParseMidiMessage(int a1)
+{
+	//printf("Abe_MusicParseMidiMessage: %X %i\n", a1, a1);
+	return Abe_MusicParseMidiMessage_.Ptr()(a1);
 }
 
 // Use these to find out where strings being rendered are located.

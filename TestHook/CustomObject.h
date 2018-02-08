@@ -310,6 +310,8 @@ void SetupCustomObjectVTable()
 
 void * CreateCustomObject()
 {
+	SetupCustomObjectVTable();
+
 	AE_abe * object = (AE_abe *)reinterpret_cast<void *(__thiscall*)(size_t size)>(0x004024AA)(305);
 	reinterpret_cast<void *(__thiscall*)(AE_abe *thisPtr, int a2)>(0x00408240)(object, 0); // AbeInitPersistantObject
 
