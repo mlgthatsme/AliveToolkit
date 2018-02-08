@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace AliveAPIDotNet
+namespace AliveAPIDotNet.Forms
 {
     public partial class SoundPlayer : Form
     {

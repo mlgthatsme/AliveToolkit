@@ -10,8 +10,10 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Interop;
+using AliveAPIDotNet.Forms;
+using AliveAPIDotNet.Unmanaged;
 
-namespace AliveAPIDotNet
+namespace AliveAPIDotNet.Forms
 {
     public partial class DebugWindow : Form
     {
@@ -289,7 +291,7 @@ namespace AliveAPIDotNet
         {
             if (listBox1.SelectedItem != null)
             {
-                ObjectEditor objEditor = new AliveAPIDotNet.ObjectEditor((AliveObject)listBox1.SelectedItem);
+                ObjectEditor objEditor = new ObjectEditor((AliveObject)listBox1.SelectedItem);
                 objEditor.Show();
             }
         }

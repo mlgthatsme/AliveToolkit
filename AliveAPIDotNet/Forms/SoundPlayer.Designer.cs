@@ -1,4 +1,4 @@
-﻿namespace AliveAPIDotNet
+﻿namespace AliveAPIDotNet.Forms
 {
     partial class SoundPlayer
     {

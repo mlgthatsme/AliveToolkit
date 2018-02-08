@@ -8,8 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using Be.Windows.Forms;
 using System.Runtime.InteropServices;
+using AliveAPIDotNet.Unmanaged;
 
-namespace AliveAPIDotNet
+namespace AliveAPIDotNet.Forms
 {
     public partial class ObjectEditor : Form
     {
@@ -36,7 +37,7 @@ namespace AliveAPIDotNet
                     {
                         var button = new ToolStripButton("Hex Edit");
                         toolStrip.Items.Add(button);
-                        button.Click += delegate { new AliveAPIDotNet.ObjectHexEdit((UnmanagedObject)aliveObj).Show(); };
+                        button.Click += delegate { new ObjectHexEdit((UnmanagedObject)aliveObj).Show(); };
 
                         var autoUpdateButton = new ToolStripButton("Auto Update");
                         autoUpdateButton.CheckOnClick = true;

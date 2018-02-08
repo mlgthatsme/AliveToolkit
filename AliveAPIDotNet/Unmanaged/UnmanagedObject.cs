@@ -7,13 +7,15 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace AliveAPIDotNet
+using AliveAPIDotNet.Forms;
+
+namespace AliveAPIDotNet.Unmanaged
 {
     internal class UnmanagedObjectEditor : UITypeEditor
     {
         public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
-            ObjectEditor editor = new AliveAPIDotNet.ObjectEditor((UnmanagedObject)value);
+            ObjectEditor editor = new ObjectEditor((UnmanagedObject)value);
             editor.Show();
             return base.EditValue(context, provider, value);
         }

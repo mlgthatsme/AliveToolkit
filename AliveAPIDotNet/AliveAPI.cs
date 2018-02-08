@@ -8,7 +8,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+
 using AliveAPIDotNet.Input;
+using AliveAPIDotNet.Forms;
+using AliveAPIDotNet.Unmanaged;
 
 namespace AliveAPIDotNet
 {
@@ -70,7 +73,7 @@ namespace AliveAPIDotNet
 
             Thread thread = new Thread(new ThreadStart(delegate
             {
-                DevWindow = new AliveAPIDotNet.DebugWindow();
+                DevWindow = new DebugWindow();
                 Application.Run(DevWindow);
             }));
             thread.SetApartmentState(ApartmentState.STA);

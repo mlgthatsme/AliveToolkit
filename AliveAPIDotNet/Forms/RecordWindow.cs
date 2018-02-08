@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using AliveAPIDotNet.Demos;
 using System.IO;
 
-namespace AliveAPIDotNet
+namespace AliveAPIDotNet.Forms
 {
     public partial class RecordWindow : Form
     {

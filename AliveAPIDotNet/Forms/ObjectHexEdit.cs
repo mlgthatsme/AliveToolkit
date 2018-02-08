@@ -8,8 +8,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using AliveAPIDotNet.Unmanaged;
 
-namespace AliveAPIDotNet
+namespace AliveAPIDotNet.Forms
 {
     public partial class ObjectHexEdit : Form
     {

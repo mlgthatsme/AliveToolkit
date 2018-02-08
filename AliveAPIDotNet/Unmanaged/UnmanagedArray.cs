@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AliveAPIDotNet
+namespace AliveAPIDotNet.Unmanaged
 {
     public class UnmanagedArray<T> : UnmanagedObject, IReadOnlyList<T>
     {

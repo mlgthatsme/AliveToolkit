@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using AliveAPIDotNet.Unmanaged;
 
 namespace AliveAPIDotNet
 {
