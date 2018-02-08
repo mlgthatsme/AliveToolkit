@@ -93,7 +93,7 @@ void MLG_InitHook()
 	else
 		printf("Unknown Game !\n");
 
-	printf("Installing hooks...");
+	printf("Installing hooks...\n");
 	BaseFunction::HookAll();
 	printf("Done!\n");
 

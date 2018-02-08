@@ -182,8 +182,8 @@ SCRIPT_FUNCTION bool IsCustomDemoPlaying()
 
 SCRIPT_FUNCTION void PlayDemo(const char * filePath)
 {
-	AliveAPIDotNet::RecordWindow::mPlayer = gcnew AliveAPIDotNet::Demos::DemoPlayer();
-	AliveAPIDotNet::RecordWindow::mPlayer->Open(System::IO::File::Open(gcnew System::String(filePath), System::IO::FileMode::Open));
+	AliveAPIDotNet::Forms::RecordWindow::mPlayer = gcnew AliveAPIDotNet::Demos::DemoPlayer();
+	AliveAPIDotNet::Forms::RecordWindow::mPlayer->Open(System::IO::File::Open(gcnew System::String(filePath), System::IO::FileMode::Open));
 }
 
 SCRIPT_FUNCTION void HideUI()
