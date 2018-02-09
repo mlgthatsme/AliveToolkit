@@ -94,8 +94,6 @@ void CLROnTick()
 	System::Threading::Monitor::Enter(AliveAPIDotNet::AliveAPI::RaycastHits);
 	AliveAPIDotNet::AliveAPI::RaycastHits->Clear();
 	System::Threading::Monitor::Exit(AliveAPIDotNet::AliveAPI::RaycastHits);
-
-	
 }
 
 int CLROnInput(int r, int index)

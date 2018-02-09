@@ -51,6 +51,12 @@
     <Compile Include="AliveObject.cs" />
     <Compile Include="AliveObjectList.cs" />
     <Compile Include="BitmapFont.cs" />
+    <Compile Include="Controls\SwitchEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\SwitchEditor.Designer.cs">
+      <DependentUpon>SwitchEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="DebugHelpers\AIHelper.cs" />
     <Compile Include="DebugHelpers\DDCheatNew.cs" />
     <Compile Include="DebugHelpers\OnScreenRenderHelper.cs" />
@@ -151,6 +157,9 @@
     <Compile Include="Win32Native.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\SwitchEditor.resx">
+      <DependentUpon>SwitchEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DebugWindow.resx">
       <DependentUpon>DebugWindow.cs</DependentUpon>
     </EmbeddedResource>

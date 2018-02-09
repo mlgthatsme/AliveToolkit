@@ -59,6 +59,7 @@
             this.buttonSpawnObject = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.checkboxPathOverlay = new System.Windows.Forms.CheckBox();
             this.checkBoxRenderMode = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.btnPathRefresh = new System.Windows.Forms.Button();
@@ -71,20 +72,21 @@
             this.checkBoxMusic = new System.Windows.Forms.CheckBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.switchEditor1 = new AliveAPIDotNet.Controls.SwitchEditor();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonRecord = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.checkboxPathOverlay = new System.Windows.Forms.CheckBox();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -97,6 +99,7 @@
             this.tabPage6.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSongNum)).BeginInit();
+            this.tabPage7.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -211,6 +214,7 @@
             this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Controls.Add(this.tabPage5);
             this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPage7);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 25);
             this.tabControl1.Name = "tabControl1";
@@ -397,6 +401,17 @@
             this.tabPage5.Text = "Path";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // checkboxPathOverlay
+            // 
+            this.checkboxPathOverlay.AutoSize = true;
+            this.checkboxPathOverlay.Location = new System.Drawing.Point(68, 215);
+            this.checkboxPathOverlay.Name = "checkboxPathOverlay";
+            this.checkboxPathOverlay.Size = new System.Drawing.Size(100, 17);
+            this.checkboxPathOverlay.TabIndex = 4;
+            this.checkboxPathOverlay.Text = "Render Overlay";
+            this.checkboxPathOverlay.UseVisualStyleBackColor = true;
+            this.checkboxPathOverlay.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // checkBoxRenderMode
             // 
             this.checkBoxRenderMode.AutoSize = true;
@@ -527,6 +542,24 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // tabPage7
+            // 
+            this.tabPage7.Controls.Add(this.switchEditor1);
+            this.tabPage7.Location = new System.Drawing.Point(4, 22);
+            this.tabPage7.Name = "tabPage7";
+            this.tabPage7.Size = new System.Drawing.Size(400, 484);
+            this.tabPage7.TabIndex = 6;
+            this.tabPage7.Text = "Switches";
+            this.tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // switchEditor1
+            // 
+            this.switchEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.switchEditor1.Location = new System.Drawing.Point(0, 0);
+            this.switchEditor1.Name = "switchEditor1";
+            this.switchEditor1.Size = new System.Drawing.Size(400, 484);
+            this.switchEditor1.TabIndex = 0;
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -548,26 +581,6 @@
             this.toolStrip1.TabIndex = 8;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
-            // 
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -588,6 +601,11 @@
             this.toolStripButton2.Text = "Step Frame";
             this.toolStripButton2.Click += new System.EventHandler(this.btnStep_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButtonRecord
             // 
             this.toolStripButtonRecord.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRecord.Image")));
@@ -597,6 +615,11 @@
             this.toolStripButtonRecord.Text = "Demos";
             this.toolStripButtonRecord.ToolTipText = "Record";
             this.toolStripButtonRecord.Click += new System.EventHandler(this.toolStripButtonRecord_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButton3
             // 
@@ -618,6 +641,11 @@
             this.toolStripButton4.Text = "toolStripButton4";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButton7
             // 
             this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -638,6 +666,11 @@
             this.toolStripButton5.Text = "VRAM";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButton6
             // 
             this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -647,17 +680,6 @@
             this.toolStripButton6.Size = new System.Drawing.Size(52, 22);
             this.toolStripButton6.Text = "Verbose";
             this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
-            // 
-            // checkBox1
-            // 
-            this.checkboxPathOverlay.AutoSize = true;
-            this.checkboxPathOverlay.Location = new System.Drawing.Point(68, 215);
-            this.checkboxPathOverlay.Name = "checkBox1";
-            this.checkboxPathOverlay.Size = new System.Drawing.Size(80, 17);
-            this.checkboxPathOverlay.TabIndex = 4;
-            this.checkboxPathOverlay.Text = "Render Overlay";
-            this.checkboxPathOverlay.UseVisualStyleBackColor = true;
-            this.checkboxPathOverlay.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // DebugWindow
             // 
@@ -687,6 +709,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSongNum)).EndInit();
+            this.tabPage7.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -750,5 +773,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.CheckBox checkboxPathOverlay;
+        private System.Windows.Forms.TabPage tabPage7;
+        private Controls.SwitchEditor switchEditor1;
     }
 }

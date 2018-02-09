@@ -261,6 +261,12 @@ namespace AliveAPIDotNet
             return switchStates;
         }
 
+        public static void SetSwitchState(int index, byte v)
+        {
+            IntPtr switchAddr = new IntPtr(GameConfiguration.Instance.AddressSwitches);
+            Marshal.WriteByte(new IntPtr(switchAddr.ToInt32() + index), v);
+        }
+
         public static bool DDCheatAlwaysRender
         {
             get { return Marshal.ReadByte(new IntPtr(GameConfiguration.Instance.AddressDDCheatAlwaysRender)) == 1; }
