@@ -25,15 +25,15 @@ namespace AliveAPIDotNet.Forms
 
             foreach(var v in GameConfiguration.Instance.SpawnEntries.OrderBy(x=>x.PathID))
             {
-                listBox2.Items.Add(v);
+                spawnListBox.Items.Add(v);
             }
 
             if (GameConfiguration.Instance.GameType != GameTypes.Exoddus)
             {
                 toolStripButtonRecord.Dispose();
                 toolStripSeparator5.Dispose();
-                toolStripButton4.Dispose();
-                toolStripButton3.Dispose();
+                toolStripButtonLoadState.Dispose();
+                toolStripButtonSaveState.Dispose();
             }
 
             AliveAPI.GameTick += AliveAPI_GameTick;
@@ -195,13 +195,13 @@ namespace AliveAPIDotNet.Forms
                 {
                     SpawnEntry se = null;
                     Invoke(new MethodInvoker(delegate {
-                        se = (SpawnEntry)listBox2.SelectedItem;
+                        se = (SpawnEntry)spawnListBox.SelectedItem;
                         
                     }));
                     return se;
                 }
                 else
-                    return (SpawnEntry)listBox2.SelectedItem;
+                    return (SpawnEntry)spawnListBox.SelectedItem;
             }
         }
 
@@ -307,7 +307,7 @@ namespace AliveAPIDotNet.Forms
                 total += alloc.Size;
             }
 
-            labelTotal.Text = "Total: " + (total / 1024) + " kb";
+            labelTotalMemory.Text = "Total: " + (total / 1024) + " kb";
         }
 
         private void copyVTableToolStripMenuItem_Click(object sender, EventArgs e)
@@ -480,7 +480,7 @@ namespace AliveAPIDotNet.Forms
 
         private void checkBoxMusic_CheckedChanged(object sender, EventArgs e)
         {
-            AliveAPI.MusicEnabled = checkBoxMusic.Checked;
+            AliveAPI.MusicEnabled = checkBoxMusicEnabled.Checked;
         }
 
         private void btnSetSong_Click(object sender, EventArgs e)

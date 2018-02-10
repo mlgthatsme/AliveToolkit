@@ -37,20 +37,20 @@ namespace AliveAPIDotNet.Forms
         {
             Invoke(new MethodInvoker(delegate
             {
-                if (pictureBox1.Image == null)
+                if (pictureBoxVRam.Image == null)
                 {
-                    pictureBox1.Image = new Bitmap(1024, 512);
+                    pictureBoxVRam.Image = new Bitmap(1024, 512);
                 }
 
                 if (AliveAPI.ScreenHdc != IntPtr.Zero)
                 {
                     Graphics src = Graphics.FromHdc(AliveAPI.ScreenHdc);
-                    var g = Graphics.FromImage(pictureBox1.Image);
-                    BitBlt(g.GetHdc(), 0, 0, pictureBox1.Image.Width, pictureBox1.Image.Height, AliveAPI.ScreenHdc, 0, 0, 0x00CC0020);
+                    var g = Graphics.FromImage(pictureBoxVRam.Image);
+                    BitBlt(g.GetHdc(), 0, 0, pictureBoxVRam.Image.Width, pictureBoxVRam.Image.Height, AliveAPI.ScreenHdc, 0, 0, 0x00CC0020);
                     g.ReleaseHdc();
                 }
 
-                pictureBox1.Refresh();
+                pictureBoxVRam.Refresh();
             }));
         }
 

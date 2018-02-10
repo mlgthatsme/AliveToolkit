@@ -28,38 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pianoControl1 = new AliveAPIDotNet.PianoControl();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.pianoControl = new AliveAPIDotNet.PianoControl();
+            this.comboBoxProgram = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // pianoControl1
+            // pianoControl
             // 
-            this.pianoControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pianoControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pianoControl1.KeyEnd = 108;
-            this.pianoControl1.KeyStart = 24;
-            this.pianoControl1.Location = new System.Drawing.Point(12, 39);
-            this.pianoControl1.Name = "pianoControl1";
-            this.pianoControl1.Size = new System.Drawing.Size(803, 113);
-            this.pianoControl1.TabIndex = 0;
+            this.pianoControl.KeyEnd = 108;
+            this.pianoControl.KeyStart = 24;
+            this.pianoControl.Location = new System.Drawing.Point(12, 39);
+            this.pianoControl.Name = "pianoControl";
+            this.pianoControl.Size = new System.Drawing.Size(803, 113);
+            this.pianoControl.TabIndex = 0;
             // 
-            // comboBox1
+            // comboBoxProgram
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(12, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(159, 21);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.Text = "Programs";
+            this.comboBoxProgram.FormattingEnabled = true;
+            this.comboBoxProgram.Location = new System.Drawing.Point(12, 12);
+            this.comboBoxProgram.Name = "comboBoxProgram";
+            this.comboBoxProgram.Size = new System.Drawing.Size(159, 21);
+            this.comboBoxProgram.TabIndex = 1;
+            this.comboBoxProgram.Text = "Programs";
             // 
             // SoundPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(827, 155);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.pianoControl1);
+            this.Controls.Add(this.comboBoxProgram);
+            this.Controls.Add(this.pianoControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "SoundPlayer";
             this.Text = "SoundPlayer";
@@ -71,7 +71,7 @@
 
         #endregion
 
-        private PianoControl pianoControl1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private PianoControl pianoControl;
+        private System.Windows.Forms.ComboBox comboBoxProgram;
     }
 }

@@ -44,65 +44,65 @@
             this.duplicateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.button1 = new System.Windows.Forms.Button();
+            this.tabPageGame = new System.Windows.Forms.TabPage();
+            this.tabPageSound = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lineGraphMemory = new AliveAPIDotNet.LineGraph();
-            this.textBoxMemoryLog = new System.Windows.Forms.TextBox();
-            this.labelTotal = new System.Windows.Forms.Label();
-            this.buttonUpdateMemory = new System.Windows.Forms.Button();
-            this.listMemoryAllocations = new System.Windows.Forms.ListBox();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.buttonSpawnObject = new System.Windows.Forms.Button();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.checkboxPathOverlay = new System.Windows.Forms.CheckBox();
-            this.checkBoxRenderMode = new System.Windows.Forms.CheckBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnPathRefresh = new System.Windows.Forms.Button();
-            this.panelCurrentScreen = new AliveAPIDotNet.DoubleBufferPanel();
-            this.listBoxPath = new System.Windows.Forms.ListBox();
-            this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSetSong = new System.Windows.Forms.Button();
             this.numSongNum = new System.Windows.Forms.NumericUpDown();
-            this.checkBoxMusic = new System.Windows.Forms.CheckBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.switchEditor1 = new AliveAPIDotNet.Controls.SwitchEditor();
+            this.checkBoxMusicEnabled = new System.Windows.Forms.CheckBox();
+            this.tabPageMemory = new System.Windows.Forms.TabPage();
+            this.lineGraphMemory = new AliveAPIDotNet.LineGraph();
+            this.textBoxMemoryLog = new System.Windows.Forms.TextBox();
+            this.labelTotalMemory = new System.Windows.Forms.Label();
+            this.buttonUpdateMemory = new System.Windows.Forms.Button();
+            this.listMemoryAllocations = new System.Windows.Forms.ListBox();
+            this.tabPageSpawn = new System.Windows.Forms.TabPage();
+            this.buttonSpawnObject = new System.Windows.Forms.Button();
+            this.spawnListBox = new System.Windows.Forms.ListBox();
+            this.tabPagePath = new System.Windows.Forms.TabPage();
+            this.checkboxPathOverlay = new System.Windows.Forms.CheckBox();
+            this.checkBoxRenderMode = new System.Windows.Forms.CheckBox();
+            this.buttonAddTestCollisionLine = new System.Windows.Forms.Button();
+            this.btnPathRefresh = new System.Windows.Forms.Button();
+            this.panelCurrentScreen = new AliveAPIDotNet.DoubleBufferPanel();
+            this.listBoxPath = new System.Windows.Forms.ListBox();
+            this.tabPageSwitches = new System.Windows.Forms.TabPage();
+            this.switchEditor = new AliveAPIDotNet.Controls.SwitchEditor();
+            this.tabPageDev = new System.Windows.Forms.TabPage();
+            this.buttonShowLevels = new System.Windows.Forms.Button();
+            this.buttonLazors = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonStopGame = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonStepFrame = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonRecord = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonSaveState = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonLoadState = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonSoundPlayer = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonShowVRam = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.toolStripButtonEnableVerboseMode = new System.Windows.Forms.ToolStripButton();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            this.tabPageGame.SuspendLayout();
+            this.tabPageSound.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            this.tabPage2.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            this.tabPage5.SuspendLayout();
-            this.tabPage6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSongNum)).BeginInit();
-            this.tabPage7.SuspendLayout();
+            this.tabPageMemory.SuspendLayout();
+            this.tabPageSpawn.SuspendLayout();
+            this.tabPagePath.SuspendLayout();
+            this.tabPageSwitches.SuspendLayout();
+            this.tabPageDev.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -210,13 +210,13 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Controls.Add(this.tabPage7);
-            this.tabControl1.Controls.Add(this.tabPage6);
+            this.tabControl1.Controls.Add(this.tabPageGame);
+            this.tabControl1.Controls.Add(this.tabPageSound);
+            this.tabControl1.Controls.Add(this.tabPageMemory);
+            this.tabControl1.Controls.Add(this.tabPageSpawn);
+            this.tabControl1.Controls.Add(this.tabPagePath);
+            this.tabControl1.Controls.Add(this.tabPageSwitches);
+            this.tabControl1.Controls.Add(this.tabPageDev);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 25);
             this.tabControl1.Name = "tabControl1";
@@ -224,55 +224,40 @@
             this.tabControl1.Size = new System.Drawing.Size(408, 510);
             this.tabControl1.TabIndex = 7;
             // 
-            // tabPage1
+            // tabPageGame
             // 
-            this.tabPage1.Controls.Add(this.textBox1);
-            this.tabPage1.Controls.Add(this.listBox1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(400, 484);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Game";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageGame.Controls.Add(this.textBox1);
+            this.tabPageGame.Controls.Add(this.listBox1);
+            this.tabPageGame.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGame.Name = "tabPageGame";
+            this.tabPageGame.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGame.Size = new System.Drawing.Size(400, 484);
+            this.tabPageGame.TabIndex = 0;
+            this.tabPageGame.Text = "Game";
+            this.tabPageGame.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
+            // tabPageSound
             // 
-            this.tabPage3.Controls.Add(this.groupBox2);
-            this.tabPage3.Controls.Add(this.groupBox1);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(400, 484);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Sound";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPageSound.Controls.Add(this.groupBox2);
+            this.tabPageSound.Controls.Add(this.groupBox1);
+            this.tabPageSound.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSound.Name = "tabPageSound";
+            this.tabPageSound.Size = new System.Drawing.Size(400, 484);
+            this.tabPageSound.TabIndex = 2;
+            this.tabPageSound.Text = "Sound";
+            this.tabPageSound.UseVisualStyleBackColor = true;
             // 
-            // numericUpDown2
+            // groupBox2
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(69, 19);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(57, 20);
-            this.numericUpDown2.TabIndex = 3;
-            this.numericUpDown2.Value = new decimal(new int[] {
-            55,
-            0,
-            0,
-            0});
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(132, 16);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Play Sound";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.groupBox2.Controls.Add(this.numericUpDown1);
+            this.groupBox2.Controls.Add(this.button1);
+            this.groupBox2.Controls.Add(this.numericUpDown2);
+            this.groupBox2.Location = new System.Drawing.Point(8, 86);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(384, 52);
+            this.groupBox2.TabIndex = 5;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Midi";
             // 
             // numericUpDown1
             // 
@@ -291,20 +276,87 @@
             0,
             0});
             // 
-            // tabPage2
+            // button1
             // 
-            this.tabPage2.Controls.Add(this.lineGraphMemory);
-            this.tabPage2.Controls.Add(this.textBoxMemoryLog);
-            this.tabPage2.Controls.Add(this.labelTotal);
-            this.tabPage2.Controls.Add(this.buttonUpdateMemory);
-            this.tabPage2.Controls.Add(this.listMemoryAllocations);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(400, 484);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Memory";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.button1.Location = new System.Drawing.Point(132, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Play Sound";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(69, 19);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(57, 20);
+            this.numericUpDown2.TabIndex = 3;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            55,
+            0,
+            0,
+            0});
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnSetSong);
+            this.groupBox1.Controls.Add(this.numSongNum);
+            this.groupBox1.Controls.Add(this.checkBoxMusicEnabled);
+            this.groupBox1.Location = new System.Drawing.Point(8, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(384, 76);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Music";
+            // 
+            // btnSetSong
+            // 
+            this.btnSetSong.Location = new System.Drawing.Point(132, 41);
+            this.btnSetSong.Name = "btnSetSong";
+            this.btnSetSong.Size = new System.Drawing.Size(75, 22);
+            this.btnSetSong.TabIndex = 4;
+            this.btnSetSong.Text = "Set Song";
+            this.btnSetSong.UseVisualStyleBackColor = true;
+            this.btnSetSong.Click += new System.EventHandler(this.btnSetSong_Click);
+            // 
+            // numSongNum
+            // 
+            this.numSongNum.Location = new System.Drawing.Point(6, 42);
+            this.numSongNum.Name = "numSongNum";
+            this.numSongNum.Size = new System.Drawing.Size(120, 20);
+            this.numSongNum.TabIndex = 3;
+            // 
+            // checkBoxMusicEnabled
+            // 
+            this.checkBoxMusicEnabled.AutoSize = true;
+            this.checkBoxMusicEnabled.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxMusicEnabled.Name = "checkBoxMusicEnabled";
+            this.checkBoxMusicEnabled.Size = new System.Drawing.Size(96, 17);
+            this.checkBoxMusicEnabled.TabIndex = 2;
+            this.checkBoxMusicEnabled.Text = "Music Enabled";
+            this.checkBoxMusicEnabled.UseVisualStyleBackColor = true;
+            this.checkBoxMusicEnabled.CheckedChanged += new System.EventHandler(this.checkBoxMusic_CheckedChanged);
+            // 
+            // tabPageMemory
+            // 
+            this.tabPageMemory.Controls.Add(this.lineGraphMemory);
+            this.tabPageMemory.Controls.Add(this.textBoxMemoryLog);
+            this.tabPageMemory.Controls.Add(this.labelTotalMemory);
+            this.tabPageMemory.Controls.Add(this.buttonUpdateMemory);
+            this.tabPageMemory.Controls.Add(this.listMemoryAllocations);
+            this.tabPageMemory.Location = new System.Drawing.Point(4, 22);
+            this.tabPageMemory.Name = "tabPageMemory";
+            this.tabPageMemory.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageMemory.Size = new System.Drawing.Size(400, 484);
+            this.tabPageMemory.TabIndex = 1;
+            this.tabPageMemory.Text = "Memory";
+            this.tabPageMemory.UseVisualStyleBackColor = true;
             // 
             // lineGraphMemory
             // 
@@ -329,14 +381,14 @@
             this.textBoxMemoryLog.Size = new System.Drawing.Size(383, 97);
             this.textBoxMemoryLog.TabIndex = 7;
             // 
-            // labelTotal
+            // labelTotalMemory
             // 
-            this.labelTotal.AutoSize = true;
-            this.labelTotal.Location = new System.Drawing.Point(8, 183);
-            this.labelTotal.Name = "labelTotal";
-            this.labelTotal.Size = new System.Drawing.Size(34, 13);
-            this.labelTotal.TabIndex = 2;
-            this.labelTotal.Text = "Total:";
+            this.labelTotalMemory.AutoSize = true;
+            this.labelTotalMemory.Location = new System.Drawing.Point(8, 183);
+            this.labelTotalMemory.Name = "labelTotalMemory";
+            this.labelTotalMemory.Size = new System.Drawing.Size(34, 13);
+            this.labelTotalMemory.TabIndex = 2;
+            this.labelTotalMemory.Text = "Total:";
             // 
             // buttonUpdateMemory
             // 
@@ -356,16 +408,16 @@
             this.listMemoryAllocations.Size = new System.Drawing.Size(383, 173);
             this.listMemoryAllocations.TabIndex = 0;
             // 
-            // tabPage4
+            // tabPageSpawn
             // 
-            this.tabPage4.Controls.Add(this.buttonSpawnObject);
-            this.tabPage4.Controls.Add(this.listBox2);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(400, 484);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Spawn";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabPageSpawn.Controls.Add(this.buttonSpawnObject);
+            this.tabPageSpawn.Controls.Add(this.spawnListBox);
+            this.tabPageSpawn.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSpawn.Name = "tabPageSpawn";
+            this.tabPageSpawn.Size = new System.Drawing.Size(400, 484);
+            this.tabPageSpawn.TabIndex = 3;
+            this.tabPageSpawn.Text = "Spawn";
+            this.tabPageSpawn.UseVisualStyleBackColor = true;
             // 
             // buttonSpawnObject
             // 
@@ -377,30 +429,30 @@
             this.buttonSpawnObject.UseVisualStyleBackColor = true;
             this.buttonSpawnObject.Click += new System.EventHandler(this.buttonSpawnObject_Click);
             // 
-            // listBox2
+            // spawnListBox
             // 
-            this.listBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.spawnListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(4, 4);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(388, 355);
-            this.listBox2.TabIndex = 0;
+            this.spawnListBox.FormattingEnabled = true;
+            this.spawnListBox.Location = new System.Drawing.Point(4, 4);
+            this.spawnListBox.Name = "spawnListBox";
+            this.spawnListBox.Size = new System.Drawing.Size(388, 355);
+            this.spawnListBox.TabIndex = 0;
             // 
-            // tabPage5
+            // tabPagePath
             // 
-            this.tabPage5.Controls.Add(this.checkboxPathOverlay);
-            this.tabPage5.Controls.Add(this.checkBoxRenderMode);
-            this.tabPage5.Controls.Add(this.button2);
-            this.tabPage5.Controls.Add(this.btnPathRefresh);
-            this.tabPage5.Controls.Add(this.panelCurrentScreen);
-            this.tabPage5.Controls.Add(this.listBoxPath);
-            this.tabPage5.Location = new System.Drawing.Point(4, 22);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(400, 484);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Path";
-            this.tabPage5.UseVisualStyleBackColor = true;
+            this.tabPagePath.Controls.Add(this.checkboxPathOverlay);
+            this.tabPagePath.Controls.Add(this.checkBoxRenderMode);
+            this.tabPagePath.Controls.Add(this.buttonAddTestCollisionLine);
+            this.tabPagePath.Controls.Add(this.btnPathRefresh);
+            this.tabPagePath.Controls.Add(this.panelCurrentScreen);
+            this.tabPagePath.Controls.Add(this.listBoxPath);
+            this.tabPagePath.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePath.Name = "tabPagePath";
+            this.tabPagePath.Size = new System.Drawing.Size(400, 484);
+            this.tabPagePath.TabIndex = 4;
+            this.tabPagePath.Text = "Path";
+            this.tabPagePath.UseVisualStyleBackColor = true;
             // 
             // checkboxPathOverlay
             // 
@@ -423,17 +475,17 @@
             this.checkBoxRenderMode.Text = "Mode";
             this.checkBoxRenderMode.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // buttonAddTestCollisionLine
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.buttonAddTestCollisionLine.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(9, 157);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(383, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Add Test Collision Line";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            this.buttonAddTestCollisionLine.Location = new System.Drawing.Point(9, 157);
+            this.buttonAddTestCollisionLine.Name = "buttonAddTestCollisionLine";
+            this.buttonAddTestCollisionLine.Size = new System.Drawing.Size(383, 23);
+            this.buttonAddTestCollisionLine.TabIndex = 1;
+            this.buttonAddTestCollisionLine.Text = "Add Test Collision Line";
+            this.buttonAddTestCollisionLine.UseVisualStyleBackColor = true;
+            this.buttonAddTestCollisionLine.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // btnPathRefresh
             // 
@@ -470,136 +522,96 @@
             this.listBoxPath.TabIndex = 0;
             this.listBoxPath.DoubleClick += new System.EventHandler(this.listBoxPath_DoubleClick);
             // 
-            // tabPage6
+            // tabPageSwitches
             // 
-            this.tabPage6.Controls.Add(this.button4);
-            this.tabPage6.Controls.Add(this.button3);
-            this.tabPage6.Location = new System.Drawing.Point(4, 22);
-            this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(400, 484);
-            this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "Dev";
-            this.tabPage6.UseVisualStyleBackColor = true;
+            this.tabPageSwitches.Controls.Add(this.switchEditor);
+            this.tabPageSwitches.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSwitches.Name = "tabPageSwitches";
+            this.tabPageSwitches.Size = new System.Drawing.Size(400, 484);
+            this.tabPageSwitches.TabIndex = 6;
+            this.tabPageSwitches.Text = "Switches";
+            this.tabPageSwitches.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // switchEditor
             // 
-            this.groupBox1.Controls.Add(this.btnSetSong);
-            this.groupBox1.Controls.Add(this.numSongNum);
-            this.groupBox1.Controls.Add(this.checkBoxMusic);
-            this.groupBox1.Location = new System.Drawing.Point(8, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(384, 76);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Music";
+            this.switchEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.switchEditor.Location = new System.Drawing.Point(0, 0);
+            this.switchEditor.Name = "switchEditor";
+            this.switchEditor.Size = new System.Drawing.Size(400, 484);
+            this.switchEditor.TabIndex = 0;
             // 
-            // btnSetSong
+            // tabPageDev
             // 
-            this.btnSetSong.Location = new System.Drawing.Point(132, 41);
-            this.btnSetSong.Name = "btnSetSong";
-            this.btnSetSong.Size = new System.Drawing.Size(75, 22);
-            this.btnSetSong.TabIndex = 4;
-            this.btnSetSong.Text = "Set Song";
-            this.btnSetSong.UseVisualStyleBackColor = true;
-            this.btnSetSong.Click += new System.EventHandler(this.btnSetSong_Click);
+            this.tabPageDev.Controls.Add(this.buttonShowLevels);
+            this.tabPageDev.Controls.Add(this.buttonLazors);
+            this.tabPageDev.Location = new System.Drawing.Point(4, 22);
+            this.tabPageDev.Name = "tabPageDev";
+            this.tabPageDev.Size = new System.Drawing.Size(400, 484);
+            this.tabPageDev.TabIndex = 5;
+            this.tabPageDev.Text = "Dev";
+            this.tabPageDev.UseVisualStyleBackColor = true;
             // 
-            // numSongNum
+            // buttonShowLevels
             // 
-            this.numSongNum.Location = new System.Drawing.Point(6, 42);
-            this.numSongNum.Name = "numSongNum";
-            this.numSongNum.Size = new System.Drawing.Size(120, 20);
-            this.numSongNum.TabIndex = 3;
+            this.buttonShowLevels.Location = new System.Drawing.Point(8, 3);
+            this.buttonShowLevels.Name = "buttonShowLevels";
+            this.buttonShowLevels.Size = new System.Drawing.Size(75, 23);
+            this.buttonShowLevels.TabIndex = 1;
+            this.buttonShowLevels.Text = "Levels";
+            this.buttonShowLevels.UseVisualStyleBackColor = true;
+            this.buttonShowLevels.Click += new System.EventHandler(this.button4_Click);
             // 
-            // checkBoxMusic
+            // buttonLazors
             // 
-            this.checkBoxMusic.AutoSize = true;
-            this.checkBoxMusic.Location = new System.Drawing.Point(6, 19);
-            this.checkBoxMusic.Name = "checkBoxMusic";
-            this.checkBoxMusic.Size = new System.Drawing.Size(96, 17);
-            this.checkBoxMusic.TabIndex = 2;
-            this.checkBoxMusic.Text = "Music Enabled";
-            this.checkBoxMusic.UseVisualStyleBackColor = true;
-            this.checkBoxMusic.CheckedChanged += new System.EventHandler(this.checkBoxMusic_CheckedChanged);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(8, 3);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 1;
-            this.button4.Text = "Levels";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(89, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "LAZORS";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // tabPage7
-            // 
-            this.tabPage7.Controls.Add(this.switchEditor1);
-            this.tabPage7.Location = new System.Drawing.Point(4, 22);
-            this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(400, 484);
-            this.tabPage7.TabIndex = 6;
-            this.tabPage7.Text = "Switches";
-            this.tabPage7.UseVisualStyleBackColor = true;
-            // 
-            // switchEditor1
-            // 
-            this.switchEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.switchEditor1.Location = new System.Drawing.Point(0, 0);
-            this.switchEditor1.Name = "switchEditor1";
-            this.switchEditor1.Size = new System.Drawing.Size(400, 484);
-            this.switchEditor1.TabIndex = 0;
+            this.buttonLazors.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLazors.Location = new System.Drawing.Point(89, 3);
+            this.buttonLazors.Name = "buttonLazors";
+            this.buttonLazors.Size = new System.Drawing.Size(75, 23);
+            this.buttonLazors.TabIndex = 0;
+            this.buttonLazors.Text = "LAZORS";
+            this.buttonLazors.UseVisualStyleBackColor = true;
+            this.buttonLazors.Click += new System.EventHandler(this.button3_Click);
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
+            this.toolStripButtonStopGame,
+            this.toolStripButtonStepFrame,
             this.toolStripSeparator4,
             this.toolStripButtonRecord,
             this.toolStripSeparator5,
-            this.toolStripButton3,
-            this.toolStripButton4,
+            this.toolStripButtonSaveState,
+            this.toolStripButtonLoadState,
             this.toolStripSeparator7,
-            this.toolStripButton7,
-            this.toolStripButton5,
+            this.toolStripButtonSoundPlayer,
+            this.toolStripButtonShowVRam,
             this.toolStripSeparator6,
-            this.toolStripButton6});
+            this.toolStripButtonEnableVerboseMode});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(408, 25);
             this.toolStrip1.TabIndex = 8;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // toolStripButtonStopGame
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "Pause Game";
-            this.toolStripButton1.Click += new System.EventHandler(this.btnStop_Click);
+            this.toolStripButtonStopGame.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonStopGame.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonStopGame.Image")));
+            this.toolStripButtonStopGame.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonStopGame.Name = "toolStripButtonStopGame";
+            this.toolStripButtonStopGame.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonStopGame.Text = "Pause Game";
+            this.toolStripButtonStopGame.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // toolStripButton2
+            // toolStripButtonStepFrame
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "Step Frame";
-            this.toolStripButton2.Click += new System.EventHandler(this.btnStep_Click);
+            this.toolStripButtonStepFrame.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonStepFrame.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonStepFrame.Image")));
+            this.toolStripButtonStepFrame.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonStepFrame.Name = "toolStripButtonStepFrame";
+            this.toolStripButtonStepFrame.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonStepFrame.Text = "Step Frame";
+            this.toolStripButtonStepFrame.Click += new System.EventHandler(this.btnStep_Click);
             // 
             // toolStripSeparator4
             // 
@@ -621,77 +633,65 @@
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton3
+            // toolStripButtonSaveState
             // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "toolStripButton3";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            this.toolStripButtonSaveState.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonSaveState.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonSaveState.Image")));
+            this.toolStripButtonSaveState.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSaveState.Name = "toolStripButtonSaveState";
+            this.toolStripButtonSaveState.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonSaveState.Text = "toolStripButton3";
+            this.toolStripButtonSaveState.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
-            // toolStripButton4
+            // toolStripButtonLoadState
             // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton4.Text = "toolStripButton4";
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
+            this.toolStripButtonLoadState.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonLoadState.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonLoadState.Image")));
+            this.toolStripButtonLoadState.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonLoadState.Name = "toolStripButtonLoadState";
+            this.toolStripButtonLoadState.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonLoadState.Text = "toolStripButton4";
+            this.toolStripButtonLoadState.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton7
+            // toolStripButtonSoundPlayer
             // 
-            this.toolStripButton7.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton7.Image = global::AliveAPIDotNet.Properties.Resources.piano;
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton7.Text = "toolStripButton7";
-            this.toolStripButton7.Click += new System.EventHandler(this.toolStripButton7_Click);
+            this.toolStripButtonSoundPlayer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonSoundPlayer.Image = global::AliveAPIDotNet.Properties.Resources.piano;
+            this.toolStripButtonSoundPlayer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSoundPlayer.Name = "toolStripButtonSoundPlayer";
+            this.toolStripButtonSoundPlayer.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonSoundPlayer.Text = "toolStripButton7";
+            this.toolStripButtonSoundPlayer.Click += new System.EventHandler(this.toolStripButton7_Click);
             // 
-            // toolStripButton5
+            // toolStripButtonShowVRam
             // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = global::AliveAPIDotNet.Properties.Resources.psx_vram;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Text = "VRAM";
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
+            this.toolStripButtonShowVRam.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonShowVRam.Image = global::AliveAPIDotNet.Properties.Resources.psx_vram;
+            this.toolStripButtonShowVRam.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonShowVRam.Name = "toolStripButtonShowVRam";
+            this.toolStripButtonShowVRam.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonShowVRam.Text = "VRAM";
+            this.toolStripButtonShowVRam.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton6
+            // toolStripButtonEnableVerboseMode
             // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(52, 22);
-            this.toolStripButton6.Text = "Verbose";
-            this.toolStripButton6.Click += new System.EventHandler(this.toolStripButton6_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.numericUpDown1);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.numericUpDown2);
-            this.groupBox2.Location = new System.Drawing.Point(8, 86);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(384, 52);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Midi";
+            this.toolStripButtonEnableVerboseMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButtonEnableVerboseMode.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEnableVerboseMode.Image")));
+            this.toolStripButtonEnableVerboseMode.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonEnableVerboseMode.Name = "toolStripButtonEnableVerboseMode";
+            this.toolStripButtonEnableVerboseMode.Size = new System.Drawing.Size(52, 22);
+            this.toolStripButtonEnableVerboseMode.Text = "Verbose";
+            this.toolStripButtonEnableVerboseMode.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
             // DebugWindow
             // 
@@ -707,24 +707,24 @@
             this.Load += new System.EventHandler(this.DebugWindow_Load);
             this.contextMenuObject.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            this.tabPageGame.ResumeLayout(false);
+            this.tabPageGame.PerformLayout();
+            this.tabPageSound.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage5.ResumeLayout(false);
-            this.tabPage5.PerformLayout();
-            this.tabPage6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSongNum)).EndInit();
-            this.tabPage7.ResumeLayout(false);
+            this.tabPageMemory.ResumeLayout(false);
+            this.tabPageMemory.PerformLayout();
+            this.tabPageSpawn.ResumeLayout(false);
+            this.tabPagePath.ResumeLayout(false);
+            this.tabPagePath.PerformLayout();
+            this.tabPageSwitches.ResumeLayout(false);
+            this.tabPageDev.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -736,11 +736,11 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuObject;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageGame;
+        private System.Windows.Forms.TabPage tabPageMemory;
         private System.Windows.Forms.ListBox listMemoryAllocations;
         private System.Windows.Forms.Button buttonUpdateMemory;
-        private System.Windows.Forms.Label labelTotal;
+        private System.Windows.Forms.Label labelTotalMemory;
         private System.Windows.Forms.TextBox textBoxMemoryLog;
         private System.Windows.Forms.ToolStripMenuItem copyVTableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteVTableToolStripMenuItem;
@@ -748,46 +748,46 @@
         private System.Windows.Forms.ToolStripMenuItem removeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem duplicateToolStripMenuItem;
         private LineGraph lineGraphMemory;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPageSound;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabPageSpawn;
         private System.Windows.Forms.ToolStripMenuItem copyAddressToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.Button buttonSpawnObject;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox spawnListBox;
         private System.Windows.Forms.ToolStripMenuItem mindControlToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.TabPage tabPage5;
+        private System.Windows.Forms.TabPage tabPagePath;
         private System.Windows.Forms.Button btnPathRefresh;
         private System.Windows.Forms.ListBox listBoxPath;
         private DoubleBufferPanel panelCurrentScreen;
-        private System.Windows.Forms.TabPage tabPage6;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TabPage tabPageDev;
+        private System.Windows.Forms.Button buttonAddTestCollisionLine;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton toolStripButtonStopGame;
+        private System.Windows.Forms.ToolStripButton toolStripButtonStepFrame;
         private System.Windows.Forms.CheckBox checkBoxRenderMode;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButtonRecord;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
-        private System.Windows.Forms.ToolStripButton toolStripButton3;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.CheckBox checkBoxMusic;
+        private System.Windows.Forms.ToolStripButton toolStripButtonSaveState;
+        private System.Windows.Forms.ToolStripButton toolStripButtonLoadState;
+        private System.Windows.Forms.Button buttonLazors;
+        private System.Windows.Forms.Button buttonShowLevels;
+        private System.Windows.Forms.ToolStripButton toolStripButtonShowVRam;
+        private System.Windows.Forms.CheckBox checkBoxMusicEnabled;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnSetSong;
         private System.Windows.Forms.NumericUpDown numSongNum;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
-        private System.Windows.Forms.ToolStripButton toolStripButton7;
+        private System.Windows.Forms.ToolStripButton toolStripButtonEnableVerboseMode;
+        private System.Windows.Forms.ToolStripButton toolStripButtonSoundPlayer;
         private System.Windows.Forms.CheckBox checkboxPathOverlay;
-        private System.Windows.Forms.TabPage tabPage7;
-        private Controls.SwitchEditor switchEditor1;
+        private System.Windows.Forms.TabPage tabPageSwitches;
+        private Controls.SwitchEditor switchEditor;
         private System.Windows.Forms.GroupBox groupBox2;
     }
 }

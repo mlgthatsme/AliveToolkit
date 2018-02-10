@@ -38,15 +38,15 @@ namespace AliveAPIDotNet.Forms
 
             if (recording)
             {
-                button2.Enabled = false;
-                button1.Text = "Stop Recording";
+                buttonPlay.Enabled = false;
+                buttonStart.Text = "Stop Recording";
                 mRecorder = new DemoRecorder();
                 mRecorder.Start();
             }
             else
             {
-                button2.Enabled = true;
-                button1.Text = "Start Recording";
+                buttonPlay.Enabled = true;
+                buttonStart.Text = "Start Recording";
                 var demoFile = mRecorder.Stop();
                 SaveFileDialog dialog = new SaveFileDialog();
                 dialog.AddExtension = true;
@@ -66,7 +66,7 @@ namespace AliveAPIDotNet.Forms
             if (playing)
             {
                 mPlayer = new DemoPlayer();
-                button2.Text = "Stop Playing";
+                buttonPlay.Text = "Stop Playing";
                 OpenFileDialog dialog = new OpenFileDialog();
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
@@ -75,7 +75,7 @@ namespace AliveAPIDotNet.Forms
             }
             else
             {
-                button2.Text = "Start Playing";
+                buttonPlay.Text = "Start Playing";
                 mPlayer.Dispose();
             }
         }
