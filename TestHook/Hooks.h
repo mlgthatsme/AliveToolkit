@@ -83,6 +83,26 @@ signed int __cdecl Abe_MusicParseMidiMessage(int a1)
 	return Abe_MusicParseMidiMessage_.Ptr()(a1);
 }
 
+signed __int16 j_Abe_LoadSave_(void);
+ALIVE_FUNC_IMPLEX(0x0, 0x004022A2, j_Abe_LoadSave_, true);
+signed __int16 j_Abe_LoadSave_(void)
+{
+	if (gAppEnableLog)
+		printf("Abe_LoadSave CALLED\n");
+
+	return j_Abe_LoadSave__.Ptr()();
+}
+
+void *__cdecl j_Abe_GenerateSave(int a1);
+ALIVE_FUNC_IMPLEX(0x0, 0x004029EB, j_Abe_GenerateSave, true);
+void *__cdecl j_Abe_GenerateSave(int a1)
+{
+	if (gAppEnableLog)
+		printf("Abe_GenerateSave CALLED\n");
+
+	return j_Abe_GenerateSave_.Ptr()(a1);
+}
+
 // Use these to find out where strings being rendered are located.
 char __cdecl Abe_LoadString(char *src, char *dst, int a3, char a4);
 ALIVE_FUNC_IMPLEX(0x0, 0x004969D0, Abe_LoadString, true);
