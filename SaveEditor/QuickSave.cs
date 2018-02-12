@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SaveEditor
 {
@@ -176,8 +177,16 @@ namespace SaveEditor
                 short objectID = reader.ReadInt16();
                 if (objectID == 0)
                     break;
-                byte[] data = reader.ReadBytes(ObjectSizes[objectID] - 2);
-                _objects.Add(new SavedObject() { ID = objectID, Data = data });
+
+                if (ObjectSizes.ContainsKey(objectID))
+                {
+                    byte[] data = reader.ReadBytes(ObjectSizes[objectID] - 2);
+                    _objects.Add(new SavedObject() { ID = objectID, Data = data });
+                }
+                else
+                {
+                    MessageBox.Show($"Unknown object type: {objectID}");
+                }
             }
         }
 
