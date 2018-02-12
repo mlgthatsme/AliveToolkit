@@ -33,8 +33,6 @@ namespace AliveAPIDotNet
 
         public static void Initialize(GameTypes gameType)
         {
-            GameConfiguration.Instance = new GameConfiguration();
-
             GameConfiguration.Instance.GameType = gameType;
 
             if (gameType == GameTypes.Oddysee)

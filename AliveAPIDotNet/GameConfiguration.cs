@@ -47,7 +47,7 @@ namespace AliveAPIDotNet
 
     public class GameConfiguration
     {
-        public static GameConfiguration Instance;
+        public static GameConfiguration Instance = new GameConfiguration();
 
         // Main Game Config
         public GameTypes GameType = GameTypes.Exoddus;
