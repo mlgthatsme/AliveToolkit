@@ -6,14 +6,6 @@
 #define __int32 int
 #define __int64 long long
 
-struct Ae_fonttype
-{
-	_BYTE gap0[40];
-	__int16 int1628;
-	_BYTE gap2A[10];
-	_DWORD dword34;
-};
-
 struct AE_ObjectList
 {
 	void *mArray;
@@ -63,6 +55,16 @@ struct AE_Rect
 	_WORD Width;
 	_WORD Height;
 };
+
+struct AE_Font
+{
+	_BYTE gap0[40];
+	AE_Rect rect;
+	_WORD v3;
+	_WORD v4;
+	_WORD v5;
+};
+
 
 
 struct HalfFloatVector

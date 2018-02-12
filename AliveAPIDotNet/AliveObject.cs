@@ -33,6 +33,8 @@ namespace AliveAPIDotNet
                     return "Cheats Mgr";
                 case 0x00544B20:
                     return "Event System";
+                case 0x00547958:
+                    return "Main Menu Mgr";
             }
             return vtable.ToInt32().ToString("X8");
         }

@@ -161,6 +161,9 @@
     <ProjectReference Include="..\AliveAPIDotNet\AliveAPIDotNet.csproj">
       <Project>{8a58bb31-f2a5-42d5-b25d-7181ba86eea4}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\SaveEditor\SaveEditor.csproj">
+      <Project>{14895775-dda0-406c-9740-677ac1a1f235}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
