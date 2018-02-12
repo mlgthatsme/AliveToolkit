@@ -64,7 +64,7 @@ namespace SaveEditor
             public short SavedMudokons { get; set; }
             public short KilledMudokons { get; set; }
             public short MudsInArea { get; set; }
-            public byte[] UnknownByteData1 { get; set; }
+            public byte[] SavedOrKilledMudsPerPath { get; set; }
             public byte byte_5C1A20 { get; set; }
             public byte byte_5C1BFA { get; set; }
             public short word_5C1BBC { get; set; }
@@ -90,7 +90,7 @@ namespace SaveEditor
                 KilledMudokons = reader.ReadInt16();
                 MudsInArea = reader.ReadInt16();
 
-                UnknownByteData1 = reader.ReadBytes(20);
+                SavedOrKilledMudsPerPath = reader.ReadBytes(20);
 
                 byte_5C1A20 = reader.ReadByte();
                 byte_5C1BFA = reader.ReadByte();
@@ -118,7 +118,7 @@ namespace SaveEditor
                 writer.Write(KilledMudokons);
                 writer.Write(MudsInArea);
 
-                writer.Write(UnknownByteData1);
+                writer.Write(SavedOrKilledMudsPerPath);
 
                 writer.Write(byte_5C1A20);
                 writer.Write(byte_5C1BFA);
