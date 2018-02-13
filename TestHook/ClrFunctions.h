@@ -1,5 +1,7 @@
 #pragma once
 
+#include "AeTypes.h"
+
 extern bool gAppEnableLog;
 
 #define SCRIPT_FUNCTION extern "C" __declspec(dllexport)
@@ -22,3 +24,5 @@ void CLROnTick();
 void CLROnDebugDraw();
 int CLROnInput(int r, int index);
 bool IsMusicEnabled();
+
+void SaveImage16(AE_Rect * rect, char * data);

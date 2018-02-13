@@ -51,6 +51,12 @@
     <Compile Include="AliveObject.cs" />
     <Compile Include="AliveObjectList.cs" />
     <Compile Include="BitmapFont.cs" />
+    <Compile Include="Controls\PaletteEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\PaletteEditor.Designer.cs">
+      <DependentUpon>PaletteEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SwitchEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -157,6 +163,9 @@
     <Compile Include="Win32Native.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Controls\PaletteEditor.resx">
+      <DependentUpon>PaletteEditor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\SwitchEditor.resx">
       <DependentUpon>SwitchEditor.cs</DependentUpon>
     </EmbeddedResource>

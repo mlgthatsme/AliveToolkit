@@ -1,6 +1,8 @@
 #include "ClrFunctions.h"
 #include <vector>
 
+#include "AeTypes.h"
+
 bool gAppEnableLog = false;
 
 ref class ManagedGlobals {
@@ -213,4 +215,16 @@ SCRIPT_FUNCTION void PlayMidiNote(int program, int note, float pan, float volume
 
 SCRIPT_FUNCTION void Lazors()
 {
+}
+
+void SaveImage16(AE_Rect * rect, char * data)
+{
+	/*System::Drawing::Bitmap ^ bitmap = gcnew System::Drawing::Bitmap(rect->Width, rect->Height);
+	System::Drawing::Imaging::BitmapData ^ bitData = bitmap->LockBits(System::Drawing::Rectangle(0, 0, rect->Width, rect->Height), System::Drawing::Imaging::ImageLockMode::ReadWrite, System::Drawing::Imaging::PixelFormat::Format16bppRgb555);
+
+	memcpy((void*)bitData->Scan0, data, rect->Width * rect->Height * 2);
+
+	bitmap->UnlockBits(bitData);
+
+	bitmap->Save(System::String::Format("export/{0:X}.png", (int)data));*/
 }

@@ -1,3 +1,7 @@
+#pragma once
+
+#include <Windows.h>
+
 #define _BYTE unsigned char
 #define _WORD unsigned short
 #define _DWORD unsigned int

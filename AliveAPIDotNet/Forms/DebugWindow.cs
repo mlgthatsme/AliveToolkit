@@ -502,5 +502,18 @@ namespace AliveAPIDotNet.Forms
         {
             DebugHelpers.PathRenderer.Enabled = checkboxPathOverlay.Checked;
         }
+
+        private void button2_Click_2(object sender, EventArgs e)
+        {
+            int address = 0;
+            if (textBoxPaletteAddr.Text.Contains("0x"))
+                address = int.Parse(textBoxPaletteAddr.Text.Replace("0x",""), System.Globalization.NumberStyles.HexNumber);
+            else
+                address = int.Parse(textBoxPaletteAddr.Text);
+
+            byte[] paletteData = new byte[(int)numericPaletteCount.Value * 2];
+            Marshal.Copy(new IntPtr(address), paletteData, 0, paletteData.Length);
+            paletteEditor1.SetPalette((int)numericPaletteCount.Value, paletteData);
+        }
     }
 }

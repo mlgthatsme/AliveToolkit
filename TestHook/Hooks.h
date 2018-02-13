@@ -55,10 +55,10 @@ int __fastcall AbeMusicManagerUpdate(void *thisPtr)
 		return 0;
 }
 
-unsigned char fontPal[32] =
+unsigned char blueLcdPal[32] =
 {
 	0x00, 0x00, 0x01, 0x80, 0x01, 0x84, 0x20, 0x84, 0x21, 0x80, 0x20, 0x84, 0x21, 0x84, 0x65, 0xCE,
-	0x65, 0x8C, 0x8C, 0xB1, 0x60, 0x8E, 0x64, 0xCE, 0x65, 0xCE, 0xD7, 0x98, 0x14, 0xA1, 0x18, 0xD8,
+	0x65, 0x8C, 0x8C, /**/0xB1, 0x03/**/, 0xE0, 0x64, 0xCE, 0x65, 0xCE, 0xD7, 0x98, 0x14, 0xA1, 0x18, 0xD8,
 };
 
 _DWORD *__fastcall Abe_ObjectInitFont(AE_Font *thisPtr, void*ecx, int a2, int pallete, int a4);
@@ -66,7 +66,7 @@ ALIVE_FUNC_IMPLEX(0x0, 0x00433590, Abe_ObjectInitFont, true);
 _DWORD *__fastcall Abe_ObjectInitFont(AE_Font *thisPtr,void*ecx, int a2, int pallete, int a4)
 {
 	//return Abe_ObjectInitFont_.Ptr()(thisPtr, ecx, 240, (int)0x560F80, 0x5BC5C8);
-	//return Abe_ObjectInitFont_.Ptr()(thisPtr, ecx, 240, (int)fontPal, 0x5BC5D8);
+	//return Abe_ObjectInitFont_.Ptr()(thisPtr, ecx, a2, (int)blueLcdPal, a4);
 
 	if (gAppEnableLog)
 		printf("Abe_ObjectInitFont: [%X] a2: %i pallete: %x data: %x\n", thisPtr, a2, pallete, a4);

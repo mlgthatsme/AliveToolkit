@@ -20,6 +20,14 @@ AliveAPI::Game * mGame = new AliveAPI::Game();
 #include "Reimplementation.h"
 #include "XInputSupport.h"
 
+int __cdecl Abe_LoadImage16(AE_Rect *a1, char *a2);
+ALIVE_FUNC_IMPLEX(0x0, 0x004F5E20, Abe_LoadImage16, true);
+int __cdecl Abe_LoadImage16(AE_Rect *a1, char *a2)
+{
+	SaveImage16(a1, a2);
+	return Abe_LoadImage16_.Ptr()(a1, a2);
+}
+
 void Loop()
 {
 	Script_Init();

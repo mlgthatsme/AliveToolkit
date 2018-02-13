@@ -88,6 +88,10 @@
             this.toolStripButtonShowVRam = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonEnableVerboseMode = new System.Windows.Forms.ToolStripButton();
+            this.paletteEditor1 = new AliveAPIDotNet.Controls.PaletteEditor();
+            this.textBoxPaletteAddr = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.numericPaletteCount = new System.Windows.Forms.NumericUpDown();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageGame.SuspendLayout();
@@ -103,6 +107,7 @@
             this.tabPageSwitches.SuspendLayout();
             this.tabPageDev.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPaletteCount)).BeginInit();
             this.SuspendLayout();
             // 
             // timer1
@@ -542,6 +547,10 @@
             // 
             // tabPageDev
             // 
+            this.tabPageDev.Controls.Add(this.numericPaletteCount);
+            this.tabPageDev.Controls.Add(this.button2);
+            this.tabPageDev.Controls.Add(this.textBoxPaletteAddr);
+            this.tabPageDev.Controls.Add(this.paletteEditor1);
             this.tabPageDev.Controls.Add(this.buttonShowLevels);
             this.tabPageDev.Controls.Add(this.buttonLazors);
             this.tabPageDev.Location = new System.Drawing.Point(4, 22);
@@ -553,7 +562,8 @@
             // 
             // buttonShowLevels
             // 
-            this.buttonShowLevels.Location = new System.Drawing.Point(8, 3);
+            this.buttonShowLevels.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonShowLevels.Location = new System.Drawing.Point(236, 453);
             this.buttonShowLevels.Name = "buttonShowLevels";
             this.buttonShowLevels.Size = new System.Drawing.Size(75, 23);
             this.buttonShowLevels.TabIndex = 1;
@@ -563,8 +573,8 @@
             // 
             // buttonLazors
             // 
-            this.buttonLazors.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonLazors.Location = new System.Drawing.Point(89, 3);
+            this.buttonLazors.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonLazors.Location = new System.Drawing.Point(317, 453);
             this.buttonLazors.Name = "buttonLazors";
             this.buttonLazors.Size = new System.Drawing.Size(75, 23);
             this.buttonLazors.TabIndex = 0;
@@ -693,6 +703,51 @@
             this.toolStripButtonEnableVerboseMode.Text = "Verbose";
             this.toolStripButtonEnableVerboseMode.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
+            // paletteEditor1
+            // 
+            this.paletteEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.paletteEditor1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.paletteEditor1.Location = new System.Drawing.Point(8, 35);
+            this.paletteEditor1.Name = "paletteEditor1";
+            this.paletteEditor1.Size = new System.Drawing.Size(384, 85);
+            this.paletteEditor1.TabIndex = 2;
+            // 
+            // textBoxPaletteAddr
+            // 
+            this.textBoxPaletteAddr.Location = new System.Drawing.Point(8, 9);
+            this.textBoxPaletteAddr.Name = "textBoxPaletteAddr";
+            this.textBoxPaletteAddr.Size = new System.Drawing.Size(105, 20);
+            this.textBoxPaletteAddr.TabIndex = 3;
+            this.textBoxPaletteAddr.Text = "0x0055CF8C";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(180, 8);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(142, 22);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Load Palette From Memory";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_2);
+            // 
+            // numericPaletteCount
+            // 
+            this.numericPaletteCount.Location = new System.Drawing.Point(119, 9);
+            this.numericPaletteCount.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericPaletteCount.Name = "numericPaletteCount";
+            this.numericPaletteCount.Size = new System.Drawing.Size(55, 20);
+            this.numericPaletteCount.TabIndex = 5;
+            this.numericPaletteCount.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            // 
             // DebugWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -723,8 +778,10 @@
             this.tabPagePath.PerformLayout();
             this.tabPageSwitches.ResumeLayout(false);
             this.tabPageDev.ResumeLayout(false);
+            this.tabPageDev.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPaletteCount)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -789,5 +846,9 @@
         private System.Windows.Forms.TabPage tabPageSwitches;
         private Controls.SwitchEditor switchEditor;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBoxPaletteAddr;
+        private Controls.PaletteEditor paletteEditor1;
+        private System.Windows.Forms.NumericUpDown numericPaletteCount;
     }
 }
