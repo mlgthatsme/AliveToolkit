@@ -106,6 +106,18 @@ namespace AliveAPIDotNet.Forms
                 }
             }
 
+            // Cheats
+            if (checkBoxCheatCrazyMuds.Checked)
+            {
+                foreach(var o in AliveAPI.ObjectList.AsAliveObjects)
+                {
+                    if (o.ObjectID == 110)
+                    {
+                        o.SafeWriteByte(o.mAddress + 0x180, 6);
+                    }
+                }
+            }
+
             this.Invoke(new MethodInvoker(delegate { panelCurrentScreen.Refresh(); }));
             lock (spawnQueues)
             {
@@ -159,14 +171,14 @@ namespace AliveAPIDotNet.Forms
                 foreach (var s in spawnQueues)
                 {
                     // Load commonly shared resources
-                    AliveAPI.LoadResource("ABEBLOW.BAN");
-                    AliveAPI.LoadResource("DOGBLOW.BAN");
-                    AliveAPI.LoadResource("SHADOW.BAN");
+                    //AliveAPI.LoadResource("ABEBLOW.BAN");
+                    //AliveAPI.LoadResource("DOGBLOW.BAN");
+                    //AliveAPI.LoadResource("SHADOW.BAN");
 
-                    foreach (string b in s.spawnEntry.Resources)
-                    {
-                        AliveAPI.LoadResource(b);
-                    }
+                    //foreach (string b in s.spawnEntry.Resources)
+                    //{
+                    //    AliveAPI.LoadResource(b);
+                    //}
 
                     AliveObject obj = AliveAPI.CreateObject(s.spawnEntry.PathID, s.PositionX, s.PositionY, (short)s.spawnEntry.Width, (short)s.spawnEntry.Height, (s.parameters == null) ? new byte[150] : s.parameters);
                 }

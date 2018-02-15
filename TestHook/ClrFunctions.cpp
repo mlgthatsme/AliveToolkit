@@ -46,6 +46,8 @@ void Ae_LoadResource(char * filename)
 	}
 }
 
+bool createObjIds[160];
+
 void * Ae_CreateObject(int id, char * params)
 {
 	switch (AliveAPIDotNet::GameConfiguration::Instance->GameType)
@@ -54,6 +56,11 @@ void * Ae_CreateObject(int id, char * params)
 		//reinterpret_cast<void *(__cdecl*)(void * params, int a2, int a3, __int16 a4)>(*(int*)(0x004D14CC + (id * 4)))(params, *(int*)(0x00507BA8), 0, 1);
 		return reinterpret_cast<void *(__cdecl*)(void * params, int a2, int a3, __int16 a4)>(*(int*)(0x004D14CC + (id * 4)))(params, *(int*)(0x00507BA8), 0, 0);
 	case AliveAPIDotNet::GameTypes::Exoddus:
+		if (!createObjIds[id])
+		{
+			reinterpret_cast<void *(__cdecl*)(void * params, int a2, int a3, __int16 a4)>(*(int*)(0x00589724 + (id * 4)))(params, *(int*)(0x00BB47C0), 0, 2);
+			createObjIds[id] = true;
+		}
 		return reinterpret_cast<void *(__cdecl*)(void * params, int a2, int a3, __int16 a4)>(*(int*)(0x00589724 + (id * 4)))(params, *(int*)(0x00BB47C0), 0, 0);
 	}
 

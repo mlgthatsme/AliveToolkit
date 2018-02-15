@@ -73,6 +73,10 @@
             this.tabPageSwitches = new System.Windows.Forms.TabPage();
             this.switchEditor = new AliveAPIDotNet.Controls.SwitchEditor();
             this.tabPageDev = new System.Windows.Forms.TabPage();
+            this.numericPaletteCount = new System.Windows.Forms.NumericUpDown();
+            this.button2 = new System.Windows.Forms.Button();
+            this.textBoxPaletteAddr = new System.Windows.Forms.TextBox();
+            this.paletteEditor1 = new AliveAPIDotNet.Controls.PaletteEditor();
             this.buttonShowLevels = new System.Windows.Forms.Button();
             this.buttonLazors = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -88,10 +92,8 @@
             this.toolStripButtonShowVRam = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonEnableVerboseMode = new System.Windows.Forms.ToolStripButton();
-            this.paletteEditor1 = new AliveAPIDotNet.Controls.PaletteEditor();
-            this.textBoxPaletteAddr = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.numericPaletteCount = new System.Windows.Forms.NumericUpDown();
+            this.tabPageFun = new System.Windows.Forms.TabPage();
+            this.checkBoxCheatCrazyMuds = new System.Windows.Forms.CheckBox();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageGame.SuspendLayout();
@@ -106,8 +108,9 @@
             this.tabPagePath.SuspendLayout();
             this.tabPageSwitches.SuspendLayout();
             this.tabPageDev.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPaletteCount)).BeginInit();
+            this.toolStrip1.SuspendLayout();
+            this.tabPageFun.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -221,6 +224,7 @@
             this.tabControl1.Controls.Add(this.tabPageSpawn);
             this.tabControl1.Controls.Add(this.tabPagePath);
             this.tabControl1.Controls.Add(this.tabPageSwitches);
+            this.tabControl1.Controls.Add(this.tabPageFun);
             this.tabControl1.Controls.Add(this.tabPageDev);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 25);
@@ -560,6 +564,51 @@
             this.tabPageDev.Text = "Dev";
             this.tabPageDev.UseVisualStyleBackColor = true;
             // 
+            // numericPaletteCount
+            // 
+            this.numericPaletteCount.Location = new System.Drawing.Point(119, 9);
+            this.numericPaletteCount.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericPaletteCount.Name = "numericPaletteCount";
+            this.numericPaletteCount.Size = new System.Drawing.Size(55, 20);
+            this.numericPaletteCount.TabIndex = 5;
+            this.numericPaletteCount.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(180, 8);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(142, 22);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Load Palette From Memory";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_2);
+            // 
+            // textBoxPaletteAddr
+            // 
+            this.textBoxPaletteAddr.Location = new System.Drawing.Point(8, 9);
+            this.textBoxPaletteAddr.Name = "textBoxPaletteAddr";
+            this.textBoxPaletteAddr.Size = new System.Drawing.Size(105, 20);
+            this.textBoxPaletteAddr.TabIndex = 3;
+            this.textBoxPaletteAddr.Text = "0x0055CF8C";
+            // 
+            // paletteEditor1
+            // 
+            this.paletteEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.paletteEditor1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.paletteEditor1.Location = new System.Drawing.Point(8, 35);
+            this.paletteEditor1.Name = "paletteEditor1";
+            this.paletteEditor1.Size = new System.Drawing.Size(384, 85);
+            this.paletteEditor1.TabIndex = 2;
+            // 
             // buttonShowLevels
             // 
             this.buttonShowLevels.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -703,50 +752,25 @@
             this.toolStripButtonEnableVerboseMode.Text = "Verbose";
             this.toolStripButtonEnableVerboseMode.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
-            // paletteEditor1
+            // tabPageFun
             // 
-            this.paletteEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.paletteEditor1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.paletteEditor1.Location = new System.Drawing.Point(8, 35);
-            this.paletteEditor1.Name = "paletteEditor1";
-            this.paletteEditor1.Size = new System.Drawing.Size(384, 85);
-            this.paletteEditor1.TabIndex = 2;
+            this.tabPageFun.Controls.Add(this.checkBoxCheatCrazyMuds);
+            this.tabPageFun.Location = new System.Drawing.Point(4, 22);
+            this.tabPageFun.Name = "tabPageFun";
+            this.tabPageFun.Size = new System.Drawing.Size(400, 484);
+            this.tabPageFun.TabIndex = 7;
+            this.tabPageFun.Text = "Fun";
+            this.tabPageFun.UseVisualStyleBackColor = true;
             // 
-            // textBoxPaletteAddr
+            // checkBoxCheatCrazyMuds
             // 
-            this.textBoxPaletteAddr.Location = new System.Drawing.Point(8, 9);
-            this.textBoxPaletteAddr.Name = "textBoxPaletteAddr";
-            this.textBoxPaletteAddr.Size = new System.Drawing.Size(105, 20);
-            this.textBoxPaletteAddr.TabIndex = 3;
-            this.textBoxPaletteAddr.Text = "0x0055CF8C";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(180, 8);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(142, 22);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Load Palette From Memory";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_2);
-            // 
-            // numericPaletteCount
-            // 
-            this.numericPaletteCount.Location = new System.Drawing.Point(119, 9);
-            this.numericPaletteCount.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericPaletteCount.Name = "numericPaletteCount";
-            this.numericPaletteCount.Size = new System.Drawing.Size(55, 20);
-            this.numericPaletteCount.TabIndex = 5;
-            this.numericPaletteCount.Value = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
+            this.checkBoxCheatCrazyMuds.AutoSize = true;
+            this.checkBoxCheatCrazyMuds.Location = new System.Drawing.Point(17, 16);
+            this.checkBoxCheatCrazyMuds.Name = "checkBoxCheatCrazyMuds";
+            this.checkBoxCheatCrazyMuds.Size = new System.Drawing.Size(112, 17);
+            this.checkBoxCheatCrazyMuds.TabIndex = 0;
+            this.checkBoxCheatCrazyMuds.Text = "All Muds are crazy";
+            this.checkBoxCheatCrazyMuds.UseVisualStyleBackColor = true;
             // 
             // DebugWindow
             // 
@@ -779,9 +803,11 @@
             this.tabPageSwitches.ResumeLayout(false);
             this.tabPageDev.ResumeLayout(false);
             this.tabPageDev.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericPaletteCount)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericPaletteCount)).EndInit();
+            this.tabPageFun.ResumeLayout(false);
+            this.tabPageFun.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -850,5 +876,7 @@
         private System.Windows.Forms.TextBox textBoxPaletteAddr;
         private Controls.PaletteEditor paletteEditor1;
         private System.Windows.Forms.NumericUpDown numericPaletteCount;
+        private System.Windows.Forms.TabPage tabPageFun;
+        private System.Windows.Forms.CheckBox checkBoxCheatCrazyMuds;
     }
 }

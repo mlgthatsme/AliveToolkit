@@ -83,12 +83,13 @@ namespace AliveAPIDotNet
 
         static byte[] CreateMudParams()
         {
-            byte[] p = new byte[128];
+            byte[] p = new byte[48];
             for (int i = 0; i < p.Length; i++)
             {
                 p[i] = 0;
             }
 
+            p[24] = 1;
 
             return p;
         }
