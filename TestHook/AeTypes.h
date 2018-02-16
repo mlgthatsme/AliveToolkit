@@ -19,6 +19,21 @@ struct AE_ObjectList
 	_WORD mFreeCount;
 };
 
+struct __declspec(align(2)) AE_WorldInfo
+{
+	_WORD word0;
+	_WORD word2;
+	_WORD word4;
+	_WORD word6;
+	_BYTE gap8[2];
+	_WORD level;
+	_WORD path;
+	_WORD cam;
+	_WORD transition;
+	_WORD word12;
+};
+
+
 struct AE_pathLine
 {
 	_WORD X1;

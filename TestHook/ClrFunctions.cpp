@@ -121,8 +121,6 @@ int CLROnInput(int r, int index)
 
 void CLROnDebugDraw()
 {
-	//reinterpret_cast<char *(__fastcall*)(int thisPtr, void * ecx, int a2, int a3, int a4)>(0x0040EC10)(0x005BB5F4, 0, 0, 640, 240); // Forces screen refresh.
-
 	int ddHdc = 0x00C1D160;
 	int screenHdc = reinterpret_cast<int(__cdecl*)(void * ddrawPtr)>(0x004F2150)((void*)ddHdc);
 	AliveAPIDotNet::AliveAPI::ScreenHdc = System::IntPtr(screenHdc);

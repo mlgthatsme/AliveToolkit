@@ -43,6 +43,23 @@ ALIVE_VAR(0x0, 0x005C3032, unsigned short, gCurrentPath);
 ALIVE_VAR(0x0, 0x005C3034, unsigned short, gCurrentCam);
 
 
+signed __int16 __fastcall Abe_LoadCam(AE_WorldInfo *thisPtr, void *ecx, __int16 level, __int16 path, __int16 cam, __int16 transition, __int16 a6, __int16 a7);
+ALIVE_FUNC_IMPLEX(0x0, 0x00480D30, Abe_LoadCam, true);
+signed __int16 __fastcall Abe_LoadCam(AE_WorldInfo *thisPtr, void *ecx, __int16 level, __int16 path, __int16 cam, __int16 transition, __int16 a6, __int16 a7)
+{
+	if (gAppEnableLog)
+		printf("Abe_LoadCam: [%x] Level: %i Path: %i Cam: %i Transition: %i a6: %i a7: %i\n", thisPtr, level, path, cam, transition, a6, a7);
+
+	return Abe_LoadCam_.Ptr()(thisPtr, ecx, level, path, cam, transition, a6, a7);
+}
+
+void sub_4DD050();
+ALIVE_FUNC_IMPLEX(0x0, 0x004DD050, sub_4DD050, true);
+void  sub_4DD050()
+{
+	reinterpret_cast<char *(__fastcall*)(int thisPtr, int ecx,int a1, int a2, int a3, int a4)>(0x0040EC10)(0x005BB5F4, 0x005BB5F4, 0, 0, 640, 240); // Forces screen refresh.
+	sub_4DD050_.Ptr()();
+}
 
 // Disable Music
 int __fastcall AbeMusicManagerUpdate(void *thisPtr);
