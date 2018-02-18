@@ -226,6 +226,18 @@ namespace AliveAPIDotNet
             set { SafeWriteInt32(mAddress + GameConfiguration.Instance.OffsetObjectPositionY, FloatToHalfFloat(value)); }
         }
 
+        public Int32 PositionXRaw
+        {
+            get { return SafeReadInt32(mAddress + GameConfiguration.Instance.OffsetObjectPositionX); }
+            set { SafeWriteInt32(mAddress + GameConfiguration.Instance.OffsetObjectPositionX, value); }
+        }
+
+        public Int32 PositionYRaw
+        {
+            get { return SafeReadInt32(mAddress + GameConfiguration.Instance.OffsetObjectPositionY); }
+            set { SafeWriteInt32(mAddress + GameConfiguration.Instance.OffsetObjectPositionY, value); }
+        }
+
         public float VelocityX
         {
             get { return HalfFloatToFloat(SafeReadInt32(mAddress + GameConfiguration.Instance.OffsetObjectVelocityX)); }

@@ -12,12 +12,14 @@ using System.Threading;
 using AliveAPIDotNet.Input;
 using AliveAPIDotNet.Forms;
 using AliveAPIDotNet.Unmanaged;
+using AliveAPIDotNet.AI;
 
 namespace AliveAPIDotNet
 {
     public class AlivePlugin
     {
         public static DebugWindow DevWindow;
+        public static AIPlayer AIPlayer;
 
         public static void HideUI()
         {
@@ -164,6 +166,9 @@ namespace AliveAPIDotNet
             Console.WriteLine("Loading " + file);
             Ae_LoadResource(file);
         }
+
+        [DllImport(DLLFileName, EntryPoint = "Raycast", CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool Raycast(int x1, int y1, int x2, int y2, int layer);
 
         [DllImport(DLLFileName, EntryPoint = "Ae_PlaySound")]
         public static extern void PlaySound(int id, int volume, float pitch, int a4);

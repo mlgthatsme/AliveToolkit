@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AliveAPIDotNet.AI;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -18,7 +19,12 @@ namespace AliveAPIDotNet.DebugHelpers
             Helpers.Add(new XboxButtons());
             Helpers.Add(new PathRenderer());
             Helpers.Add(new DDCheatNew());
-            Helpers.Add(new AIHelper());
+            //Helpers.Add(new AIHelper());
+
+            AlivePlugin.AIPlayer = new AIPlayer();
+            AlivePlugin.AIPlayer.Start();
+
+            Helpers.Add(AlivePlugin.AIPlayer);
         }
 
         private static int prevLevel;

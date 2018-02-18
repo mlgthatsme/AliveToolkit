@@ -35,6 +35,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
+    <Reference Include="SharpNeatDomains">
+      <HintPath>..\..\..\UserData\Downloads\sharpneat-2.3.1\src\SharpNeatDomains\bin\Debug\SharpNeatDomains.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpNeatLib">
+      <HintPath>..\..\..\UserData\Downloads\sharpneat-2.3.1\src\SharpNeatLib\bin\Debug\SharpNeatLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -47,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\AIPlayer.cs" />
     <Compile Include="AliveAPI.cs" />
     <Compile Include="AliveObject.cs" />
     <Compile Include="AliveObjectList.cs" />

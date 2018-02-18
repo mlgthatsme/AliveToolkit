@@ -57,8 +57,6 @@ void Loop()
 	{
 		if (GetGameType() == 2) // Exoddus
 		{
-			
-
 			std::ifstream stream = std::ifstream("debug.sav");
 			if (stream.good())
 			{
@@ -74,6 +72,15 @@ void Loop()
 	}
 
 	CLROnTick();
+}
+
+SCRIPT_FUNCTION bool Raycast(int x1, int y1, int x2, int y2, int layer)
+{
+	_DWORD lineOut = 0;
+	_DWORD xOut = 0;
+	_DWORD yOut = 0;
+	return reinterpret_cast<bool(__fastcall*)(int thisPtr, int _EDX, signed int a2, signed int a3, signed int a4, signed int a5, _DWORD *a6, _DWORD *a7, _DWORD *a8, int mode)>(0x00401258)
+		(*(int*)0x005C1128, 0x04740000, x1, y1, x2, y2, &lineOut, &xOut, &yOut, layer);
 }
 
 int __fastcall LoopHook(void *thisPtr);
