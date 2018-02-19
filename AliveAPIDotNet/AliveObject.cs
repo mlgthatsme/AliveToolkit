@@ -141,6 +141,8 @@ namespace AliveAPIDotNet
                         return "UXB";
                     case 146:
                         return "Web";
+                    case 148:
+                        return "Wheel";
                     default:
                         return "Unknown";
                 }

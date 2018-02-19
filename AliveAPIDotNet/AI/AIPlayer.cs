@@ -31,8 +31,8 @@ namespace AliveAPIDotNet.AI
         NeatEvolutionAlgorithm<NeatGenome> _ea;
         AbeEvaluator AbeEval = new AbeEvaluator();
 
-        int inputsCount = 2;
-        int outputsCount = 4; // Up, Down, Left, Right, Chant, Hop
+        int inputsCount = 9;
+        int outputsCount = 5; // Up, Down, Left, Right, Chant, Hop
 
         bool FrameSkip { get { return Marshal.ReadByte(new IntPtr(0x005CA4D1)) == 1; } set { Marshal.WriteByte(new IntPtr(0x005CA4D1), (byte)((value) ? 1 : 0)); } }
 
@@ -42,7 +42,7 @@ namespace AliveAPIDotNet.AI
 
             IDistanceMetric distanceMetric = new ManhattanDistanceMetric(1.0, 0.0, 10.0);
             ISpeciationStrategy<NeatGenome> speciationStrategy = new ParallelKMeansClusteringStrategy<NeatGenome>(distanceMetric);
-            IComplexityRegulationStrategy complexityRegulationStrategy = ExperimentUtils.CreateComplexityRegulationStrategy("Absolute", 50);
+            IComplexityRegulationStrategy complexityRegulationStrategy = ExperimentUtils.CreateComplexityRegulationStrategy("Absolute", 30);
             
 
             _ea = new NeatEvolutionAlgorithm<NeatGenome>(param, speciationStrategy, complexityRegulationStrategy);
@@ -58,22 +58,23 @@ namespace AliveAPIDotNet.AI
 
             // Initialize the evolution algorithm.
             _ea.Initialize(genomeListEvaluator, genomeFactory, genomeFactory.CreateGenomeList(20, 0));
-
-            _ea.UpdateScheme = new UpdateScheme(1);
         }
 
         public void Start()
         {
-            startSave = new QuikSave(File.ReadAllBytes("neat.sav"));
-            AliveAPI.QuikLoad(startSave);
+            if (File.Exists("neat.sav"))
+            {
+                startSave = new QuikSave(File.ReadAllBytes("neat.sav"));
+                AliveAPI.QuikLoad(startSave);
 
-            FrameSkip = true;
+                FrameSkip = true;
 
-            CreateAI();
-            _ea.StartContinue();
+                CreateAI();
 
-            AliveAPI.GameTick += AliveAPI_GameTick;
-            AliveAPI.OnInput += AliveAPI_OnInput;
+
+                AliveAPI.GameTick += AliveAPI_GameTick;
+                AliveAPI.OnInput += AliveAPI_OnInput;
+            }
         }
 
         private void AliveAPI_OnInput(object sender, InputEventArgs e)
@@ -120,20 +121,27 @@ namespace AliveAPIDotNet.AI
                 }
                 if (AbeEval.Outputs[3] > 0.5)
                 {
-                    e.Pad.Pressed.Value |= 0x1;
+                    //e.Pad.Pressed.Value |= 0x1;
+                }
+                if (AbeEval.Outputs[4] > 0.5)
+                {
+                    e.Pad.Pressed.Value |= 0x40000;
                 }
             }
         }
 
+        bool started = false;
+
         private void AliveAPI_GameTick(object sender, EventArgs e)
         {
-            AbeEval.ThreadWait = true;
-            if (AliveAPI.GetPlayerObject() != null)
+            if (!started)
             {
-                AbeEval.TargetX = (int)AliveAPI.GetPlayerObject().PositionX;
+                started = true;
+                _ea.StartContinue();
+                AbeEval.IsReady = true;
             }
 
-            Console.WriteLine($"Generation: {_ea.CurrentGeneration} Genome Count: {_ea.GenomeList.Count} Current Score: {AbeEval._points} Best Fitness {_ea.CurrentChampGenome.EvaluationInfo.Fitness}");
+            Console.WriteLine($"Generation: {_ea.CurrentGeneration} Specie Size: {_ea.Statistics._minSpecieSize} Current Score: {AbeEval._points} Best Fitness {_ea.CurrentChampGenome.EvaluationInfo.Fitness}");
 
             //while (_ea.RunState == RunState.Running)
             //{
@@ -198,7 +206,11 @@ namespace AliveAPIDotNet.AI
                 }
                 foreach (var c in nodePosList)
                 {
-                    g.FillRectangle(Brushes.White, new RectangleF(c.X, c.Y, 6, 3));
+                    Brush color = Brushes.White;
+                    if (c.Node.NodeType == NodeType.Input && AbeEval.Inputs[c.Node.Id] > 0)
+                        color = Brushes.Yellow;
+                            
+                    g.FillRectangle(color, new RectangleF(c.X, c.Y, 6, 3));
                 }
 
                 foreach (var c in cl)
@@ -218,6 +230,11 @@ namespace AliveAPIDotNet.AI
 
     public class AbeEvaluator : IPhenomeEvaluator<IBlackBox>
     {
+        public AbeEvaluator()
+        {
+            Outputs = new double[100];
+            Inputs = new double[100];
+        }
         private ulong _evalCount = 0;
         private bool _stopConditionSatisfied;
 
@@ -233,67 +250,124 @@ namespace AliveAPIDotNet.AI
         int previousFrame = 0;
         int prevMudsSaved = 0;
         public int _points = 0;
-        bool firstInit = true;
+        byte[] switchStatePrev;
 
-        public bool ThreadWait = false;
+        public bool IsReady = false;
 
         public double[] Outputs;
+        public double[] Inputs;
+
+        bool IsObjectNearPoint(int x ,int y, int objectType)
+        {
+            foreach (var w in AliveAPI.ObjectList.AsAliveObjects.Where(z => z.ObjectID == objectType))
+            {
+                if (x > w.PositionX - 15 && x < w.PositionX + 15 && y > w.PositionY - 15 && y < w.PositionY + 15)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         public FitnessInfo Evaluate(IBlackBox phenome)
         {
-            int currentMudsSaved = Marshal.ReadInt16(new IntPtr(0x005C1BC2));
+            if (!IsReady)
+                return new FitnessInfo(0, 0);
 
-            if (firstInit)
+            while (AliveAPI.GetPlayerObject() == null)
             {
-                firstInit = false;
-                prevTargetX = TargetX;
-                previousFrame = AliveAPI.gnFrame;
-                prevMudsSaved = currentMudsSaved;
-            }
-            
-
-            var abe = AliveAPI.GetPlayerObject();
-
-            if (abe != null)
-            {
-                phenome.InputSignalArray[0] = (AliveAPI.Raycast((int)abe.PositionXRaw - (25 << 16), (int)abe.PositionYRaw, (int)abe.PositionXRaw - (25 << 16), (int)abe.PositionYRaw + (64 << 16), 7)) ? 1 : 0;
-                phenome.InputSignalArray[1] = (AliveAPI.Raycast((int)abe.PositionXRaw + (25 << 16), (int)abe.PositionYRaw, (int)abe.PositionXRaw + (25 << 16), (int)abe.PositionYRaw + (64 << 16), 7)) ? 1 : 0;
+                Thread.Sleep(1);
             }
 
-            phenome.Activate();
+            prevTargetX = 0;
+            previousFrame = AliveAPI.gnFrame;
+            prevMudsSaved = Marshal.ReadInt16(new IntPtr(0x005C1BC2));
+            switchStatePrev = AliveAPI.GetSwitchStates();
 
-            Outputs = new double[phenome.OutputCount];
-            phenome.OutputSignalArray.CopyTo(Outputs, 0);
-
-            if (ThreadWait)
+            while (!StopConditionSatisfied)
             {
                 while (previousFrame == AliveAPI.gnFrame)
                 {
                     Thread.Sleep(1);
                 }
-            }
+                
+                byte[] switchStates = AliveAPI.GetSwitchStates();
+                var abe = AliveAPI.GetPlayerObject();
 
-            _evalCount++;
+                int currentMudsSaved = Marshal.ReadInt16(new IntPtr(0x005C1BC2));
 
-            int saveMudsDelta = currentMudsSaved - prevMudsSaved;
+                TargetX = (int)abe.PositionX;
 
-            if (prevTargetX == TargetX)
-            {
-                idleTime++;
-                if (idleTime > 1000)
+                if (abe != null)
                 {
-                    _stopConditionSatisfied = true;
+                    var objs = AliveAPI.ObjectList.AsAliveObjects;
+
+                    phenome.InputSignalArray[0] = (AliveAPI.Raycast((int)abe.PositionXRaw - (25 << 16), (int)abe.PositionYRaw, (int)abe.PositionXRaw - (25 << 16), (int)abe.PositionYRaw + (64 << 16), 7)) ? 1 : 0;
+                    phenome.InputSignalArray[1] = (AliveAPI.Raycast((int)abe.PositionXRaw + (25 << 16), (int)abe.PositionYRaw, (int)abe.PositionXRaw + (25 << 16), (int)abe.PositionYRaw + (64 << 16), 7)) ? 1 : 0;
+                    phenome.InputSignalArray[2] = (abe.AliveState == 58) ? 1 : 0; // Is on Ledge
+                    phenome.InputSignalArray[3] = (objs.Where(x => x.ObjectID == 35).Count() > 0) ? 1 : 0; // Birds Exist
+
+                    phenome.InputSignalArray[4] = (IsObjectNearPoint((int)abe.PositionX, (int)abe.PositionY, 148)) ? 1 : 0;
+
+                    // Bombs two spaces forward and back.
+                    phenome.InputSignalArray[5] = (IsObjectNearPoint((int)abe.PositionX - 25, (int)abe.PositionY, 88)) ? 1 : 0;
+                    phenome.InputSignalArray[6] = (IsObjectNearPoint((int)abe.PositionX + 25, (int)abe.PositionY, 88)) ? 1 : 0;
+                    phenome.InputSignalArray[7] = (IsObjectNearPoint((int)abe.PositionX - 50, (int)abe.PositionY, 88)) ? 1 : 0;
+                    phenome.InputSignalArray[8] = (IsObjectNearPoint((int)abe.PositionX + 50, (int)abe.PositionY, 88)) ? 1 : 0;
                 }
+
+                phenome.Activate();
+
+                Outputs = new double[phenome.OutputCount];
+                Inputs = new double[phenome.InputCount];
+                phenome.OutputSignalArray.CopyTo(Outputs, 0);
+                phenome.InputSignalArray.CopyTo(Inputs, 0);
+
+                _evalCount++;
+
+                int saveMudsDelta = currentMudsSaved - prevMudsSaved;
+
+                if (prevTargetX == TargetX)
+                {
+                    idleTime++;
+                    if (idleTime > 1000)
+                    {
+                        _points = -100000;
+                        _stopConditionSatisfied = true;
+                    }
+                }
+                else
+                    idleTime = 0;
+
+                int abeHealth = abe.SafeReadInt32(abe.mAddress + 0x10c);
+
+                if (abeHealth == 0)
+                    _stopConditionSatisfied = true;
+
+                //_points += TargetX - prevTargetX;
+
+                if (saveMudsDelta > 0)
+                    _points += saveMudsDelta * 500;
+
+                if (switchStatePrev != null)
+                {
+                    for(int i = 0; i < switchStates.Length;i++)
+                    {
+                        if (switchStates[i] != switchStatePrev[i] && switchStates[i] > 0)
+                            _points += 100;
+                    }
+                }
+
+                prevTargetX = TargetX;
+                previousFrame = AliveAPI.gnFrame;
+                prevMudsSaved = currentMudsSaved;
+                switchStatePrev = switchStates;
             }
-            else
-                idleTime = 0;
 
-            _points += TargetX - prevTargetX;
-            //_points += saveMudsDelta * 5000;
-
-            prevTargetX = TargetX;
-            previousFrame = AliveAPI.gnFrame;
-            prevMudsSaved = currentMudsSaved;
+            _points += (int)AliveAPI.GetPlayerObject().PositionX;
+            if (_points < 0)
+                _points = 0;
 
             return new FitnessInfo(_points, _points);
         }
@@ -304,7 +378,7 @@ namespace AliveAPIDotNet.AI
             _evalCount = 0;
             _stopConditionSatisfied = false;
             idleTime = 0;
-            firstInit = true; ;
+            _points = 0;
         }
     }
 }
