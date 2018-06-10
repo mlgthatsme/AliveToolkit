@@ -87,6 +87,7 @@ namespace AliveAPIDotNet.Forms
         public static bool freezeGame = false;
         public static bool stepFrame = false;
         VRamWindow vRamWindow = new VRamWindow();
+        FunctionCallerWindow mFunctionCallerWindow = new FunctionCallerWindow();
         bool modalMode = false;
 
         float mouseXPrev = 0;
@@ -526,6 +527,11 @@ namespace AliveAPIDotNet.Forms
             byte[] paletteData = new byte[(int)numericPaletteCount.Value * 2];
             Marshal.Copy(new IntPtr(address), paletteData, 0, paletteData.Length);
             paletteEditor1.SetPalette((int)numericPaletteCount.Value, paletteData);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            mFunctionCallerWindow.Show();
         }
     }
 }

@@ -27,6 +27,9 @@ namespace AliveAPIDotNet.DebugHelpers
 
         private static void AliveAPI_OnDebugDraw(object sender, EventArgs e)
         {
+            if (AliveAPI.ScreenHdc == IntPtr.Zero)
+                return;
+
             Graphics graphics = Graphics.FromHdc(AliveAPI.ScreenHdc);
             graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 

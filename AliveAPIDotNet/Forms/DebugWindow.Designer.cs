@@ -72,6 +72,8 @@
             this.listBoxPath = new System.Windows.Forms.ListBox();
             this.tabPageSwitches = new System.Windows.Forms.TabPage();
             this.switchEditor = new AliveAPIDotNet.Controls.SwitchEditor();
+            this.tabPageFun = new System.Windows.Forms.TabPage();
+            this.checkBoxCheatCrazyMuds = new System.Windows.Forms.CheckBox();
             this.tabPageDev = new System.Windows.Forms.TabPage();
             this.numericPaletteCount = new System.Windows.Forms.NumericUpDown();
             this.button2 = new System.Windows.Forms.Button();
@@ -92,8 +94,8 @@
             this.toolStripButtonShowVRam = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonEnableVerboseMode = new System.Windows.Forms.ToolStripButton();
-            this.tabPageFun = new System.Windows.Forms.TabPage();
-            this.checkBoxCheatCrazyMuds = new System.Windows.Forms.CheckBox();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageGame.SuspendLayout();
@@ -107,10 +109,10 @@
             this.tabPageSpawn.SuspendLayout();
             this.tabPagePath.SuspendLayout();
             this.tabPageSwitches.SuspendLayout();
+            this.tabPageFun.SuspendLayout();
             this.tabPageDev.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPaletteCount)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            this.tabPageFun.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -549,6 +551,26 @@
             this.switchEditor.Size = new System.Drawing.Size(400, 484);
             this.switchEditor.TabIndex = 0;
             // 
+            // tabPageFun
+            // 
+            this.tabPageFun.Controls.Add(this.checkBoxCheatCrazyMuds);
+            this.tabPageFun.Location = new System.Drawing.Point(4, 22);
+            this.tabPageFun.Name = "tabPageFun";
+            this.tabPageFun.Size = new System.Drawing.Size(400, 484);
+            this.tabPageFun.TabIndex = 7;
+            this.tabPageFun.Text = "Fun";
+            this.tabPageFun.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxCheatCrazyMuds
+            // 
+            this.checkBoxCheatCrazyMuds.AutoSize = true;
+            this.checkBoxCheatCrazyMuds.Location = new System.Drawing.Point(17, 16);
+            this.checkBoxCheatCrazyMuds.Name = "checkBoxCheatCrazyMuds";
+            this.checkBoxCheatCrazyMuds.Size = new System.Drawing.Size(112, 17);
+            this.checkBoxCheatCrazyMuds.TabIndex = 0;
+            this.checkBoxCheatCrazyMuds.Text = "All Muds are crazy";
+            this.checkBoxCheatCrazyMuds.UseVisualStyleBackColor = true;
+            // 
             // tabPageDev
             // 
             this.tabPageDev.Controls.Add(this.numericPaletteCount);
@@ -645,7 +667,9 @@
             this.toolStripButtonSoundPlayer,
             this.toolStripButtonShowVRam,
             this.toolStripSeparator6,
-            this.toolStripButtonEnableVerboseMode});
+            this.toolStripButtonEnableVerboseMode,
+            this.toolStripSeparator8,
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(408, 25);
@@ -752,25 +776,20 @@
             this.toolStripButtonEnableVerboseMode.Text = "Verbose";
             this.toolStripButtonEnableVerboseMode.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
-            // tabPageFun
+            // toolStripSeparator8
             // 
-            this.tabPageFun.Controls.Add(this.checkBoxCheatCrazyMuds);
-            this.tabPageFun.Location = new System.Drawing.Point(4, 22);
-            this.tabPageFun.Name = "tabPageFun";
-            this.tabPageFun.Size = new System.Drawing.Size(400, 484);
-            this.tabPageFun.TabIndex = 7;
-            this.tabPageFun.Text = "Fun";
-            this.tabPageFun.UseVisualStyleBackColor = true;
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
             // 
-            // checkBoxCheatCrazyMuds
+            // toolStripButton1
             // 
-            this.checkBoxCheatCrazyMuds.AutoSize = true;
-            this.checkBoxCheatCrazyMuds.Location = new System.Drawing.Point(17, 16);
-            this.checkBoxCheatCrazyMuds.Name = "checkBoxCheatCrazyMuds";
-            this.checkBoxCheatCrazyMuds.Size = new System.Drawing.Size(112, 17);
-            this.checkBoxCheatCrazyMuds.TabIndex = 0;
-            this.checkBoxCheatCrazyMuds.Text = "All Muds are crazy";
-            this.checkBoxCheatCrazyMuds.UseVisualStyleBackColor = true;
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(41, 22);
+            this.toolStripButton1.Text = "Caller";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // DebugWindow
             // 
@@ -801,13 +820,13 @@
             this.tabPagePath.ResumeLayout(false);
             this.tabPagePath.PerformLayout();
             this.tabPageSwitches.ResumeLayout(false);
+            this.tabPageFun.ResumeLayout(false);
+            this.tabPageFun.PerformLayout();
             this.tabPageDev.ResumeLayout(false);
             this.tabPageDev.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPaletteCount)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.tabPageFun.ResumeLayout(false);
-            this.tabPageFun.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -878,5 +897,7 @@
         private System.Windows.Forms.NumericUpDown numericPaletteCount;
         private System.Windows.Forms.TabPage tabPageFun;
         private System.Windows.Forms.CheckBox checkBoxCheatCrazyMuds;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }

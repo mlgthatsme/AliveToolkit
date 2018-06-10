@@ -34,6 +34,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MemorySharp">
+      <HintPath>..\ThirdParty\MemorySharp.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -78,6 +81,12 @@
     <Compile Include="Demos\DemoInputState.cs" />
     <Compile Include="Demos\DemoPlayer.cs" />
     <Compile Include="Demos\DemoRecorder.cs" />
+    <Compile Include="Forms\FunctionCallerWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FunctionCallerWindow.Designer.cs">
+      <DependentUpon>FunctionCallerWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameConfiguration.cs" />
     <Compile Include="HexBox\BuiltInContextMenu.cs">
       <SubType>Component</SubType>
@@ -171,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DebugWindow.resx">
       <DependentUpon>DebugWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FunctionCallerWindow.resx">
+      <DependentUpon>FunctionCallerWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HexBox\HexBox.resx">
       <DependentUpon>HexBox.cs</DependentUpon>
