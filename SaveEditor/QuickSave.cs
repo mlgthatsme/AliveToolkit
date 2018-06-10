@@ -73,6 +73,7 @@ namespace SaveEditor
             public short VisitedBarracks { get; set; }
             public short VisitedFeecoEnder { get; set; }
             public int dword_5C1BE8 { get; set; }
+            public int dword_unknown2 { get; set; }
 
             public void Parse(BinaryReader reader)
             {
@@ -100,6 +101,7 @@ namespace SaveEditor
                 VisitedBarracks = reader.ReadInt16();
                 VisitedFeecoEnder = reader.ReadInt16();
                 dword_5C1BE8 = reader.ReadInt32();
+                dword_unknown2 = reader.ReadInt32();
             }
 
             public void Serialize(BinaryWriter writer)
@@ -128,6 +130,7 @@ namespace SaveEditor
                 writer.Write(VisitedBarracks);
                 writer.Write(VisitedFeecoEnder);
                 writer.Write(dword_5C1BE8);
+                writer.Write(dword_unknown2);
             }
         }
 
@@ -175,7 +178,7 @@ namespace SaveEditor
             while(true)
             {
                 short objectID = reader.ReadInt16();
-                if (objectID == 0)
+                if (objectID == 0) // Start bly data
                     break;
 
                 if (ObjectSizes.ContainsKey(objectID))
