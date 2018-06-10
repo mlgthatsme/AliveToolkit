@@ -96,6 +96,8 @@
             this.toolStripButtonEnableVerboseMode = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.checkBoxCheatInstaChant = new System.Windows.Forms.CheckBox();
+            this.checkBoxCheatSlowTick = new System.Windows.Forms.CheckBox();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageGame.SuspendLayout();
@@ -553,6 +555,8 @@
             // 
             // tabPageFun
             // 
+            this.tabPageFun.Controls.Add(this.checkBoxCheatSlowTick);
+            this.tabPageFun.Controls.Add(this.checkBoxCheatInstaChant);
             this.tabPageFun.Controls.Add(this.checkBoxCheatCrazyMuds);
             this.tabPageFun.Location = new System.Drawing.Point(4, 22);
             this.tabPageFun.Name = "tabPageFun";
@@ -791,6 +795,26 @@
             this.toolStripButton1.Text = "Caller";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
+            // checkBoxCheatInstaChant
+            // 
+            this.checkBoxCheatInstaChant.AutoSize = true;
+            this.checkBoxCheatInstaChant.Location = new System.Drawing.Point(17, 39);
+            this.checkBoxCheatInstaChant.Name = "checkBoxCheatInstaChant";
+            this.checkBoxCheatInstaChant.Size = new System.Drawing.Size(80, 17);
+            this.checkBoxCheatInstaChant.TabIndex = 1;
+            this.checkBoxCheatInstaChant.Text = "Insta Chant";
+            this.checkBoxCheatInstaChant.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxCheatSlowTick
+            // 
+            this.checkBoxCheatSlowTick.AutoSize = true;
+            this.checkBoxCheatSlowTick.Location = new System.Drawing.Point(17, 62);
+            this.checkBoxCheatSlowTick.Name = "checkBoxCheatSlowTick";
+            this.checkBoxCheatSlowTick.Size = new System.Drawing.Size(135, 17);
+            this.checkBoxCheatSlowTick.TabIndex = 1;
+            this.checkBoxCheatSlowTick.Text = "Slow Down Game Tick";
+            this.checkBoxCheatSlowTick.UseVisualStyleBackColor = true;
+            // 
             // DebugWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -899,5 +923,7 @@
         private System.Windows.Forms.CheckBox checkBoxCheatCrazyMuds;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.CheckBox checkBoxCheatInstaChant;
+        private System.Windows.Forms.CheckBox checkBoxCheatSlowTick;
     }
 }

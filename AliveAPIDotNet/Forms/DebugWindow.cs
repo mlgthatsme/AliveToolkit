@@ -93,6 +93,8 @@ namespace AliveAPIDotNet.Forms
         float mouseXPrev = 0;
         float mouseYPrev = 0;
 
+        int t = 0;
+
         private void AliveAPI_GameTick(object sender, EventArgs e)
         {
             if (modalMode)
@@ -119,7 +121,20 @@ namespace AliveAPIDotNet.Forms
                 }
             }
 
-            this.Invoke(new MethodInvoker(delegate { panelCurrentScreen.Refresh(); }));
+            t++;
+            
+            if (checkBoxCheatSlowTick.Checked)
+            {
+                if (t % 2 == 0)
+                    AliveAPI.gnFrame -= 1;
+            }
+
+            if (checkBoxCheatInstaChant.Checked)
+            {
+                AliveAPI.gnFrame += 10;
+            }
+
+                this.Invoke(new MethodInvoker(delegate { panelCurrentScreen.Refresh(); }));
             lock (spawnQueues)
             {
                 int gameX = (int)AliveAPI.CameraOffsetX + (int)(AliveAPI.MouseX * 374);
