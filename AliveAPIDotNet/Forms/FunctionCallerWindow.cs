@@ -127,7 +127,8 @@ namespace AliveAPIDotNet.Forms
                 addressString = addressString.Split('_').Last();
 
             IntPtr addr = new IntPtr(int.Parse(addressString, System.Globalization.NumberStyles.HexNumber));
-            mMemSharp.Assembly.Execute(addr, callingConvention, p);
+            var r = mMemSharp.Assembly.Execute<int>(addr, callingConvention, p);
+            textBox2.Text = "0x" + r.ToString("X");
         }
 
         private void AliveAPI_GameTick(object sender, EventArgs e)
