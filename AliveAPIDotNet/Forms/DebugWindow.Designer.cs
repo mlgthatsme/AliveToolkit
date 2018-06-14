@@ -73,6 +73,8 @@
             this.tabPageSwitches = new System.Windows.Forms.TabPage();
             this.switchEditor = new AliveAPIDotNet.Controls.SwitchEditor();
             this.tabPageFun = new System.Windows.Forms.TabPage();
+            this.checkBoxCheatSlowTick = new System.Windows.Forms.CheckBox();
+            this.checkBoxCheatInstaChant = new System.Windows.Forms.CheckBox();
             this.checkBoxCheatCrazyMuds = new System.Windows.Forms.CheckBox();
             this.tabPageDev = new System.Windows.Forms.TabPage();
             this.numericPaletteCount = new System.Windows.Forms.NumericUpDown();
@@ -96,8 +98,10 @@
             this.toolStripButtonEnableVerboseMode = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.checkBoxCheatInstaChant = new System.Windows.Forms.CheckBox();
-            this.checkBoxCheatSlowTick = new System.Windows.Forms.CheckBox();
+            this.textBoxFactoryAddress = new System.Windows.Forms.TextBox();
+            this.btnFactoryForceSpawn = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageGame.SuspendLayout();
@@ -115,6 +119,7 @@
             this.tabPageDev.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPaletteCount)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -565,6 +570,26 @@
             this.tabPageFun.Text = "Fun";
             this.tabPageFun.UseVisualStyleBackColor = true;
             // 
+            // checkBoxCheatSlowTick
+            // 
+            this.checkBoxCheatSlowTick.AutoSize = true;
+            this.checkBoxCheatSlowTick.Location = new System.Drawing.Point(17, 62);
+            this.checkBoxCheatSlowTick.Name = "checkBoxCheatSlowTick";
+            this.checkBoxCheatSlowTick.Size = new System.Drawing.Size(135, 17);
+            this.checkBoxCheatSlowTick.TabIndex = 1;
+            this.checkBoxCheatSlowTick.Text = "Slow Down Game Tick";
+            this.checkBoxCheatSlowTick.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxCheatInstaChant
+            // 
+            this.checkBoxCheatInstaChant.AutoSize = true;
+            this.checkBoxCheatInstaChant.Location = new System.Drawing.Point(17, 39);
+            this.checkBoxCheatInstaChant.Name = "checkBoxCheatInstaChant";
+            this.checkBoxCheatInstaChant.Size = new System.Drawing.Size(80, 17);
+            this.checkBoxCheatInstaChant.TabIndex = 1;
+            this.checkBoxCheatInstaChant.Text = "Insta Chant";
+            this.checkBoxCheatInstaChant.UseVisualStyleBackColor = true;
+            // 
             // checkBoxCheatCrazyMuds
             // 
             this.checkBoxCheatCrazyMuds.AutoSize = true;
@@ -577,6 +602,7 @@
             // 
             // tabPageDev
             // 
+            this.tabPageDev.Controls.Add(this.groupBox3);
             this.tabPageDev.Controls.Add(this.numericPaletteCount);
             this.tabPageDev.Controls.Add(this.button2);
             this.tabPageDev.Controls.Add(this.textBoxPaletteAddr);
@@ -795,25 +821,44 @@
             this.toolStripButton1.Text = "Caller";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // checkBoxCheatInstaChant
+            // textBoxFactoryAddress
             // 
-            this.checkBoxCheatInstaChant.AutoSize = true;
-            this.checkBoxCheatInstaChant.Location = new System.Drawing.Point(17, 39);
-            this.checkBoxCheatInstaChant.Name = "checkBoxCheatInstaChant";
-            this.checkBoxCheatInstaChant.Size = new System.Drawing.Size(80, 17);
-            this.checkBoxCheatInstaChant.TabIndex = 1;
-            this.checkBoxCheatInstaChant.Text = "Insta Chant";
-            this.checkBoxCheatInstaChant.UseVisualStyleBackColor = true;
+            this.textBoxFactoryAddress.Location = new System.Drawing.Point(87, 21);
+            this.textBoxFactoryAddress.Name = "textBoxFactoryAddress";
+            this.textBoxFactoryAddress.Size = new System.Drawing.Size(179, 20);
+            this.textBoxFactoryAddress.TabIndex = 6;
+            this.textBoxFactoryAddress.Text = "4D7160";
             // 
-            // checkBoxCheatSlowTick
+            // btnFactoryForceSpawn
             // 
-            this.checkBoxCheatSlowTick.AutoSize = true;
-            this.checkBoxCheatSlowTick.Location = new System.Drawing.Point(17, 62);
-            this.checkBoxCheatSlowTick.Name = "checkBoxCheatSlowTick";
-            this.checkBoxCheatSlowTick.Size = new System.Drawing.Size(135, 17);
-            this.checkBoxCheatSlowTick.TabIndex = 1;
-            this.checkBoxCheatSlowTick.Text = "Slow Down Game Tick";
-            this.checkBoxCheatSlowTick.UseVisualStyleBackColor = true;
+            this.btnFactoryForceSpawn.Location = new System.Drawing.Point(272, 19);
+            this.btnFactoryForceSpawn.Name = "btnFactoryForceSpawn";
+            this.btnFactoryForceSpawn.Size = new System.Drawing.Size(106, 23);
+            this.btnFactoryForceSpawn.TabIndex = 7;
+            this.btnFactoryForceSpawn.Text = "Force Spawn";
+            this.btnFactoryForceSpawn.UseVisualStyleBackColor = true;
+            this.btnFactoryForceSpawn.Click += new System.EventHandler(this.btnFactoryForceSpawn_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.textBoxFactoryAddress);
+            this.groupBox3.Controls.Add(this.btnFactoryForceSpawn);
+            this.groupBox3.Location = new System.Drawing.Point(8, 126);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(384, 57);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Factory Invoker";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Func Address:";
             // 
             // DebugWindow
             // 
@@ -851,6 +896,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericPaletteCount)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -925,5 +972,9 @@
         private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.CheckBox checkBoxCheatInstaChant;
         private System.Windows.Forms.CheckBox checkBoxCheatSlowTick;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBoxFactoryAddress;
+        private System.Windows.Forms.Button btnFactoryForceSpawn;
     }
 }

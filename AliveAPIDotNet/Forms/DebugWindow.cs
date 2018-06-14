@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using System.Windows.Interop;
 using AliveAPIDotNet.Forms;
 using AliveAPIDotNet.Unmanaged;
+using Binarysharp.MemoryManagement;
+using System.IO;
 
 namespace AliveAPIDotNet.Forms
 {
@@ -89,6 +91,7 @@ namespace AliveAPIDotNet.Forms
         VRamWindow vRamWindow = new VRamWindow();
         FunctionCallerWindow mFunctionCallerWindow = new FunctionCallerWindow();
         bool modalMode = false;
+        MemorySharp mMemorySharp;
 
         float mouseXPrev = 0;
         float mouseYPrev = 0;
@@ -547,6 +550,36 @@ namespace AliveAPIDotNet.Forms
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             mFunctionCallerWindow.Show();
+        }
+
+        private void btnFactoryForceSpawn_Click(object sender, EventArgs e)
+        {
+            mMemorySharp = new MemorySharp(Process.GetCurrentProcess());
+
+            IntPtr address = new IntPtr(int.Parse(textBoxFactoryAddress.Text, System.Globalization.NumberStyles.HexNumber));
+
+            AliveObject obj = new AliveObject(Marshal.ReadIntPtr(new IntPtr(0x005C1B8C)));
+
+            MemoryStream str = new MemoryStream();
+            BinaryWriter writer = new BinaryWriter(str);
+            int x = (int)obj.PositionX + 100;
+            int y = (int)obj.PositionY;
+            writer.Write((short)0);
+            writer.Write((short)0);
+            writer.Write((short)0); // id
+            writer.Write((short)0);
+            writer.Write((short)(x - (32 / 2)));
+            writer.Write(y);
+            writer.Write((short)(x + (32 / 2)));
+            writer.Write((short)(y + 32));
+
+            byte[] finalData = str.ToArray();
+
+            IntPtr paramsData = Marshal.AllocHGlobal(1000);
+            Marshal.Copy(finalData, 0, paramsData, finalData.Length);
+            mMemorySharp.Assembly.Execute(address, Binarysharp.MemoryManagement.Assembly.CallingConvention.CallingConventions.Cdecl, new dynamic[] { paramsData, Marshal.ReadIntPtr(new IntPtr(0xBB47C0)), 0, 2 });
+            mMemorySharp.Assembly.Execute(address, Binarysharp.MemoryManagement.Assembly.CallingConvention.CallingConventions.Cdecl, new dynamic[] { paramsData, Marshal.ReadIntPtr(new IntPtr(0xBB47C0)), 0, 0 });
+            Marshal.FreeHGlobal(paramsData);
         }
     }
 }
