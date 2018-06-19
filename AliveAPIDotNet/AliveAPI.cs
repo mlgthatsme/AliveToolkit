@@ -14,6 +14,7 @@ using AliveAPIDotNet.Forms;
 using AliveAPIDotNet.Unmanaged;
 using Binarysharp.MemoryManagement;
 using System.Diagnostics;
+using AliveAPIDotNet.Databases;
 
 namespace AliveAPIDotNet
 {
@@ -117,6 +118,7 @@ namespace AliveAPIDotNet
         public static InputObject Input;
         public static bool MusicEnabled = false;
         public static MemorySharp mMemorySharp;
+        public static VTableDB VTableDatabase;
 
         public static List<RaycastHit> RaycastHits = new List<RaycastHit>();
 
@@ -129,7 +131,8 @@ namespace AliveAPIDotNet
             PathData = new PathObjectList(new IntPtr(GameConfiguration.Instance.AddressPathData));
             Levels = new LevelEntryList(new IntPtr(GameConfiguration.Instance.AddressLevelConfigs));
             Input = new InputObject(new IntPtr(GameConfiguration.Instance.AddressInputObject));
-
+            VTableDatabase = new VTableDB();
+            VTableDatabase.LoadFromString(File.ReadAllText("vtables.inf"));
             //AliveAPI.EnableVerboseLog();
         }
 

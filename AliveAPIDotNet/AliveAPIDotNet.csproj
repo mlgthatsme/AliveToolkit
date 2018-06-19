@@ -66,6 +66,7 @@
     <Compile Include="Controls\SwitchEditor.Designer.cs">
       <DependentUpon>SwitchEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Databases\VTableDB.cs" />
     <Compile Include="DebugHelpers\AIHelper.cs" />
     <Compile Include="DebugHelpers\DDCheatNew.cs" />
     <Compile Include="DebugHelpers\OnScreenRenderHelper.cs" />
@@ -211,6 +212,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="vtables.inf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\8x8.bmp" />
     <None Include="Resources\ABE_XBOX_BUTTONS.png" />
     <None Include="Resources\piano.png" />

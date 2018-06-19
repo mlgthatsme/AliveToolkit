@@ -19,24 +19,26 @@ namespace AliveAPIDotNet
 
         public static string GetVTableName(IntPtr vtable)
         {
-            switch(vtable.ToInt32())
-            {
-                case 0x00545EBC:
-                    return "Resource Mgr";
-                case 0x005463C0:
-                    return "Music Mgr";
-                case 0x005441E4:
-                    return "Screen Mgr";
-                case 0x00544518:
-                    return "DDCheat";
-                case 0x00544B44:
-                    return "Cheats Mgr";
-                case 0x00544B20:
-                    return "Event System";
-                case 0x00547958:
-                    return "Main Menu Mgr";
-            }
-            return vtable.ToInt32().ToString("X8");
+            //switch(vtable.ToInt32())
+            //{
+            //    case 0x00545EBC:
+            //        return "Resource Mgr";
+            //    case 0x005463C0:
+            //        return "Music Mgr";
+            //    case 0x005441E4:
+            //        return "Screen Mgr";
+            //    case 0x00544518:
+            //        return "DDCheat";
+            //    case 0x00544B44:
+            //        return "Cheats Mgr";
+            //    case 0x00544B20:
+            //        return "Event System";
+            //    case 0x00547958:
+            //        return "Main Menu Mgr";
+            //}
+            //return vtable.ToInt32().ToString("X8");
+
+            return AliveAPI.VTableDatabase.GetVTableFriendlyName((int)vtable);
         }
 
         public static string GetFriendlyName(int type)
@@ -168,6 +170,7 @@ namespace AliveAPIDotNet
 
         public override string ToString()
         {
+            return $"{GetVTableName(VTable)} | {ObjectID} P:[{PositionX.ToString("0.00")}, {PositionY.ToString("0.00")}], S:[{AllocatedSize}] V:[{VTable.ToString("X8")}]";
             return string.Format("{5} [{4}, {2}, {3}]: {0} {1}", PositionX.ToString("0.00"), PositionY.ToString("0.00"), ObjectID, AllocatedSize, GetVTableName(VTable), GetFriendlyName(ObjectID));
         }
 
