@@ -196,6 +196,12 @@ namespace AliveAPIDotNet
             set { SafeWriteInt16(mAddress + 0x04, value); }
         }
 
+        public int UpdateDelay
+        {
+            get { return SafeReadInt32(mAddress + 0x1c); }
+            set { SafeWriteInt32(mAddress + 0x1c, value); }
+        }
+
         public short AliveState
         {
             get { return SafeReadInt16(mAddress + GameConfiguration.Instance.OffsetObjectAliveState); }

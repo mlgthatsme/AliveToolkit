@@ -74,9 +74,12 @@ namespace AliveAPIDotNet
 
         public void Add(UnmanagedObject objPointer)
         {
-            IntPtr objAddr = Marshal.ReadIntPtr(Pointer);
-            Marshal.WriteIntPtr(objAddr + (4 * Count), objPointer.Pointer);
-            Count++;
+            AliveAPI.mMemorySharp.Assembly.Execute(new IntPtr(0x40CAF0), Binarysharp.MemoryManagement.Assembly.CallingConvention.CallingConventions.Thiscall, this.Pointer, objPointer.Pointer);
+        }
+
+        public void Remove(IntPtr address)
+        {
+            AliveAPI.mMemorySharp.Assembly.Execute(new IntPtr(0x40CB60), Binarysharp.MemoryManagement.Assembly.CallingConvention.CallingConventions.Thiscall, this.Pointer, address);
         }
 
         public UnmanagedObject[] Objects

@@ -16,7 +16,7 @@ namespace AliveAPIDotNet.DebugHelpers
                 // Extra ai info
                 StringBuilder aiDebug = new StringBuilder();
                 int[] supportedObjectsForAI = new int[] { 69, 110, 125 };
-                foreach (var o in AliveAPI.ObjectList.AsAliveObjects)
+                foreach (var o in AliveAPI.ObjectListBaseObjects.AsAliveObjects)
                 {
                     if (supportedObjectsForAI.Contains(o.ObjectID))
                         aiDebug.AppendLine($"[{AliveObject.GetFriendlyName(o.ObjectID)}] - {o.AliveState}");

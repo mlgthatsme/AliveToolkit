@@ -56,8 +56,10 @@ namespace AliveAPIDotNet
         public int AddressPlayerPointer = 0x5C1B8C;
         public int AddressScreenInfo = 0x5BB5F4;
         public int AddressPathData = 0x005C1128;
-        public int AddressObjectList = 0x00BB47C4;
-        public int AddressObjectListActive = 0x005C1124;
+
+        public int AddressListBaseGameObjects = 0x00BB47C4;
+        public int AddressListDrawables = 0x005C1124;
+
         public int AddressLevelConfigs = 0x00559660;
         public int AddressLevelPathCam = 0x005C3030;
         public int AddressGNFrame = 0x005C1B84;

@@ -46,7 +46,7 @@ namespace AliveAPIDotNet.DebugHelpers
                     g.DrawLine(Pens.Red, p1, p2);
                 }
 
-                foreach (var o in AliveAPI.ObjectList.AsAliveObjects)
+                foreach (var o in AliveAPI.ObjectListBaseObjects.AsAliveObjects)
                 {
                     g.FillEllipse(Brushes.YellowGreen, new RectangleF(o.PositionX - 4, o.PositionY - 8, 8, 8));
                 }

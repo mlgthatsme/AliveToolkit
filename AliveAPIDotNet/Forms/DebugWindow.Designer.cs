@@ -73,10 +73,15 @@
             this.tabPageSwitches = new System.Windows.Forms.TabPage();
             this.switchEditor = new AliveAPIDotNet.Controls.SwitchEditor();
             this.tabPageFun = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
             this.checkBoxCheatSlowTick = new System.Windows.Forms.CheckBox();
             this.checkBoxCheatInstaChant = new System.Windows.Forms.CheckBox();
             this.checkBoxCheatCrazyMuds = new System.Windows.Forms.CheckBox();
             this.tabPageDev = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxFactoryAddress = new System.Windows.Forms.TextBox();
+            this.btnFactoryForceSpawn = new System.Windows.Forms.Button();
             this.numericPaletteCount = new System.Windows.Forms.NumericUpDown();
             this.button2 = new System.Windows.Forms.Button();
             this.textBoxPaletteAddr = new System.Windows.Forms.TextBox();
@@ -98,10 +103,9 @@
             this.toolStripButtonEnableVerboseMode = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.textBoxFactoryAddress = new System.Windows.Forms.TextBox();
-            this.btnFactoryForceSpawn = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.x2UpdateDelayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateDelayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBoxRenderLoop = new System.Windows.Forms.CheckBox();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageGame.SuspendLayout();
@@ -117,9 +121,9 @@
             this.tabPageSwitches.SuspendLayout();
             this.tabPageFun.SuspendLayout();
             this.tabPageDev.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPaletteCount)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -152,64 +156,66 @@
             this.mindControlToolStripMenuItem,
             this.toolStripSeparator3,
             this.removeToolStripMenuItem,
-            this.duplicateToolStripMenuItem});
+            this.duplicateToolStripMenuItem,
+            this.x2UpdateDelayToolStripMenuItem,
+            this.updateDelayToolStripMenuItem});
             this.contextMenuObject.Name = "contextMenuObject";
-            this.contextMenuObject.Size = new System.Drawing.Size(159, 154);
+            this.contextMenuObject.Size = new System.Drawing.Size(164, 198);
             // 
             // copyAddressToolStripMenuItem
             // 
             this.copyAddressToolStripMenuItem.Name = "copyAddressToolStripMenuItem";
-            this.copyAddressToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.copyAddressToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.copyAddressToolStripMenuItem.Text = "Copy Address";
             this.copyAddressToolStripMenuItem.Click += new System.EventHandler(this.copyAddressToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(155, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(160, 6);
             // 
             // copyVTableToolStripMenuItem
             // 
             this.copyVTableToolStripMenuItem.Name = "copyVTableToolStripMenuItem";
-            this.copyVTableToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.copyVTableToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.copyVTableToolStripMenuItem.Text = "Copy VTable";
             this.copyVTableToolStripMenuItem.Click += new System.EventHandler(this.copyVTableToolStripMenuItem_Click);
             // 
             // pasteVTableToolStripMenuItem
             // 
             this.pasteVTableToolStripMenuItem.Name = "pasteVTableToolStripMenuItem";
-            this.pasteVTableToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.pasteVTableToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.pasteVTableToolStripMenuItem.Text = "Paste VTable";
             this.pasteVTableToolStripMenuItem.Click += new System.EventHandler(this.pasteVTableToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(155, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
             // 
             // mindControlToolStripMenuItem
             // 
             this.mindControlToolStripMenuItem.Name = "mindControlToolStripMenuItem";
-            this.mindControlToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.mindControlToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.mindControlToolStripMenuItem.Text = "Mind Control";
             this.mindControlToolStripMenuItem.Click += new System.EventHandler(this.mindControlToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(155, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(160, 6);
             // 
             // removeToolStripMenuItem
             // 
             this.removeToolStripMenuItem.Name = "removeToolStripMenuItem";
-            this.removeToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.removeToolStripMenuItem.Text = "Remove (Temp)";
+            this.removeToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.removeToolStripMenuItem.Text = "Remove";
             this.removeToolStripMenuItem.Click += new System.EventHandler(this.removeToolStripMenuItem_Click);
             // 
             // duplicateToolStripMenuItem
             // 
             this.duplicateToolStripMenuItem.Name = "duplicateToolStripMenuItem";
-            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.duplicateToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.duplicateToolStripMenuItem.Text = "Duplicate (R.I.P)";
             this.duplicateToolStripMenuItem.Click += new System.EventHandler(this.duplicateToolStripMenuItem_Click);
             // 
@@ -560,6 +566,7 @@
             // 
             // tabPageFun
             // 
+            this.tabPageFun.Controls.Add(this.button3);
             this.tabPageFun.Controls.Add(this.checkBoxCheatSlowTick);
             this.tabPageFun.Controls.Add(this.checkBoxCheatInstaChant);
             this.tabPageFun.Controls.Add(this.checkBoxCheatCrazyMuds);
@@ -569,6 +576,16 @@
             this.tabPageFun.TabIndex = 7;
             this.tabPageFun.Text = "Fun";
             this.tabPageFun.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(17, 85);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(145, 23);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Give me MOAR ABEZ";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // checkBoxCheatSlowTick
             // 
@@ -602,6 +619,7 @@
             // 
             // tabPageDev
             // 
+            this.tabPageDev.Controls.Add(this.checkBoxRenderLoop);
             this.tabPageDev.Controls.Add(this.groupBox3);
             this.tabPageDev.Controls.Add(this.numericPaletteCount);
             this.tabPageDev.Controls.Add(this.button2);
@@ -615,6 +633,45 @@
             this.tabPageDev.TabIndex = 5;
             this.tabPageDev.Text = "Dev";
             this.tabPageDev.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.textBoxFactoryAddress);
+            this.groupBox3.Controls.Add(this.btnFactoryForceSpawn);
+            this.groupBox3.Location = new System.Drawing.Point(8, 126);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(384, 57);
+            this.groupBox3.TabIndex = 8;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Factory Invoker";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Func Address:";
+            // 
+            // textBoxFactoryAddress
+            // 
+            this.textBoxFactoryAddress.Location = new System.Drawing.Point(87, 21);
+            this.textBoxFactoryAddress.Name = "textBoxFactoryAddress";
+            this.textBoxFactoryAddress.Size = new System.Drawing.Size(179, 20);
+            this.textBoxFactoryAddress.TabIndex = 6;
+            this.textBoxFactoryAddress.Text = "4D7160";
+            // 
+            // btnFactoryForceSpawn
+            // 
+            this.btnFactoryForceSpawn.Location = new System.Drawing.Point(272, 19);
+            this.btnFactoryForceSpawn.Name = "btnFactoryForceSpawn";
+            this.btnFactoryForceSpawn.Size = new System.Drawing.Size(106, 23);
+            this.btnFactoryForceSpawn.TabIndex = 7;
+            this.btnFactoryForceSpawn.Text = "Force Spawn";
+            this.btnFactoryForceSpawn.UseVisualStyleBackColor = true;
+            this.btnFactoryForceSpawn.Click += new System.EventHandler(this.btnFactoryForceSpawn_Click);
             // 
             // numericPaletteCount
             // 
@@ -821,44 +878,29 @@
             this.toolStripButton1.Text = "Caller";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
-            // textBoxFactoryAddress
+            // x2UpdateDelayToolStripMenuItem
             // 
-            this.textBoxFactoryAddress.Location = new System.Drawing.Point(87, 21);
-            this.textBoxFactoryAddress.Name = "textBoxFactoryAddress";
-            this.textBoxFactoryAddress.Size = new System.Drawing.Size(179, 20);
-            this.textBoxFactoryAddress.TabIndex = 6;
-            this.textBoxFactoryAddress.Text = "4D7160";
+            this.x2UpdateDelayToolStripMenuItem.Name = "x2UpdateDelayToolStripMenuItem";
+            this.x2UpdateDelayToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.x2UpdateDelayToolStripMenuItem.Text = "x2 Update Delay";
+            this.x2UpdateDelayToolStripMenuItem.Click += new System.EventHandler(this.x2UpdateDelayToolStripMenuItem_Click);
             // 
-            // btnFactoryForceSpawn
+            // updateDelayToolStripMenuItem
             // 
-            this.btnFactoryForceSpawn.Location = new System.Drawing.Point(272, 19);
-            this.btnFactoryForceSpawn.Name = "btnFactoryForceSpawn";
-            this.btnFactoryForceSpawn.Size = new System.Drawing.Size(106, 23);
-            this.btnFactoryForceSpawn.TabIndex = 7;
-            this.btnFactoryForceSpawn.Text = "Force Spawn";
-            this.btnFactoryForceSpawn.UseVisualStyleBackColor = true;
-            this.btnFactoryForceSpawn.Click += new System.EventHandler(this.btnFactoryForceSpawn_Click);
+            this.updateDelayToolStripMenuItem.Name = "updateDelayToolStripMenuItem";
+            this.updateDelayToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.updateDelayToolStripMenuItem.Text = "%2 Update Delay";
+            this.updateDelayToolStripMenuItem.Click += new System.EventHandler(this.updateDelayToolStripMenuItem_Click);
             // 
-            // groupBox3
+            // checkBoxRenderLoop
             // 
-            this.groupBox3.Controls.Add(this.label1);
-            this.groupBox3.Controls.Add(this.textBoxFactoryAddress);
-            this.groupBox3.Controls.Add(this.btnFactoryForceSpawn);
-            this.groupBox3.Location = new System.Drawing.Point(8, 126);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(384, 57);
-            this.groupBox3.TabIndex = 8;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Factory Invoker";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(75, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Func Address:";
+            this.checkBoxRenderLoop.AutoSize = true;
+            this.checkBoxRenderLoop.Location = new System.Drawing.Point(9, 190);
+            this.checkBoxRenderLoop.Name = "checkBoxRenderLoop";
+            this.checkBoxRenderLoop.Size = new System.Drawing.Size(80, 17);
+            this.checkBoxRenderLoop.TabIndex = 9;
+            this.checkBoxRenderLoop.Text = "checkBox1";
+            this.checkBoxRenderLoop.UseVisualStyleBackColor = true;
             // 
             // DebugWindow
             // 
@@ -893,11 +935,11 @@
             this.tabPageFun.PerformLayout();
             this.tabPageDev.ResumeLayout(false);
             this.tabPageDev.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericPaletteCount)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -976,5 +1018,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxFactoryAddress;
         private System.Windows.Forms.Button btnFactoryForceSpawn;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ToolStripMenuItem x2UpdateDelayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateDelayToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxRenderLoop;
     }
 }

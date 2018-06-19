@@ -14,6 +14,7 @@ using AliveAPIDotNet.Forms;
 using AliveAPIDotNet.Unmanaged;
 using Binarysharp.MemoryManagement;
 using System.IO;
+using Binarysharp.MemoryManagement.Assembly.CallingConvention;
 
 namespace AliveAPIDotNet.Forms
 {
@@ -91,7 +92,7 @@ namespace AliveAPIDotNet.Forms
         VRamWindow vRamWindow = new VRamWindow();
         FunctionCallerWindow mFunctionCallerWindow = new FunctionCallerWindow();
         bool modalMode = false;
-        MemorySharp mMemorySharp;
+        Random rand = new Random();
 
         float mouseXPrev = 0;
         float mouseYPrev = 0;
@@ -100,6 +101,8 @@ namespace AliveAPIDotNet.Forms
 
         private void AliveAPI_GameTick(object sender, EventArgs e)
         {
+            RenderLoop();
+
             if (modalMode)
                 return;
 
@@ -115,7 +118,7 @@ namespace AliveAPIDotNet.Forms
             // Cheats
             if (checkBoxCheatCrazyMuds.Checked)
             {
-                foreach(var o in AliveAPI.ObjectList.AsAliveObjects)
+                foreach(var o in AliveAPI.ObjectListBaseObjects.AsAliveObjects)
                 {
                     if (o.ObjectID == 110)
                     {
@@ -152,7 +155,7 @@ namespace AliveAPIDotNet.Forms
                 {
                     if (AliveAPI.MouseLeftPressed)
                     {
-                        foreach (AliveObject obj in AliveAPI.ObjectList.AsAliveObjects)
+                        foreach (AliveObject obj in AliveAPI.ObjectListBaseObjects.AsAliveObjects)
                         {
                             float dist = Distance(gameX, gameY, (int)obj.PositionX, (int)obj.PositionY);
                             if (dist < 30)
@@ -292,7 +295,7 @@ namespace AliveAPIDotNet.Forms
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            AliveObject[] objects = AliveAPI.ObjectList.AsAliveObjects;
+            AliveObject[] objects = AliveAPI.ObjectListBaseObjects.AsAliveObjects;
 
             object selection = listBox1.SelectedItem;
             listBox1.Items.Clear();
@@ -369,7 +372,8 @@ namespace AliveAPIDotNet.Forms
             if (SelectedObject != null)
             {
                 AliveObject clone = SelectedObject.Duplicate();
-                AliveAPI.ObjectList.Add(clone);
+                AliveAPI.ObjectListBaseObjects.Add(clone);
+                AliveAPI.ObjectListDrawables.Add(clone);
             }
         }
 
@@ -377,7 +381,8 @@ namespace AliveAPIDotNet.Forms
         {
             if (SelectedObject != null)
             {
-                SelectedObject.Destroy();
+                AliveAPI.ObjectListBaseObjects.Remove(SelectedObject.Pointer);
+                AliveAPI.ObjectListDrawables.Remove(SelectedObject.Pointer);
             }
         }
 
@@ -554,7 +559,7 @@ namespace AliveAPIDotNet.Forms
 
         private void btnFactoryForceSpawn_Click(object sender, EventArgs e)
         {
-            mMemorySharp = new MemorySharp(Process.GetCurrentProcess());
+            
 
             IntPtr address = new IntPtr(int.Parse(textBoxFactoryAddress.Text, System.Globalization.NumberStyles.HexNumber));
 
@@ -577,9 +582,75 @@ namespace AliveAPIDotNet.Forms
 
             IntPtr paramsData = Marshal.AllocHGlobal(1000);
             Marshal.Copy(finalData, 0, paramsData, finalData.Length);
-            mMemorySharp.Assembly.Execute(address, Binarysharp.MemoryManagement.Assembly.CallingConvention.CallingConventions.Cdecl, new dynamic[] { paramsData, Marshal.ReadIntPtr(new IntPtr(0xBB47C0)), 0, 2 });
-            mMemorySharp.Assembly.Execute(address, Binarysharp.MemoryManagement.Assembly.CallingConvention.CallingConventions.Cdecl, new dynamic[] { paramsData, Marshal.ReadIntPtr(new IntPtr(0xBB47C0)), 0, 0 });
+            //AliveAPI.mMemorySharp.Assembly.Execute(address, Binarysharp.MemoryManagement.Assembly.CallingConvention.CallingConventions.Cdecl, new dynamic[] { paramsData, Marshal.ReadIntPtr(new IntPtr(0xBB47C0)), 0, 2 });
+            AliveAPI.mMemorySharp.Assembly.Execute(address, Binarysharp.MemoryManagement.Assembly.CallingConvention.CallingConventions.Cdecl, new dynamic[] { paramsData, Marshal.ReadIntPtr(new IntPtr(0xBB47C0)), 0, 0 });
             Marshal.FreeHGlobal(paramsData);
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            IntPtr newAbeData = Marshal.AllocHGlobal(0x1BC);
+            AliveAPI.mMemorySharp.Assembly.Execute(new IntPtr(0x44AD10), Binarysharp.MemoryManagement.Assembly.CallingConvention.CallingConventions.Thiscall, newAbeData, 58808, 85, 57, 55);
+            AliveObject newAbe = new AliveObject(newAbeData);
+
+            newAbe.PositionX = AliveAPI.CurrentlyControlled.PositionX + 20 + rand.Next(0, 100);
+            newAbe.PositionY = AliveAPI.CurrentlyControlled.PositionY;
+        }
+
+        private void x2UpdateDelayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SelectedObject != null)
+            {
+                SelectedObject.UpdateDelay *= 2;
+            }
+        }
+
+        private void updateDelayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SelectedObject != null)
+            {
+                SelectedObject.UpdateDelay /= 2;
+            }
+        }
+
+        void RenderLoop()
+        {
+            while (checkBoxRenderLoop.Checked)
+            {
+                AliveAPI.mMemorySharp.Assembly.Execute(new IntPtr(0x464A70), CallingConventions.Thiscall, new IntPtr(0x5C1BB0));
+                AliveAPI.mMemorySharp.Assembly.Execute(new IntPtr(0x494580), CallingConventions.Cdecl);
+
+                int displayBufferSize = 0x470;
+                int bufferIndex = Marshal.ReadInt16(new IntPtr(0x5C1130 + 0xC));
+                IntPtr otBuffer = new IntPtr(0x5C1130 + 0x10 + (bufferIndex * displayBufferSize) + 0x70);
+
+                foreach (var go in AliveAPI.ObjectListDrawables.AsAliveObjects)
+                {
+                    if (go.VTable == IntPtr.Zero)
+                        continue;
+
+                    if ((go.ObjectState & 4) == 0 && (go.ObjectState & 8) > 0)
+                    {
+                        AliveAPI.mMemorySharp.Assembly.Execute(Marshal.ReadIntPtr(new IntPtr((int)go.VTable + 0x8)), CallingConventions.Thiscall, go.Pointer, otBuffer);
+                        bufferIndex = Marshal.ReadInt16(new IntPtr(0x5C1130 + 0xC));
+                    }
+                }
+
+                // ScreenManager::40EC90(pScreenManager_5BB5F4, 0, 0, 640, 240, pScreenManager_5BB5F4->field_3A);
+                
+
+                AliveAPI.mMemorySharp.Assembly.Execute(new IntPtr(0x40E6E0), CallingConventions.Thiscall, new IntPtr(0x5BB5F4), otBuffer); // pScreenManager_5BB5F4->Render
+
+                AliveAPI.mMemorySharp.Assembly.Execute(new IntPtr(0x4F6280), CallingConventions.Cdecl, 0); // Draw Sync
+                AliveAPI.mMemorySharp.Assembly.Execute(new IntPtr(0x49C470), CallingConventions.Cdecl, 0x7A120); // sub_49C470
+
+                AliveAPI.mMemorySharp.Assembly.Execute(new IntPtr(0x41DDF0), CallingConventions.Thiscall, new IntPtr(0x5C1130)); // PSX_Display_Render_OT_41DDF0
+                AliveAPI.mMemorySharp.Assembly.Execute(new IntPtr(0x45F040), CallingConventions.Thiscall, new IntPtr(0x5BD4E0)); // Input_update_45F040
+
+                AliveAPI.mMemorySharp.Assembly.Execute(new IntPtr(0x40EC90), CallingConventions.Thiscall, new IntPtr(0x5BB5F4), 0, 0, 640, 240, Marshal.ReadInt16(new IntPtr(Marshal.ReadInt32(new IntPtr(0x5BB5F4)) + 0x3a)));
+
+                //Thread.Sleep(10);
+            }
         }
     }
 }

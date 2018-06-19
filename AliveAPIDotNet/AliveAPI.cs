@@ -12,6 +12,8 @@ using System.Threading;
 using AliveAPIDotNet.Input;
 using AliveAPIDotNet.Forms;
 using AliveAPIDotNet.Unmanaged;
+using Binarysharp.MemoryManagement;
+using System.Diagnostics;
 
 namespace AliveAPIDotNet
 {
@@ -39,7 +41,7 @@ namespace AliveAPIDotNet
             {
                 GameConfiguration.Instance.HeroTypeID = 43;
 
-                GameConfiguration.Instance.AddressObjectList = 0x009F2DF0;
+                GameConfiguration.Instance.AddressListBaseGameObjects = 0x009F2DF0;
                 GameConfiguration.Instance.AddressScreenInfo = 0x004FF7C8;
                 GameConfiguration.Instance.AddressPlayerPointer = 0x0050767C;
                 GameConfiguration.Instance.AddressPathData = 0x504C6C;
@@ -107,20 +109,23 @@ namespace AliveAPIDotNet
     {
         const string DLLFileName = "TestHook.dll";
 
-        public static AliveObjectList ObjectList;
-        public static AliveObjectList ObjectListActive;
+        public static AliveObjectList ObjectListBaseObjects;
+        public static AliveObjectList ObjectListDrawables;
         public static PathObjectList PathData;
         public static LevelEntryList Levels;
         public static IntPtr ScreenHdc;
         public static InputObject Input;
         public static bool MusicEnabled = false;
+        public static MemorySharp mMemorySharp;
 
         public static List<RaycastHit> RaycastHits = new List<RaycastHit>();
 
         public static void InitializeAPI()
         {
-            ObjectList = new AliveObjectList(new IntPtr(GameConfiguration.Instance.AddressObjectList), true);
-            ObjectListActive = new AliveObjectList(new IntPtr(GameConfiguration.Instance.AddressObjectListActive), true);
+            mMemorySharp = new MemorySharp(Process.GetCurrentProcess());
+
+            ObjectListBaseObjects = new AliveObjectList(new IntPtr(GameConfiguration.Instance.AddressListBaseGameObjects), true);
+            ObjectListDrawables = new AliveObjectList(new IntPtr(GameConfiguration.Instance.AddressListDrawables), true);
             PathData = new PathObjectList(new IntPtr(GameConfiguration.Instance.AddressPathData));
             Levels = new LevelEntryList(new IntPtr(GameConfiguration.Instance.AddressLevelConfigs));
             Input = new InputObject(new IntPtr(GameConfiguration.Instance.AddressInputObject));
@@ -263,6 +268,14 @@ namespace AliveAPIDotNet
         {
             IntPtr switchAddr = new IntPtr(GameConfiguration.Instance.AddressSwitches);
             Marshal.WriteByte(new IntPtr(switchAddr.ToInt32() + index), v);
+        }
+
+        public static AliveObject CurrentlyControlled
+        {
+            get
+            {
+                return new AliveObject(Marshal.ReadIntPtr(new IntPtr(0x005C1B8C)));
+            }
         }
 
         public static bool DDCheatAlwaysRender
