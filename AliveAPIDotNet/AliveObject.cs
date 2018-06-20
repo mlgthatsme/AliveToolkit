@@ -171,7 +171,7 @@ namespace AliveAPIDotNet
         public override string ToString()
         {
             return $"{GetVTableName(VTable)} | {ObjectID} P:[{PositionX.ToString("0.00")}, {PositionY.ToString("0.00")}], S:[{AllocatedSize}] V:[{VTable.ToString("X8")}]";
-            return string.Format("{5} [{4}, {2}, {3}]: {0} {1}", PositionX.ToString("0.00"), PositionY.ToString("0.00"), ObjectID, AllocatedSize, GetVTableName(VTable), GetFriendlyName(ObjectID));
+            //return string.Format("{5} [{4}, {2}, {3}]: {0} {1}", PositionX.ToString("0.00"), PositionY.ToString("0.00"), ObjectID, AllocatedSize, GetVTableName(VTable), GetFriendlyName(ObjectID));
         }
 
         // Variables

@@ -15,6 +15,7 @@ using AliveAPIDotNet.Unmanaged;
 using Binarysharp.MemoryManagement;
 using System.IO;
 using Binarysharp.MemoryManagement.Assembly.CallingConvention;
+using AliveAPIDotNet.Helpers;
 
 namespace AliveAPIDotNet.Forms
 {
@@ -44,6 +45,15 @@ namespace AliveAPIDotNet.Forms
 
             Application.EnterThreadModal += delegate { modalMode = true; };
             Application.LeaveThreadModal += delegate { modalMode = false; };
+
+            mKeyboardHook.KeyPressed += MKeyboardHook_KeyPressed;
+            mKeyboardHook.RegisterHotKey(0, Keys.End);
+        }
+
+        private void MKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
+        {
+            if (e.Key == Keys.End)
+                ToggleFrameFreeze();
         }
 
         private void AliveAPI_OnDebugDraw(object sender, EventArgs e)
@@ -93,6 +103,7 @@ namespace AliveAPIDotNet.Forms
         FunctionCallerWindow mFunctionCallerWindow = new FunctionCallerWindow();
         bool modalMode = false;
         Random rand = new Random();
+        KeyboardHook mKeyboardHook = new KeyboardHook();
 
         float mouseXPrev = 0;
         float mouseYPrev = 0;
@@ -293,6 +304,8 @@ namespace AliveAPIDotNet.Forms
 
         byte[] oldSwitchStates = new byte[256];
 
+        List<int> unknownVTablesList = new List<int>();
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             AliveObject[] objects = AliveAPI.ObjectListBaseObjects.AsAliveObjects;
@@ -302,6 +315,16 @@ namespace AliveAPIDotNet.Forms
             listBox1.Items.AddRange(objects);
             if (selection != null && objects.Contains(selection))
                 listBox1.SelectedItem = selection;
+
+            foreach(var o in objects)
+            {
+                int vtbl = (int)o.VTable;
+                if (vtbl != 0 && !AliveAPI.VTableDatabase.DoesVTableDefinitionExist(vtbl) && !unknownVTablesList.Contains(vtbl))
+                {
+                    Log($"Unknown VTABLE!!: 0x{vtbl.ToString("X")}");
+                    unknownVTablesList.Add(vtbl);
+                }
+            }
 
             byte[] newSwitchStates = AliveAPI.GetSwitchStates();
             for (int i = 0; i < 256; i++)
@@ -448,12 +471,13 @@ namespace AliveAPIDotNet.Forms
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            freezeGame = !freezeGame;
+            ToggleFrameFreeze();
+        }
 
-            if (freezeGame)
-                Marshal.WriteByte(new IntPtr(0x005CA4D1), 1);
-            else
-                Marshal.WriteByte(new IntPtr(0x005CA4D1), 0);
+        void ToggleFrameFreeze()
+        {
+            freezeGame = !freezeGame;
+            Marshal.WriteByte(new IntPtr(0x005CA4D1), (byte)((freezeGame) ? 1 : 0));
         }
 
         private void btnStep_Click(object sender, EventArgs e)
@@ -559,8 +583,6 @@ namespace AliveAPIDotNet.Forms
 
         private void btnFactoryForceSpawn_Click(object sender, EventArgs e)
         {
-            
-
             IntPtr address = new IntPtr(int.Parse(textBoxFactoryAddress.Text, System.Globalization.NumberStyles.HexNumber));
 
             AliveObject obj = new AliveObject(Marshal.ReadIntPtr(new IntPtr(0x005C1B8C)));
@@ -595,22 +617,6 @@ namespace AliveAPIDotNet.Forms
 
             newAbe.PositionX = AliveAPI.CurrentlyControlled.PositionX + 20 + rand.Next(0, 100);
             newAbe.PositionY = AliveAPI.CurrentlyControlled.PositionY;
-        }
-
-        private void x2UpdateDelayToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (SelectedObject != null)
-            {
-                SelectedObject.UpdateDelay *= 2;
-            }
-        }
-
-        private void updateDelayToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (SelectedObject != null)
-            {
-                SelectedObject.UpdateDelay /= 2;
-            }
         }
 
         void RenderLoop()
@@ -650,6 +656,32 @@ namespace AliveAPIDotNet.Forms
                 AliveAPI.mMemorySharp.Assembly.Execute(new IntPtr(0x40EC90), CallingConventions.Thiscall, new IntPtr(0x5BB5F4), 0, 0, 640, 240, Marshal.ReadInt16(new IntPtr(Marshal.ReadInt32(new IntPtr(0x5BB5F4)) + 0x3a)));
 
                 //Thread.Sleep(10);
+            }
+        }
+
+        private void defineVTableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (SelectedObject != null)
+            {
+                string userVTableName = TextPopup.GetInput("Enter new VTable name", "Set new VTable definition");
+                
+                if (userVTableName != null)
+                {
+                    AliveAPI.VTableDatabase.AddUserVTable((int)SelectedObject.VTable, userVTableName);
+                }
+            }
+        }
+
+        private void contextMenuObject_Opening(object sender, CancelEventArgs e)
+        {
+            if (SelectedObject != null)
+            {
+                int vtable = (int)SelectedObject.VTable;
+                defineVTableToolStripMenuItem.Enabled = (!AliveAPI.VTableDatabase.DoesVTableDefinitionExist(vtable)) || (AliveAPI.VTableDatabase.DoesVTableDefinitionExist(vtable) && AliveAPI.VTableDatabase.IsVTableUserDefined(vtable));
+            }
+            else
+            {
+                defineVTableToolStripMenuItem.Enabled = false;
             }
         }
     }

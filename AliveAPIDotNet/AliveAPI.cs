@@ -132,7 +132,6 @@ namespace AliveAPIDotNet
             Levels = new LevelEntryList(new IntPtr(GameConfiguration.Instance.AddressLevelConfigs));
             Input = new InputObject(new IntPtr(GameConfiguration.Instance.AddressInputObject));
             VTableDatabase = new VTableDB();
-            VTableDatabase.LoadFromString(File.ReadAllText("vtables.inf"));
             //AliveAPI.EnableVerboseLog();
         }
 

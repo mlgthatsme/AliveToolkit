@@ -1,4 +1,4 @@
-# AUTO GENERATED VIA IDA SCRIPT 2018-06-19 09:42 PM
+# AUTO GENERATED VIA IDA SCRIPT 2018-06-20 12:26 PM
 0x544074=vTbl_GlukkonPanic_544074,GlukkonPanic
 0x544090=vTbl_SligSpawner_544090,SligSpawner
 0x5440d4=vTbl_LiftMover_5440D4,LiftMover
@@ -16,7 +16,7 @@
 0x5445e0=vTbl_GasCountdown_5445E0,GasCountdown
 0x544618=vTbl_CreditsController_544618,CreditsController
 0x5446a8=vTbl_NakedSlig_5446A8,NakedSlig
-0x5447cc=vTbl_Class_5447CC,Class
+0x5447dc=vTbl_ParticleBurst_5447DC,ParticleBurst
 0x544824=vTbl_BaseDoor_544824,BaseDoor
 0x5449bc=vTbl_Door_5449BC,Door
 0x544a1c=vTbl_DoorBlocker_544A1C,DoorBlocker
@@ -41,8 +41,6 @@
 0x5456e0=vTbl_Grenade_5456E0,Grenade
 0x545910=vTbl_Hoist_545910,Hoist
 0x5459bc=vTbl_DoorFlame_5459BC,DoorFlame
-0x545a04=vTbl_Class_545A04,Class
-0x545a60=vTbl_Class_545A60,Class
 0x545a7c=vTbl_InvisibleSwitch_545A7C,InvisibleSwitch
 0x545aac=vTbl_LCDScreen_545AAC,LCDScreen
 0x545cc0=vTbl_LiftPoint_545CC0,LiftPoint
@@ -53,7 +51,6 @@
 0x545ed8=vTbl_SligGetPantsAndWings_545ED8,SligGetPantsAndWings
 0x545f20=vTbl_WheelSyncer_545F20,WheelSyncer
 0x545f3c=vTbl_ChantSupressor_545F3C,ChantSupressor
-0x545fb0=vTbl_Class_545FB0,Class
 0x545ff8=vTbl_MotionDetector_545FF8,MotionDetector
 0x5460d4=vTbl_MeatSack_5460D4,MeatSack
 0x546148=vTbl_Text_546148,Text
@@ -67,7 +64,6 @@
 0x5463dc=vTbl_MusicTrigger_5463DC,MusicTrigger
 0x54640c=vTbl_Paramite_54640C,Paramite
 0x546658=vTbl_PauseMenu_546658,PauseMenu
-0x546890=vTbl_Class_546890,Class
 0x54690c=vTbl_Demo_54690C,Demo
 0x546970=vTbl_BirdPortal_546970,BirdPortal
 0x5469c8=vTbl_FG1_5469C8,FG1
@@ -84,9 +80,7 @@
 0x54700c=vTbl_Obj_115_54700C,Obj
 0x547028=vTbl_SecurityDoor_547028,SecurityDoor
 0x547070=vTbl_ScreenShake_547070,ScreenShake
-0x54708c=vTbl_Class_54708C,Class
-0x5470d4=vTbl_Class_5470D4,Class
-0x5470f0=vTbl_Class_5470F0,Class
+0x54708c=vTbl_BulletShell_54708C,BulletShell
 0x547288=vTbl_SlamDoor_547288,SlamDoor
 0x5472fc=vTbl_SnoozeParticle,SnoozeParticle
 0x547460=vTbl_Slig_547460,Slig
@@ -100,7 +94,6 @@
 0x547858=vTbl_Particle_547858,Particle
 0x5478a0=vTbl_ZapLine_5478A0,ZapLine
 0x5478e8=vTbl_TimerTrigger_5478E8,TimerTrigger
-0x547904=vTbl_Class_547904,Class
 0x547958=vTbl_MainMenuController_547958,MainMenuController
 0x5479a4=vTbl_StatusLight_5479A4,StatusLight
 0x547a5c=vTbl_Switch_547A5C,Switch
@@ -111,16 +104,11 @@
 0x547ce0=vTbl_TrapDoor_547CE0,TrapDoor
 0x547e38=vTbl_FootSwitch_547E38,FootSwitch
 0x547e80=vTbl_Uxb_547E80,Uxb
-0x547ef4=vTbl_Class_547EF4,Class
 0x547f10=vTbl_Water_547F10,Water
-0x547f58=vTbl_Class_547F58,Class
 0x547fa0=vTbl_ParamiteWeb_547FA0,ParamiteWeb
 0x547fe8=vTbl_ExpressWell_547FE8,ExpressWell
 0x548004=vTbl_Leaf_548004,Leaf
 0x548064=vTbl_WorkWheel_548064,WorkWheel
-0x5480b8=vTbl_Class_5480B8,Class
-0x5480d4=vTbl_Class_5480D4,Class
-0x548100=vTbl_Class_548100,Class
 0x548128=vTbl_IClass_548128,IClass
 0x544000=gVtbl_BaseAliveGameObject_544000,BaseAliveGameObject
 0x544290=gVtbl_animation_2a_544290,animation
