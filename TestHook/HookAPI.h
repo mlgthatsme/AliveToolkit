@@ -136,7 +136,7 @@ protected:
 private:
 	void ApplyImpl(void* funcToHook, void* replacement)
 	{
-		std::cout << "old addr " << funcToHook << " new addr " << replacement << std::endl;
+		//std::cout << "old addr " << funcToHook << " new addr " << replacement << std::endl;
 
 		mRealFuncPtr = (TFuncType)funcToHook;
 

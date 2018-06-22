@@ -20,6 +20,10 @@ AliveAPI::Game * mGame = new AliveAPI::Game();
 #include "Reimplementation.h"
 #include "XInputSupport.h"
 
+#include <ddraw.h>
+#include "windowed/window_hooks.hpp"
+#include "windowed/ddraw7proxy.hpp"
+
 int __cdecl Abe_LoadImage16(AE_Rect *a1, char *a2);
 ALIVE_FUNC_IMPLEX(0x0, 0x004F5E20, Abe_LoadImage16, true);
 int __cdecl Abe_LoadImage16(AE_Rect *a1, char *a2)
@@ -86,6 +90,35 @@ int __fastcall LoopHook(void *thisPtr)
 	
 	
 	return v;
+}
+
+/*static*/ DirectSurface7Proxy* DirectSurface7Proxy::g_Primary;
+/*static*/ DirectSurface7Proxy* DirectSurface7Proxy::g_BackBuffer;
+/*static*/ DirectSurface7Proxy* DirectSurface7Proxy::g_FakePrimary;
+
+HRESULT __stdcall Hook_DirectDrawCreate(GUID *lpGUID, LPDIRECTDRAW *lplpDD, IUnknown *pUnkOuter);
+ALIVE_FUNC_IMPLEX(0x0052C75C, 0x0052C75C, Hook_DirectDrawCreate, true);
+HRESULT __stdcall Hook_DirectDrawCreate(GUID *lpGUID, LPDIRECTDRAW *lplpDD, IUnknown *pUnkOuter)
+{
+    const HRESULT ret = Hook_DirectDrawCreate_.Ptr()(lpGUID, lplpDD, pUnkOuter);
+    if (SUCCEEDED(ret))
+    {
+        *lplpDD = new DirectDraw7Proxy(*lplpDD);
+
+        SubClassWindow();
+        PatchWindowTitle();
+    }
+    return ret;
+}
+
+ALIVE_FUNC_IMPLEX(0x0052C6DE, 0x0052C6DE, Hook_SetWindowLongA, true);
+LONG WINAPI Hook_SetWindowLongA(HWND hWnd, int nIndex, LONG dwNewLong)
+{
+    if (nIndex == GWL_STYLE)
+    {
+        dwNewLong = WS_OVERLAPPEDWINDOW | WS_VISIBLE;
+    }
+    return Hook_SetWindowLongA_.Ptr()(hWnd, nIndex, dwNewLong);
 }
 
 void MLG_InitHook()
