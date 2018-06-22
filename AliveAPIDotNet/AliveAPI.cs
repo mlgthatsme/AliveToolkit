@@ -199,6 +199,18 @@ namespace AliveAPIDotNet
         [DllImport(DLLFileName, EntryPoint = "PlayMidiNote")]
         public static extern void PlayMidiNote(int program, int note, float pan, float volume);
 
+        public static bool DoesCommandArgExist(string s)
+        {
+            string[] clArgs = Environment.GetCommandLineArgs();
+
+            if (clArgs.Contains(s))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public static void SetMusic(int song, AliveObject obj)
         {
             Ae_SetMusic(song, obj.mAddress, 0, 0);

@@ -12,6 +12,7 @@
 #include <fstream>
 
 Injector * injector = new Injector();
+std::string argString;
 
 HANDLE StartProcess(const char * target)
 {
@@ -22,7 +23,7 @@ HANDLE StartProcess(const char * target)
 		si.cb = sizeof(si);
 		PROCESS_INFORMATION pi;
 
-		CreateProcess(target, NULL, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi);
+		CreateProcess(target, const_cast<char *>(argString.c_str()), NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi);
         return pi.hThread;
 	}
 }
@@ -48,6 +49,13 @@ void InjectDll(const char * file, char * target)
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+    argString = "";
+
+    for (int i = 1; i < argc; i++)
+    {
+        argString += std::string(argv[i]) + " ";
+    }
+
     HANDLE gameThread = nullptr;
 
 	if (std::ifstream("Exoddus.exe"))

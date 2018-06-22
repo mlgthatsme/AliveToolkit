@@ -48,6 +48,7 @@ namespace AliveAPIDotNet.Forms
 
             mKeyboardHook.KeyPressed += MKeyboardHook_KeyPressed;
             mKeyboardHook.RegisterHotKey(0, Keys.End);
+            
         }
 
         private void MKeyboardHook_KeyPressed(object sender, KeyPressedEventArgs e)
@@ -110,8 +111,14 @@ namespace AliveAPIDotNet.Forms
 
         int t = 0;
 
+        protected override void SetVisibleCore(bool value)
+        {
+            base.SetVisibleCore(AliveAPI.DoesCommandArgExist("-no_ui") ? false : value);
+        }
+
         private void AliveAPI_GameTick(object sender, EventArgs e)
         {
+
             RenderLoop();
 
             if (modalMode)
@@ -151,7 +158,11 @@ namespace AliveAPIDotNet.Forms
                 AliveAPI.gnFrame += 10;
             }
 
+            if (IsHandleCreated)
+            {
                 this.Invoke(new MethodInvoker(delegate { panelCurrentScreen.Refresh(); }));
+            }
+
             lock (spawnQueues)
             {
                 int gameX = (int)AliveAPI.CameraOffsetX + (int)(AliveAPI.MouseX * 374);
