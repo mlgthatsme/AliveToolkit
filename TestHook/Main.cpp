@@ -69,7 +69,7 @@ void Loop()
 			}
 			loadedSave = true;
 
-			gPtrPauseMenu = j_Abe_CreatePauseMenu(malloc(616));
+			gPtrPauseMenu = j_Abe_CreatePauseMenu(abe_malloc(616));
 		}
 	}
 

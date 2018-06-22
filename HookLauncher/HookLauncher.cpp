@@ -13,7 +13,7 @@
 
 Injector * injector = new Injector();
 
-void StartProcess(const char * target)
+HANDLE StartProcess(const char * target)
 {
 	DWORD procID = injector->GetTargetThreadIDFromProcName(target);
 	if (procID == 0)
@@ -22,8 +22,8 @@ void StartProcess(const char * target)
 		si.cb = sizeof(si);
 		PROCESS_INFORMATION pi;
 
-		CreateProcess(target, NULL, NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
-		Sleep(500);
+		CreateProcess(target, NULL, NULL, NULL, FALSE, CREATE_SUSPENDED, NULL, NULL, &si, &pi);
+        return pi.hThread;
 	}
 }
 
@@ -48,14 +48,16 @@ void InjectDll(const char * file, char * target)
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+    HANDLE gameThread = nullptr;
+
 	if (std::ifstream("Exoddus.exe"))
 	{
-		StartProcess("Exoddus.exe");
+        gameThread = StartProcess("Exoddus.exe");
 		InjectDll("\\TestHook.dll", "Exoddus.exe");
 	}
 	else if (std::ifstream("AbeWin.exe"))
 	{
-		StartProcess("AbeWin.exe");
+        gameThread = StartProcess("AbeWin.exe");
 		InjectDll("\\TestHook.dll", "AbeWin.exe");
 	}
 	else
@@ -63,6 +65,9 @@ int _tmain(int argc, _TCHAR* argv[])
 		printf("Could not find Exoddus.exe or AbeWin.exe");
 		std::cin.get();
 	}
+
+    if (gameThread != nullptr)
+        ResumeThread(gameThread);
 
 	return 0;
 }
