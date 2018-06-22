@@ -1,4 +1,4 @@
-# AUTO GENERATED VIA IDA SCRIPT 2018-06-20 12:26 PM
+# AUTO GENERATED VIA IDA SCRIPT 2018-06-20 11:06 PM
 0x544074=vTbl_GlukkonPanic_544074,GlukkonPanic
 0x544090=vTbl_SligSpawner_544090,SligSpawner
 0x5440d4=vTbl_LiftMover_5440D4,LiftMover
@@ -46,7 +46,7 @@
 0x545cc0=vTbl_LiftPoint_545CC0,LiftPoint
 0x545d68=vTbl_PlatformBase_545D68,PlatformBase
 0x545e10=vTbl_Shadow_545E10,Shadow
-0x545ea0=vTbl_MainMenu_Unknown_545EA0,MainMenu
+0x545ea0=vTbl_MainMenuTransition_545EA0,MainMenuTransition
 0x545ebc=vTbl_ResourceManager_545EBC,ResourceManager
 0x545ed8=vTbl_SligGetPantsAndWings_545ED8,SligGetPantsAndWings
 0x545f20=vTbl_WheelSyncer_545F20,WheelSyncer

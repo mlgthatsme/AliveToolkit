@@ -11,6 +11,14 @@ namespace AliveAPIDotNet.Databases
     {
         public VTableDB()
         {
+            ReloadInfs();
+        }
+
+        public void ReloadInfs()
+        {
+            mVTables.Clear();
+            mUserVTables.Clear();
+
             if (File.Exists("vtables.inf"))
             {
                 LoadFromString(File.ReadAllText("vtables.inf"));
