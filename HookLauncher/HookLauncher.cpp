@@ -66,6 +66,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::cin.get();
 	}
 
+    Sleep(100);
+
     if (gameThread != nullptr)
         ResumeThread(gameThread);
 
