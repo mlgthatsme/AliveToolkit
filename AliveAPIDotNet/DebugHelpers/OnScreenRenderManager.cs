@@ -20,6 +20,7 @@ namespace AliveAPIDotNet.DebugHelpers
             Helpers.Add(new PathRenderer());
             Helpers.Add(new DDCheatNew());
             Helpers.Add(new AIHelper());
+            Helpers.Add(new ObjectRenderer());
         }
 
         private static int prevLevel;

@@ -695,5 +695,10 @@ namespace AliveAPIDotNet.Forms
                 defineVTableToolStripMenuItem.Enabled = false;
             }
         }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+            DebugHelpers.ObjectRenderer.RenderObjectOverlays = checkBox1.Checked;
+        }
     }
 }

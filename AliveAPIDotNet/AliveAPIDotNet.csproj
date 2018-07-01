@@ -68,6 +68,7 @@
     </Compile>
     <Compile Include="Databases\VTableDB.cs" />
     <Compile Include="DebugHelpers\AIHelper.cs" />
+    <Compile Include="DebugHelpers\ObjectRenderer.cs" />
     <Compile Include="DebugHelpers\DDCheatNew.cs" />
     <Compile Include="DebugHelpers\OnScreenRenderHelper.cs" />
     <Compile Include="DebugHelpers\OnScreenRenderManager.cs" />

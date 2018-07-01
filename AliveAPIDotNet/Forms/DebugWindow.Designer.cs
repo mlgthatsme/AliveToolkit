@@ -37,6 +37,8 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.copyVTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteVTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.defineVTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.mindControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -90,22 +92,21 @@
             this.buttonShowLevels = new System.Windows.Forms.Button();
             this.buttonLazors = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
-            this.defineVTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButtonStopGame = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonStepFrame = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonRecord = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonSaveState = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonLoadState = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonSoundPlayer = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonShowVRam = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonEnableVerboseMode = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.contextMenuObject.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPageGame.SuspendLayout();
@@ -188,6 +189,19 @@
             this.pasteVTableToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.pasteVTableToolStripMenuItem.Text = "Paste VTable";
             this.pasteVTableToolStripMenuItem.Click += new System.EventHandler(this.pasteVTableToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(155, 6);
+            // 
+            // defineVTableToolStripMenuItem
+            // 
+            this.defineVTableToolStripMenuItem.Name = "defineVTableToolStripMenuItem";
+            this.defineVTableToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.defineVTableToolStripMenuItem.Text = "Define VTable";
+            this.defineVTableToolStripMenuItem.ToolTipText = "Give this VTable a name so it no longer pops up on the unknown object alert";
+            this.defineVTableToolStripMenuItem.Click += new System.EventHandler(this.defineVTableToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -620,6 +634,7 @@
             // 
             // tabPageDev
             // 
+            this.tabPageDev.Controls.Add(this.checkBox1);
             this.tabPageDev.Controls.Add(this.checkBoxRenderLoop);
             this.tabPageDev.Controls.Add(this.groupBox3);
             this.tabPageDev.Controls.Add(this.numericPaletteCount);
@@ -774,44 +789,6 @@
             this.toolStrip1.TabIndex = 8;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator7
-            // 
-            this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator6
-            // 
-            this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator8
-            // 
-            this.toolStripSeparator8.Name = "toolStripSeparator8";
-            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator9
-            // 
-            this.toolStripSeparator9.Name = "toolStripSeparator9";
-            this.toolStripSeparator9.Size = new System.Drawing.Size(155, 6);
-            // 
-            // defineVTableToolStripMenuItem
-            // 
-            this.defineVTableToolStripMenuItem.Name = "defineVTableToolStripMenuItem";
-            this.defineVTableToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.defineVTableToolStripMenuItem.Text = "Define VTable";
-            this.defineVTableToolStripMenuItem.ToolTipText = "Give this VTable a name so it no longer pops up on the unknown object alert";
-            this.defineVTableToolStripMenuItem.Click += new System.EventHandler(this.defineVTableToolStripMenuItem_Click);
-            // 
             // toolStripButtonStopGame
             // 
             this.toolStripButtonStopGame.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -832,6 +809,11 @@
             this.toolStripButtonStepFrame.Text = "Step Frame";
             this.toolStripButtonStepFrame.Click += new System.EventHandler(this.btnStep_Click);
             // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButtonRecord
             // 
             this.toolStripButtonRecord.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRecord.Image")));
@@ -841,6 +823,11 @@
             this.toolStripButtonRecord.Text = "Demos";
             this.toolStripButtonRecord.ToolTipText = "Record";
             this.toolStripButtonRecord.Click += new System.EventHandler(this.toolStripButtonRecord_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // toolStripButtonSaveState
             // 
@@ -862,6 +849,11 @@
             this.toolStripButtonLoadState.Text = "toolStripButton4";
             this.toolStripButtonLoadState.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButtonSoundPlayer
             // 
             this.toolStripButtonSoundPlayer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -882,6 +874,11 @@
             this.toolStripButtonShowVRam.Text = "VRAM";
             this.toolStripButtonShowVRam.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButtonEnableVerboseMode
             // 
             this.toolStripButtonEnableVerboseMode.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -892,6 +889,11 @@
             this.toolStripButtonEnableVerboseMode.Text = "Verbose";
             this.toolStripButtonEnableVerboseMode.Click += new System.EventHandler(this.toolStripButton6_Click);
             // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButton1
             // 
             this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -901,6 +903,17 @@
             this.toolStripButton1.Size = new System.Drawing.Size(41, 22);
             this.toolStripButton1.Text = "Caller";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(9, 225);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(131, 17);
+            this.checkBox1.TabIndex = 10;
+            this.checkBox1.Text = "Render Object Names";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
             // 
             // DebugWindow
             // 
@@ -1022,5 +1035,6 @@
         private System.Windows.Forms.CheckBox checkBoxRenderLoop;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.ToolStripMenuItem defineVTableToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
