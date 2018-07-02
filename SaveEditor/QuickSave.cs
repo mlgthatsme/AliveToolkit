@@ -139,6 +139,7 @@ namespace SaveEditor
         {
             public short ID { get; set; }
             public byte[] Data { get; set; }
+            public object Serialized { get; set; }
 
             public override string ToString()
             {
@@ -184,7 +185,13 @@ namespace SaveEditor
                 if (ObjectSizes.ContainsKey(objectID))
                 {
                     byte[] data = reader.ReadBytes(ObjectSizes[objectID] - 2);
-                    _objects.Add(new SavedObject() { ID = objectID, Data = data });
+                    var newObj = new SavedObject() { ID = objectID, Data = data };
+                    if (objectID == 69) // Todo, object attributes and reflection
+                    {
+                        reader.BaseStream.Position -= ObjectSizes[objectID];
+                        newObj.Serialized = BinaryHelper.StructFromByteArray<DataTypes.Abe_69>(reader.ReadBytes(ObjectSizes[objectID]));
+                    }
+                    _objects.Add(newObj);
                 }
                 else
                 {

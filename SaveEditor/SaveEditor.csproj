@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinaryHelper.cs" />
+    <Compile Include="DataTypes\Abe_69.cs" />
     <Compile Include="QuickSave.cs" />
     <Compile Include="SaveEditorForm.cs">
       <SubType>Form</SubType>
